@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Deep & Hinal · Shubh Lagna</title>
+<meta name="description" content="With the divine blessings of Shree Swaminarayan Bhagwan, Deep & Hinal warmly invite you to celebrate their wedding.">
+<meta name="theme-color" content="#1d0709">
+<meta property="og:title" content="Deep & Hinal · Wedding Invitation">
+<meta property="og:description" content="With the divine blessings of Shree Swaminarayan Bhagwan, we warmly invite you to celebrate our wedding.">
+<meta property="og:image" content="real/photos/DSC01840-s.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+Gujarati:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="real/md/f000.webp">
+<style>
+:root{
+  color-scheme:dark;
+  --kumkum:#7a1420;--kumkum-d:#3d0910;--night:#140507;
+  --ivory:#fbf3e4;--ivory-2:#f3e4c8;
+  --gold:#d9a84e;--gold-l:#f5d996;--gold-d:#9c6b23;
+  --ink:#33160f;--ink-2:#6a3c2a;
+  --f-display:"Cinzel","Trajan Pro",Georgia,serif;
+  --f-body:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --f-guj:"Noto Serif Gujarati","Shruti",serif;
+  --ease:cubic-bezier(.22,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;font-style:normal!important}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--night);color:var(--ivory);font-family:var(--f-body);font-size:19px;line-height:1.6;font-weight:500;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+html[lang=gu] body{font-family:var(--f-guj),var(--f-body);font-size:17px;font-weight:400;line-height:1.75}
+body.locked{overflow:hidden;height:100svh}
+img{display:block;max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+.guj{font-family:var(--f-guj)}
+.gold{background:linear-gradient(100deg,#b07a2c 0%,#f8e2a6 28%,#d9a84e 50%,#fff1c6 70%,#b4802f 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- top bar: language + music ---------- */
+.topbar{position:fixed;top:max(12px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));z-index:50;display:flex;gap:8px}
+.pill{height:42px;min-width:42px;padding:0 16px;border-radius:999px;border:1px solid rgba(245,217,150,.55);background:rgba(20,5,7,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--gold-l);display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;font:600 13px/1 var(--f-display);letter-spacing:.12em;transition:background .3s,transform .3s}
+.pill:hover{background:rgba(122,20,32,.7)}
+.pill:active{transform:scale(.96)}
+#langBtn .to{font:600 15px/1 var(--f-guj);letter-spacing:0}
+html[lang=gu] #langBtn .to{font:600 13px/1 var(--f-display);letter-spacing:.12em}
+#langBtn svg,#muBtn svg{width:18px;height:18px;flex:none}
+#muBtn{padding:0;width:42px;display:none}
+body.entered #muBtn{display:inline-flex}
+#muBtn.off .w{display:none}
+#muBtn:not(.off) .x{display:none}
+
+/* ---------- walk-in: scroll plays the Kalupur video ---------- */
+#walk{position:relative;height:620vh}
+#walk .stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#1a0c08 url(real/md/f000.webp) center/cover no-repeat}
+#film{position:absolute;inset:0;width:100%;height:100%;display:block}
+#walk .shade{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(14,4,5,.78) 0%,rgba(14,4,5,.2) 26%,rgba(14,4,5,0) 45%,rgba(14,4,5,.25) 62%,rgba(14,4,5,.86) 100%)}
+#walk .shade.full{background:rgba(14,4,5,.38);opacity:0;transition:none}
+.ov{position:absolute;left:0;right:0;padding:0 max(20px,env(safe-area-inset-left));text-align:center;opacity:0;pointer-events:none;will-change:opacity,transform}
+.ov.live{pointer-events:auto}
+.ov-top{top:max(70px,calc(env(safe-area-inset-top) + 64px))}
+.ov-bot{bottom:max(92px,calc(env(safe-area-inset-bottom) + 84px))}
+#ovEnter{bottom:max(40px,calc(env(safe-area-inset-bottom) + 34px))}
+.ov-mid{top:50%;transform:translateY(-50%)}
+.greet{font:700 clamp(18px,5vw,24px)/1.5 var(--f-guj);color:var(--gold-l);text-shadow:0 2px 14px rgba(0,0,0,.7)}
+.greet+.greet{margin-top:2px}
+.welcome{max-width:560px;margin:0 auto 22px;font-size:clamp(19px,4.8vw,24px);line-height:1.5;font-weight:600;text-shadow:0 2px 16px rgba(0,0,0,.85)}
+html[lang=gu] .welcome{font-size:clamp(16px,4.3vw,20px);font-weight:500}
+.btn-gold{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 30px;border-radius:999px;border:0;cursor:pointer;
+  background:linear-gradient(180deg,#fbe7ad 0%,#e1b25a 46%,#b98330 100%);color:#3d0910;font:700 14px/1.2 var(--f-display);letter-spacing:.14em;text-transform:uppercase;
+  box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 0 1px rgba(255,236,180,.6) inset,0 0 0 4px rgba(217,168,78,.25);transition:transform .3s var(--ease),box-shadow .3s}
+html[lang=gu] .btn-gold{font:700 16px/1.2 var(--f-guj);letter-spacing:.02em;text-transform:none}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 0 1px rgba(255,236,180,.7) inset,0 0 0 6px rgba(217,168,78,.3)}
+.btn-gold::after{content:"";position:absolute;inset:-6px;border-radius:inherit;border:1px solid rgba(245,217,150,.6);animation:ring 2.6s ease-out infinite}
+@keyframes ring{0%{opacity:.9;transform:scale(.96)}100%{opacity:0;transform:scale(1.18)}}
+.hint{margin-top:16px;font:600 12px/1.4 var(--f-display);letter-spacing:.24em;text-transform:uppercase;color:rgba(251,243,228,.8)}
+html[lang=gu] .hint{font:500 14px/1.5 var(--f-guj);letter-spacing:.02em;text-transform:none}
+.eyebrow{display:block;font:600 13px/1.5 var(--f-display);letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+html[lang=gu] .eyebrow{font:600 16px/1.5 var(--f-guj);letter-spacing:.03em;text-transform:none}
+.ov h2{font:600 clamp(30px,8.4vw,60px)/1.12 var(--f-display);letter-spacing:.02em;text-shadow:0 4px 30px rgba(0,0,0,.75);text-wrap:balance}
+html[lang=gu] .ov h2{font:700 clamp(28px,8vw,54px)/1.3 var(--f-guj)}
+.ov p.sub{max-width:620px;margin:10px auto 0;font-size:clamp(19px,4.8vw,25px);font-weight:600;text-shadow:0 2px 18px rgba(0,0,0,.85);text-wrap:balance}
+html[lang=gu] .ov p.sub{font-size:clamp(16px,4.3vw,21px);font-weight:500}
+.names-big{font:600 clamp(54px,16vw,128px)/1 var(--f-display);letter-spacing:.02em;text-shadow:none;filter:drop-shadow(0 6px 26px rgba(0,0,0,.7))}
+html[lang=gu] .names-big{font:700 clamp(52px,15vw,120px)/1.15 var(--f-guj)}
+.names-big .amp{display:block;font-size:.42em;line-height:1.3;color:var(--gold-l);-webkit-text-fill-color:var(--gold-l)}
+.shubh{font:700 clamp(17px,4.4vw,22px)/1.4 var(--f-guj);color:var(--gold-l);margin-bottom:10px}
+.wdate{margin-top:14px;font:600 clamp(13px,3.6vw,17px)/1.6 var(--f-display);letter-spacing:.24em;color:var(--gold-l);text-transform:uppercase}
+html[lang=gu] .wdate{font:600 clamp(15px,4vw,19px)/1.6 var(--f-guj);letter-spacing:.02em}
+.wbar{position:absolute;left:0;bottom:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--gold-d),var(--gold-l))}
+.scrollcue{position:absolute;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;font:600 11px/1 var(--f-display);letter-spacing:.3em;color:rgba(251,243,228,.85);opacity:0;transition:opacity .6s}
+html[lang=gu] .scrollcue{font:500 13px/1.3 var(--f-guj);letter-spacing:.02em}
+.scrollcue i{width:1px;height:34px;background:linear-gradient(var(--gold-l),transparent);animation:drop 1.8s ease-in-out infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:0 0}50%{transform:scaleY(1);transform-origin:0 0}51%{transform-origin:0 100%}100%{transform:scaleY(0);transform-origin:0 100%}}
+body.entered .scrollcue.on{opacity:1}
+
+/* ---------- shared section bits ---------- */
+section{position:relative}
+.pad{padding:clamp(80px,12vw,140px) max(20px,env(safe-area-inset-left))}
+.wrap{max-width:1120px;margin:0 auto;position:relative}
+.h-sec{font:600 clamp(32px,8vw,58px)/1.15 var(--f-display);letter-spacing:.02em;text-wrap:balance}
+html[lang=gu] .h-sec{font:700 clamp(28px,7.4vw,50px)/1.35 var(--f-guj)}
+.rule{display:block;width:120px;height:1px;margin:22px auto;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.center{text-align:center}
+.ivory{background:linear-gradient(180deg,var(--ivory),var(--ivory-2));color:var(--ink)}
+.ivory .eyebrow{color:var(--gold-d)}
+.ivory .h-sec{color:var(--kumkum)}
+.rv{opacity:0;transform:translateY(34px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}
+.ph{position:relative;overflow:hidden;background:#2a0d0d}
+.ph img{width:100%;height:100%;object-fit:cover;transform:scale(1.14);transition:transform 1.8s var(--ease)}
+.ph.rv{opacity:1;transform:none;clip-path:inset(14% 10% 14% 10% round 4px);transition:clip-path 1.4s var(--ease)}
+.ph.rv.in{clip-path:inset(0 0 0 0 round 4px)}
+.ph.rv.in img{transform:scale(1.02)}
+
+/* ---------- couple ---------- */
+#couple .grid{display:grid;grid-template-columns:1fr;gap:44px;align-items:center}
+#couple .ph{aspect-ratio:2/3;max-width:460px;width:100%;margin:0 auto;border-radius:4px;box-shadow:0 30px 80px -30px rgba(61,9,16,.55)}
+#couple .frame{position:relative;max-width:460px;margin:0 auto;width:100%}
+#couple .frame::before{content:"";position:absolute;inset:-14px;border:1px solid rgba(156,107,35,.55);border-radius:6px;pointer-events:none}
+.person{text-align:center}
+.person .pre{font:600 13px/1.4 var(--f-display);letter-spacing:.28em;color:var(--gold-d);text-transform:uppercase}
+html[lang=gu] .person .pre{font:600 16px/1.4 var(--f-guj);letter-spacing:0;text-transform:none}
+.person .nm{font:600 clamp(46px,12vw,76px)/1.1 var(--f-display);color:var(--kumkum)}
+html[lang=gu] .person .nm{font:700 clamp(44px,11vw,70px)/1.3 var(--f-guj)}
+.person .of{margin-top:4px;color:var(--ink-2);font-size:19px}
+.amp-sm{display:block;text-align:center;margin:20px 0;font:600 30px/1 var(--f-display);color:var(--gold)}
+@media (min-width:880px){#couple .grid{grid-template-columns:1fr 1.05fr;gap:80px}}
+
+/* ---------- full-bleed photo with words ---------- */
+.bleed{position:relative;min-height:100vh;min-height:100svh;display:grid;place-items:center;overflow:hidden;text-align:center}
+.bleed .bg{position:absolute;inset:-12% 0;will-change:transform}
+.bleed .bg img{width:100%;height:100%;object-fit:cover}
+.bleed::after{content:"";position:absolute;inset:0;background:radial-gradient(80% 70% at 50% 50%,rgba(14,4,5,.25),rgba(14,4,5,.72))}
+.bleed .inner{position:relative;z-index:2;padding:0 max(22px,env(safe-area-inset-left));max-width:900px}
+.quote{font:600 clamp(28px,7.4vw,56px)/1.25 var(--f-display);letter-spacing:.01em;text-wrap:balance;text-shadow:0 4px 30px rgba(0,0,0,.7)}
+html[lang=gu] .quote{font:600 clamp(24px,6.6vw,46px)/1.55 var(--f-guj)}
+.bleed .by{margin-top:18px;font:600 14px/1.4 var(--f-display);letter-spacing:.32em;color:var(--gold-l);text-transform:uppercase}
+html[lang=gu] .bleed .by{font:600 17px/1.4 var(--f-guj);letter-spacing:.02em}
+
+/* ---------- gallery: vertical scroll moves the film strip sideways ---------- */
+#gallery{position:relative;height:var(--gh,420vh);background:var(--night)}
+#gallery .stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+#gallery .head{padding:0 max(20px,env(safe-area-inset-left));margin-bottom:clamp(18px,3vh,34px);display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+#gallery .head .h-sec{color:var(--ivory)}
+#gallery .count{font:600 14px/1 var(--f-display);letter-spacing:.2em;color:var(--gold)}
+.track{display:flex;gap:clamp(14px,2.4vw,28px);padding:0 max(20px,env(safe-area-inset-left));will-change:transform}
+.track figure{flex:none;height:min(64vh,640px);overflow:hidden;border-radius:4px;position:relative;background:#2a0d0d}
+.track figure.p{aspect-ratio:2/3}.track figure.l{aspect-ratio:3/2}
+.track img{width:100%;height:100%;object-fit:cover;transform:scale(1.08)}
+.gal-bar{margin:clamp(18px,3vh,30px) max(20px,env(safe-area-inset-left)) 0;height:1px;background:rgba(217,168,78,.25);position:relative}
+.gal-bar i{position:absolute;inset:0;transform-origin:0 50%;transform:scaleX(0);background:var(--gold-l)}
+@media (max-width:760px){.track figure{height:56vh}.track figure.l{height:34vh;align-self:center}}
+
+/* ---------- date + countdown ---------- */
+#date .inner{max-width:760px}
+.big-date{font:600 clamp(40px,11vw,92px)/1.08 var(--f-display);letter-spacing:.02em;margin:10px 0 6px}
+html[lang=gu] .big-date{font:700 clamp(36px,10vw,80px)/1.3 var(--f-guj)}
+.muh{font:600 clamp(16px,4.2vw,21px)/1.5 var(--f-display);letter-spacing:.16em;color:var(--gold-l);text-transform:uppercase}
+html[lang=gu] .muh{font:600 clamp(17px,4.4vw,22px)/1.6 var(--f-guj);letter-spacing:.02em}
+.cd{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,2vw,18px);max-width:560px;margin:34px auto 30px}
+.cd div{padding:16px 4px 12px;border:1px solid rgba(245,217,150,.45);border-radius:6px;background:rgba(20,5,7,.45);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.cd b{display:block;font:600 clamp(28px,8vw,48px)/1 var(--f-display);color:var(--ivory)}
+html[lang=gu] .cd b{font:600 clamp(26px,7.4vw,44px)/1.1 var(--f-guj)}
+.cd span{display:block;margin-top:8px;font:600 11px/1.2 var(--f-display);letter-spacing:.2em;color:var(--gold-l);text-transform:uppercase}
+html[lang=gu] .cd span{font:500 14px/1.3 var(--f-guj);letter-spacing:0}
+.btn-line{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 24px;border-radius:999px;border:1px solid currentColor;background:transparent;cursor:pointer;text-decoration:none;font:600 13px/1.2 var(--f-display);letter-spacing:.16em;text-transform:uppercase;transition:background .3s,color .3s}
+html[lang=gu] .btn-line{font:600 16px/1.2 var(--f-guj);letter-spacing:.01em;text-transform:none}
+.btn-line svg{width:17px;height:17px}
+.bleed .btn-line{color:var(--gold-l)}
+.bleed .btn-line:hover{background:var(--gold-l);color:#3d0910}
+.ivory .btn-line{color:var(--kumkum)}
+.ivory .btn-line:hover{background:var(--kumkum);color:var(--ivory)}
+
+/* ---------- events ---------- */
+.ev-grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:46px}
+@media (min-width:700px){.ev-grid{grid-template-columns:1fr 1fr}}
+@media (min-width:1040px){.ev-grid{grid-template-columns:1fr 1fr 1fr}}
+.ev{position:relative;background:#fffaf0;border-radius:6px;padding:30px 26px 26px;box-shadow:0 1px 0 rgba(156,107,35,.25),0 24px 50px -30px rgba(61,9,16,.45);border-top:3px solid var(--gold);text-align:center}
+.ev .no{font:600 13px/1 var(--f-display);letter-spacing:.3em;color:var(--gold-d)}
+.ev h3{margin:10px 0 2px;font:600 clamp(26px,6vw,32px)/1.2 var(--f-display);color:var(--kumkum)}
+html[lang=gu] .ev h3{font:700 clamp(24px,5.6vw,30px)/1.4 var(--f-guj)}
+.ev .when{margin-top:10px;font:600 14px/1.6 var(--f-display);letter-spacing:.14em;color:var(--ink);text-transform:uppercase}
+html[lang=gu] .ev .when{font:600 16px/1.6 var(--f-guj);letter-spacing:0;text-transform:none}
+.ev .where{margin-top:6px;color:var(--ink-2)}
+.ev .dress{margin-top:12px;display:flex;align-items:center;justify-content:center;gap:8px;color:var(--ink-2);font-size:16px}
+.ev .dress b{font-weight:700;color:var(--ink)}
+.sw{display:inline-block;width:14px;height:14px;border-radius:50%;box-shadow:0 0 0 1px rgba(0,0,0,.18)}
+.ev .btn-line{margin-top:18px;min-height:42px;padding:0 18px;font-size:12px}
+html[lang=gu] .ev .btn-line{font-size:15px}
+
+/* ---------- venue ---------- */
+#venue .bg img{filter:saturate(1.05)}
+.v-name{font:600 clamp(30px,8vw,54px)/1.2 var(--f-display);margin:8px 0 6px}
+html[lang=gu] .v-name{font:700 clamp(28px,7.4vw,48px)/1.4 var(--f-guj)}
+.v-addr{font-size:clamp(18px,4.6vw,22px);color:#f3e2c4;margin-bottom:26px}
+.map{margin:26px auto 0;max-width:720px;aspect-ratio:16/9;border:1px solid rgba(245,217,150,.4);border-radius:6px;overflow:hidden}
+.map iframe{width:100%;height:100%;border:0}
+
+/* ---------- family ---------- */
+.fam{display:grid;grid-template-columns:1fr;gap:26px;margin-top:40px}
+@media (min-width:760px){.fam{grid-template-columns:1fr 1fr}}
+.fam .card{background:#fffaf0;border-radius:6px;padding:28px 24px;text-align:center;box-shadow:0 24px 50px -32px rgba(61,9,16,.45)}
+.fam h3{font:600 15px/1.4 var(--f-display);letter-spacing:.26em;color:var(--gold-d);text-transform:uppercase;margin-bottom:12px}
+html[lang=gu] .fam h3{font:700 19px/1.4 var(--f-guj);letter-spacing:0;text-transform:none;color:var(--kumkum)}
+.fam li{list-style:none;padding:6px 0;border-bottom:1px solid rgba(156,107,35,.18);color:var(--ink)}
+.fam li:last-child{border:0}
+.fam-photo{margin-top:56px;aspect-ratio:3/2;border-radius:4px}
+@media (max-width:760px){.fam-photo{aspect-ratio:4/5}}
+
+/* ---------- RSVP ---------- */
+#rsvp .grid{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+@media (min-width:880px){#rsvp .grid{grid-template-columns:.9fr 1.1fr;gap:70px}}
+#rsvp .ph{aspect-ratio:2/3;border-radius:4px;max-width:440px;width:100%;margin:0 auto}
+form{display:grid;gap:16px;background:#fffaf0;border-radius:6px;padding:30px 24px;box-shadow:0 24px 50px -30px rgba(61,9,16,.45)}
+label.f,span.f{display:grid;gap:6px;font:600 12px/1.4 var(--f-display);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2)}
+html[lang=gu] label.f,html[lang=gu] span.f{font:600 15px/1.4 var(--f-guj);letter-spacing:0;text-transform:none}
+input[type=text],select,textarea{width:100%;min-height:50px;padding:12px 14px;border-radius:4px;border:1px solid rgba(156,107,35,.45);background:#fff;color:var(--ink);font-family:var(--f-body);font-size:19px;letter-spacing:0;text-transform:none}
+html[lang=gu] input[type=text],html[lang=gu] select,html[lang=gu] textarea{font-family:var(--f-guj);font-size:17px}
+textarea{min-height:96px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.choice label{position:relative;cursor:pointer}
+.choice input{position:absolute;opacity:0}
+.choice span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:50px;padding:8px 10px;border-radius:4px;border:1px solid rgba(156,107,35,.45);color:var(--ink);font-size:17px;line-height:1.3;transition:background .25s,color .25s}
+.choice input:checked+span{background:var(--kumkum);border-color:var(--kumkum);color:var(--ivory)}
+.choice input:focus-visible+span{outline:2px solid var(--gold);outline-offset:1px}
+form .btn-gold{width:100%;margin-top:6px}
+form .btn-gold::after{display:none}
+.thanks{display:none;text-align:center;font-size:21px;color:var(--kumkum);font-weight:600;padding:8px 0}
+form.sent .thanks{display:block}
+
+/* ---------- closing ---------- */
+#closing .names-big{margin:14px 0}
+.jai{font:700 clamp(18px,4.6vw,24px)/1.5 var(--f-guj);color:var(--gold-l)}
+footer{background:var(--night);text-align:center;padding:26px 20px calc(30px + env(safe-area-inset-bottom));font-size:14px;color:rgba(251,243,228,.55)}
+
+
+
+
+/* ---------- 360 view opening ---------- */
+#view360{position:relative;z-index:2;height:100vh;height:100svh;background:#1a0c08 url(real/md/f000.webp) center/cover no-repeat}
+#view360.scrub{height:260vh}
+#view360 .v-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.v-pano{position:absolute;inset:0}
+.v-pano iframe{position:absolute;inset:0;width:100%;height:100%;border:0;opacity:0;transition:opacity 1.2s ease}
+.v-pano iframe.on{opacity:1}
+.v-catch{position:absolute;inset:0;z-index:2}
+#view360.looking .v-catch{pointer-events:none}
+.v-top,.v-bot{position:absolute;left:0;right:0;z-index:3;text-align:center;padding:0 max(20px,env(safe-area-inset-left))}
+.v-top{top:0;padding-top:max(70px,calc(env(safe-area-inset-top) + 64px));padding-bottom:60px;background:linear-gradient(180deg,rgba(14,4,5,.8),rgba(14,4,5,0))}
+.v-bot{bottom:0;padding-top:90px;padding-bottom:max(26px,calc(env(safe-area-inset-bottom) + 20px));background:linear-gradient(0deg,rgba(14,4,5,.9) 30%,rgba(14,4,5,0))}
+#view360.looking .v-top,#view360.looking .v-bot .welcome{opacity:0;pointer-events:none}
+.v-top,.v-bot .welcome{transition:opacity .5s}
+#view360.looking .v-top{visibility:hidden}
+#view360.looking .v-bot{background:none;pointer-events:none}
+#view360.looking .v-actions{pointer-events:auto}
+.v-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.v-actions .pill{height:46px;padding:0 20px;white-space:nowrap}
+.v-actions svg{width:18px;height:18px;flex:none}
+html[lang=gu] .v-actions .pill{font:600 15px/1 var(--f-guj);letter-spacing:0}
+.v-go{background:linear-gradient(180deg,#fbe7ad,#e1b25a 46%,#b98330);color:#3d0910;border:0}
+.v-go:hover{background:linear-gradient(180deg,#fff0c4,#e8bd68 46%,#c48d38)}
+.v-credit{margin-top:12px;font-size:12px;color:rgba(251,243,228,.6)}
+html[lang=gu] .v-credit{font-size:13px}
+#view360.scrub .v-look{display:none}
+
+
+/* ---------- 360 journey ---------- */
+#tour{position:relative;z-index:2;background:#120406}
+#tour .t-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;perspective:1200px}
+.t-stage{position:absolute;inset:0}
+.t-layer{position:absolute;inset:-4%;opacity:0;visibility:hidden;will-change:opacity,transform;background:#120406 center/cover no-repeat}
+.t-layer iframe{position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none;opacity:0;transition:opacity 1.2s ease}
+.t-layer iframe.on{opacity:1}
+.t-layer.sv{opacity:1;visibility:visible;pointer-events:none}
+.t-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(14,4,5,.75) 0%,rgba(14,4,5,0) 28%,rgba(14,4,5,0) 52%,rgba(14,4,5,.85) 100%)}
+.tv{position:absolute;left:0;right:0;text-align:center;padding:0 max(20px,env(safe-area-inset-left));opacity:0;pointer-events:none;will-change:opacity}
+.tv[data-pos=top]{top:max(70px,calc(env(safe-area-inset-top) + 64px))}
+.tv[data-pos=bot]{bottom:max(64px,calc(env(safe-area-inset-bottom) + 56px))}
+.tv[data-pos=mid]{top:50%;transform:translateY(-50%)}
+.tv h2{font:600 clamp(30px,8.4vw,60px)/1.12 var(--f-display);text-shadow:0 4px 30px rgba(0,0,0,.75)}
+html[lang=gu] .tv h2{font:700 clamp(28px,8vw,54px)/1.3 var(--f-guj)}
+.tv .sub{max-width:640px;margin:10px auto 0;font-size:clamp(19px,4.8vw,25px);font-weight:600;text-shadow:0 2px 18px rgba(0,0,0,.85);text-wrap:balance}
+.tv .sub.big{font-size:clamp(22px,5.6vw,34px)}
+html[lang=gu] .tv .sub{font-size:clamp(16px,4.3vw,21px);font-weight:500}
+html[lang=gu] .tv .sub.big{font-size:clamp(19px,5vw,28px)}
+.tv .pp{font:600 clamp(30px,8vw,52px)/1.2 var(--f-display);color:var(--gold-l);text-shadow:0 4px 26px rgba(0,0,0,.8)}
+html[lang=gu] .tv .pp{font:700 clamp(28px,7.4vw,48px)/1.35 var(--f-guj)}
+.tv .pp .pre{font:600 .42em/1 var(--f-display);letter-spacing:.2em;color:var(--ivory);vertical-align:.35em}
+html[lang=gu] .tv .pp .pre{font:600 .5em/1 var(--f-guj);letter-spacing:0}
+.tv .of{font-size:clamp(17px,4.4vw,21px);font-weight:600;text-shadow:0 2px 16px rgba(0,0,0,.9)}
+html[lang=gu] .tv .of{font-size:clamp(15px,4vw,19px);font-weight:500}
+.tv .amp2{font:600 26px/1.6 var(--f-display);color:var(--gold)}
+.t-credit{position:absolute;right:12px;bottom:max(10px,env(safe-area-inset-bottom));font-size:11px;color:rgba(251,243,228,.55);z-index:3}
+
+/* ---------- photo chapters ---------- */
+#gallery{display:none!important}
+.chap{background:var(--night);padding:clamp(80px,11vw,130px) max(16px,env(safe-area-inset-left))}
+.chap-head{text-align:center;margin-bottom:32px}
+.chap-head .h-sec{color:var(--ivory)}
+.chap-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:1120px;margin:0 auto;grid-auto-flow:dense}
+.chap-grid figure{overflow:hidden;border-radius:4px;background:#2a0d0d;aspect-ratio:2/3}
+.chap-grid figure.l{grid-column:span 2;aspect-ratio:3/2}
+.chap-grid img{width:100%;height:100%;object-fit:cover}
+@media (min-width:760px){.chap-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}}
+body.w3d .chap{background:transparent;padding:0;height:calc(var(--n,6) * 64vh + 80vh)}
+body.w3d .chap-grid{display:none}
+body.w3d .chap-head{position:sticky;top:max(72px,calc(env(safe-area-inset-top) + 64px));margin:0;padding:20px 16px 0;text-shadow:0 2px 20px rgba(0,0,0,.9);pointer-events:none}
+body.w3d .chap-head .h-sec{font-size:clamp(26px,6.4vw,44px)}
+
+/* ============ FULL 3D MODE ============ */
+#three{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;pointer-events:none;opacity:0;transition:opacity .6s}
+body.w3d #three{opacity:1}
+body.w3d #film{visibility:hidden}
+body.w3d #walk .stick{background:transparent}
+body.w3d #walk,body.w3d section,body.w3d footer{position:relative;z-index:1}
+body.w3d #gallery{display:none}
+body.w3d .ivory{background:transparent}
+body.w3d .ivory.pad,body.w3d #rsvp.pad{padding-top:34vh!important;padding-bottom:34vh}
+body.w3d .ivory>.wrap{background:linear-gradient(180deg,rgba(251,243,228,.96),rgba(243,228,200,.95));border-radius:22px;padding:46px clamp(18px,5vw,56px);
+  box-shadow:0 50px 100px -30px rgba(0,0,0,.8),0 0 0 1px rgba(217,168,78,.75),inset 0 0 0 7px rgba(251,243,228,.7),inset 0 0 0 8px rgba(217,168,78,.4);transform-origin:50% 50%;will-change:transform,opacity}
+body.w3d .bleed{min-height:auto;padding:34vh max(16px,env(safe-area-inset-left))}
+body.w3d .bleed::after,body.w3d .bleed .bg{display:none}
+body.w3d .bleed .inner{background:linear-gradient(180deg,rgba(58,10,16,.9),rgba(22,5,8,.92));border-radius:22px;padding:46px clamp(20px,5vw,56px);width:100%;
+  box-shadow:0 50px 100px -30px rgba(0,0,0,.8),0 0 0 1px rgba(245,217,150,.45);transform-origin:50% 50%;will-change:transform,opacity}
+body.w3d #closing{padding-bottom:20vh}
+body.w3d footer{background:transparent}
+@media (max-width:560px){body.w3d .ivory>.wrap,body.w3d .bleed .inner{padding:34px 16px;border-radius:18px}}
+
+@media (prefers-reduced-motion:reduce){.rv,.ph.rv{transition:none;opacity:1;transform:none;clip-path:none}.btn-gold::after,.scrollcue i{animation:none}}
+</style>
+</head>
+<body class="entered">
+
+<div class="topbar">
+  <button class="pill" id="langBtn" type="button" aria-label="Switch language">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg>
+    <span class="to">ગુજરાતી</span>
+  </button>
+  <button class="pill" id="muBtn" type="button" aria-label="Mute music">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="w" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path class="x" d="M17 9.5l5 5M22 9.5l-5 5"/></svg>
+  </button>
+</div>
+
+<canvas id="three" aria-hidden="true"></canvas>
+<!-- ============ 360 JOURNEY: five real 360 views, gate → courtyard → corridor → arches → dome ============ -->
+<section id="tour" aria-label="Shree Swaminarayan Mandir, Kalupur">
+  <div class="t-stick">
+    <div class="t-stage" id="tStage"></div>
+    <div class="t-shade" aria-hidden="true"></div>
+    <div class="tv" data-st="0" data-pos="top"><p class="greet">|| શ્રી સ્વામિનારાયણ ||</p><p class="greet">|| શ્રી ગણેશાય નમઃ ||</p></div>
+    <div class="tv" data-st="0" data-pos="bot"><p class="welcome" data-t="welcome"></p></div>
+    <div class="tv" data-st="1" data-pos="bot"><span class="eyebrow" data-t="w1b"></span><h2 data-t="w1a"></h2><p class="sub" data-t="w1c"></p></div>
+    <div class="tv" data-st="2" data-pos="bot"><span class="eyebrow" data-t="w2a"></span><p class="sub big" data-t="w2b"></p></div>
+    <div class="tv" data-st="3" data-pos="bot">
+      <p class="pp"><span class="pre" data-t="groomPre"></span> <b data-f="groom"></b></p><p class="of" data-f="groomOf"></p>
+      <p class="amp2">&amp;</p>
+      <p class="pp"><span class="pre" data-t="bridePre"></span> <b data-f="bride"></b></p><p class="of" data-f="brideOf"></p>
+    </div>
+    <div class="tv" data-st="4" data-pos="mid">
+      <p class="shubh">|| શુભ લગ્ન ||</p>
+      <h1 class="names-big"><span class="gold" data-f="groom"></span><span class="amp">&amp;</span><span class="gold" data-f="bride"></span></h1>
+      <p class="wdate" data-f="dateCity"></p>
+    </div>
+    <p class="t-credit" data-t="credit360"></p>
+    <div class="wbar" id="tbar"></div>
+  </div>
+</section>
+
+<!-- ============ WALK-IN: scrolling plays the walk through Kalupur Mandir ============ -->
+<section id="walk" aria-hidden="true" hidden>
+  <div class="stick">
+    <canvas id="film" aria-hidden="true"></canvas>
+    <div class="shade" aria-hidden="true"></div>
+    <div class="shade full" id="shadeFull" aria-hidden="true"></div>
+
+    <div class="ov ov-bot" data-a=".03" data-b=".4">
+      <span class="eyebrow" data-t="w1b"></span>
+      <h2 data-t="w1a"></h2>
+      <p class="sub" data-t="w1c"></p>
+    </div>
+    <div class="ov ov-bot" data-a=".46" data-b=".72">
+      <span class="eyebrow" data-t="w2a"></span>
+      <p class="sub" data-t="w2b" style="font-size:clamp(22px,5.6vw,34px)"></p>
+    </div>
+    <div class="ov ov-mid" data-a=".78" data-b="1.2">
+      <p class="shubh">|| શુભ લગ્ન ||</p>
+      <h1 class="names-big"><span class="gold" data-f="groom"></span><span class="amp">&amp;</span><span class="gold" data-f="bride"></span></h1>
+      <p class="wdate" data-f="dateCity"></p>
+    </div>
+
+    <div class="wbar" id="wbar"></div>
+  </div>
+</section>
+
+<!-- ============ COUPLE ============ -->
+<section id="couple" class="ivory pad">
+  <div class="wrap grid">
+    <div class="frame rv"><div class="ph rv"><img src="real/photos/DSC01870-s.webp" srcset="real/photos/DSC01870-s.webp 733w, real/photos/DSC01870-l.webp 1333w" sizes="(min-width:880px) 460px, 92vw" alt="Deep and Hinal" loading="lazy"></div></div>
+    <div>
+      <span class="eyebrow center rv" data-t="coupleEy"></span>
+      <span class="rule rv"></span>
+      <div class="person rv">
+        <p class="pre" data-t="groomPre"></p>
+        <p class="nm" data-f="groom"></p>
+        <p class="of" data-f="groomOf"></p>
+      </div>
+      <span class="amp-sm rv">&amp;</span>
+      <div class="person rv">
+        <p class="pre" data-t="bridePre"></p>
+        <p class="nm" data-f="bride"></p>
+        <p class="of" data-f="brideOf"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STORY ============ -->
+<section class="chap" data-ch="0" aria-label="Photos">
+  <div class="chap-head"><span class="eyebrow" data-chn="0"></span><h2 class="h-sec" data-chname="0"></h2></div>
+  <div class="chap-grid" data-grid="0"></div>
+</section>
+
+<section class="bleed" id="story">
+  <div class="bg" data-par><picture>
+    <img src="real/photos/DSC01840-l.webp" srcset="real/photos/DSC01840-s.webp 1100w, real/photos/DSC01840-l.webp 2000w" sizes="100vw" alt="" loading="lazy">
+  </picture></div>
+  <div class="inner">
+    <p class="quote rv" data-t="storyQ"></p>
+    <p class="by rv d1" data-f="both"></p>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section id="gallery" aria-label="Photos">
+  <div class="stick">
+    <div class="head">
+      <div><span class="eyebrow" data-t="galEy2"></span><h2 class="h-sec" data-t="galEy"></h2></div>
+      <span class="count" id="galCount">01 / 12</span>
+    </div>
+    <div class="track" id="track"></div>
+    <div class="gal-bar"><i id="galBar"></i></div>
+  </div>
+</section>
+
+<!-- ============ DATE ============ -->
+<section class="bleed" id="date">
+  <div class="bg" data-par><picture>
+    <img src="real/photos/DSC00302-l.webp" srcset="real/photos/DSC00302-s.webp 1100w, real/photos/DSC00302-l.webp 2000w" sizes="100vw" alt="" loading="lazy">
+  </picture></div>
+  <div class="inner">
+    <span class="eyebrow rv" data-t="dateEy"></span>
+    <p class="big-date gold rv d1" data-f="bigDate"></p>
+    <p class="muh rv d2" data-f="muhurat"></p>
+    <div class="cd rv d2" id="cd" aria-live="off">
+      <div><b id="cdD">0</b><span data-t="days"></span></div>
+      <div><b id="cdH">0</b><span data-t="hours"></span></div>
+      <div><b id="cdM">0</b><span data-t="mins"></span></div>
+      <div><b id="cdS">0</b><span data-t="secs"></span></div>
+    </div>
+    <button class="btn-line rv d3" id="calBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4"/></svg><span data-t="cal"></span></button>
+  </div>
+</section>
+
+<!-- ============ EVENTS ============ -->
+<section id="events" class="ivory pad">
+  <div class="wrap center">
+    <span class="eyebrow rv" data-t="evEy2"></span>
+    <h2 class="h-sec rv d1" data-t="evEy"></h2>
+    <span class="rule rv"></span>
+    <p class="rv d2" style="color:var(--ink-2);max-width:620px;margin:0 auto" data-t="evSub"></p>
+    <div class="ev-grid" id="evGrid"></div>
+  </div>
+</section>
+
+<!-- ============ VENUE ============ -->
+<section class="bleed" id="venue">
+  <div class="bg" data-par><img src="real/hd/f191.webp" alt="" loading="lazy"></div>
+  <div class="inner">
+    <span class="eyebrow rv" data-t="venueEy"></span>
+    <p class="v-name gold rv d1" data-f="venueName"></p>
+    <p class="v-addr rv d2" data-f="venueAddress"></p>
+    <a class="btn-line rv d3" id="mapBtn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-t="map"></span></a>
+    <div class="map rv" id="mapBox" hidden></div>
+  </div>
+</section>
+
+<!-- ============ FAMILY ============ -->
+<section id="family" class="ivory pad">
+  <div class="wrap center">
+    <span class="eyebrow rv" data-t="famEy2"></span>
+    <h2 class="h-sec rv d1" data-t="famEy"></h2>
+    <span class="rule rv"></span>
+    <p class="rv d2" style="color:var(--ink-2)" data-t="famSub"></p>
+    <div class="fam" id="fam"></div>
+  </div>
+</section>
+
+<!-- ============ RSVP ============ -->
+<section id="rsvp" class="ivory pad" style="padding-top:20px">
+  <div class="wrap grid">
+    <div class="ph rv"><img src="real/photos/DSC00342-s.webp" srcset="real/photos/DSC00342-s.webp 733w, real/photos/DSC00342-l.webp 1333w" sizes="(min-width:880px) 440px, 92vw" alt="Deep and Hinal" loading="lazy"></div>
+    <div>
+      <div class="center" style="margin-bottom:26px">
+        <span class="eyebrow rv" data-t="rsvpEy2"></span>
+        <h2 class="h-sec rv d1" data-t="rsvpEy"></h2>
+      </div>
+      <form id="rsvpForm" class="rv d2" novalidate>
+        <label class="f"><span data-t="fName"></span><input type="text" id="rName" autocomplete="name" required></label>
+        <div role="radiogroup" aria-labelledby="attL" style="display:grid;gap:6px"><span class="f" id="attL" data-t="fAttend"></span>
+          <div class="choice">
+            <label><input type="radio" name="att" value="yes" checked><span data-t="yes"></span></label>
+            <label><input type="radio" name="att" value="no"><span data-t="no"></span></label>
+          </div>
+        </div>
+        <label class="f"><span data-t="fGuests"></span><select id="rGuests"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select></label>
+        <label class="f"><span data-t="fMsg"></span><textarea id="rMsg"></textarea></label>
+        <button class="btn-gold" type="submit"><span data-t="send"></span></button>
+        <p class="thanks" id="thanks"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section class="bleed" id="closing">
+  <div class="bg" data-par><picture>
+    <img src="real/photos/DSC01834-l.webp" srcset="real/photos/DSC01834-s.webp 1100w, real/photos/DSC01834-l.webp 2000w" sizes="100vw" alt="" loading="lazy">
+  </picture></div>
+  <div class="inner">
+    <p class="quote rv" data-t="closeQ" style="font-size:clamp(24px,6vw,40px)"></p>
+    <h2 class="names-big rv d1"><span class="gold" data-f="groom"></span><span class="amp">&amp;</span><span class="gold" data-f="bride"></span></h2>
+    <p class="jai rv d2">|| જય શ્રી સ્વામિનારાયણ ||</p>
+  </div>
+</section>
+<footer data-t="footer"></footer>
+
+<script>
+/* =====================================================================
+   EDIT YOUR DETAILS HERE. Every text has an English (en) and Gujarati (gu) version.
+   Anything in [square brackets] is a placeholder still to be filled in.
+   ===================================================================== */
+const CONFIG = {
+  groom: { en: "Deep", gu: "દીપ" },
+  bride: { en: "Hinal", gu: "હિનલ" },
+  groomParents: { en: "Shri Kiritbhai Patel & Smt. [Mother's name]", gu: "શ્રી કિરીટભાઈ પટેલ તથા શ્રીમતી [માતાનું નામ]" },
+  brideParents: { en: "Shri Arvindbhai Patel & Smt. [Mother's name]", gu: "શ્રી અરવિંદભાઈ પટેલ તથા શ્રીમતી [માતાનું નામ]" },
+  city: { en: "Ahmedabad", gu: "અમદાવાદ" },
+  weddingISO: "2027-01-28T10:30:00+05:30",     // 28 January 2027 (the 10:30 muhurat time is still a SAMPLE): drives the countdown and calendar
+  venueName: { en: "[Venue name]", gu: "[લગ્ન સ્થળનું નામ]" },
+  venueAddress: { en: "[Street, Area], Ahmedabad, Gujarat", gu: "[સરનામું], અમદાવાદ, ગુજરાત" },
+  mapsQuery: "Ahmedabad, Gujarat",
+  mapEmbed: "",                                  // optional Google Maps embed URL
+  events: [                                      // SAMPLE times and places around the 28 Jan wedding (time is 24-hour)
+    { en: "Ganesh Sthapana", gu: "ગણેશ સ્થાપના", date: "2027-01-25", time: "09:00", place: { en: "Groom's residence", gu: "વરપક્ષનું નિવાસસ્થાન" }, dress: { en: "Yellow & ivory", gu: "પીળો અને ક્રીમ" }, colors: ["#f3c23c", "#fbf3e4"] },
+    { en: "Mehndi Rasam", gu: "મહેંદી રસમ", date: "2027-01-26", time: "16:00", place: { en: "Bride's residence", gu: "કન્યાપક્ષનું નિવાસસ્થાન" }, dress: { en: "Shades of green", gu: "લીલા રંગના શેડ્સ" }, colors: ["#3f7a2a", "#9cc46a"] },
+    { en: "Pithi", gu: "પીઠી", date: "2027-01-27", time: "10:00", place: { en: "Both residences", gu: "બંને નિવાસસ્થાને" }, dress: { en: "Haldi yellow", gu: "હળદરિયો પીળો" }, colors: ["#f2b21b", "#ffde7a"] },
+    { en: "Sangeet & Garba", gu: "સંગીત સંધ્યા અને ગરબા", date: "2027-01-27", time: "19:30", place: { en: "[Party plot], Ahmedabad", gu: "[પાર્ટી પ્લોટ], અમદાવાદ" }, dress: { en: "Chaniya choli & kediyu", gu: "ચણિયાચોળી અને કેડિયું" }, colors: ["#d6336c", "#2a6fd6", "#f2b21b"] },
+    { en: "Hast Melap", gu: "હસ્તમેળાપ", date: "2027-01-28", time: "10:30", place: { en: "[Venue name]", gu: "[લગ્ન સ્થળ]" }, dress: { en: "Traditional red & gold", gu: "પરંપરાગત લાલ અને સોનેરી" }, colors: ["#a3182a", "#d9a84e"] },
+    { en: "Reception", gu: "સ્વાગત સમારંભ", date: "2027-01-28", time: "19:30", place: { en: "[Venue name]", gu: "[લગ્ન સ્થળ]" }, dress: { en: "Indo-western formal", gu: "ઇન્ડો-વેસ્ટર્ન ફોર્મલ" }, colors: ["#2b0a0c", "#e9b7a6"] }
+  ],
+  families: [                                    // SAMPLE
+    { en: "Groom's family", gu: "વરપક્ષ", names: [
+      { en: "Shri Kiritbhai Patel & Smt. [Name]", gu: "શ્રી કિરીટભાઈ પટેલ તથા શ્રીમતી [નામ]" },
+      { en: "Shri [Name] & Smt. [Name]", gu: "શ્રી [નામ] તથા શ્રીમતી [નામ]" },
+      { en: "[Siblings & cousins]", gu: "[ભાઈ-બહેન તથા પરિવારજનો]" } ] },
+    { en: "Bride's family", gu: "કન્યાપક્ષ", names: [
+      { en: "Shri Arvindbhai Patel & Smt. [Name]", gu: "શ્રી અરવિંદભાઈ પટેલ તથા શ્રીમતી [નામ]" },
+      { en: "Shri [Name] & Smt. [Name]", gu: "શ્રી [નામ] તથા શ્રીમતી [નામ]" },
+      { en: "[Siblings & cousins]", gu: "[ભાઈ-બહેન તથા પરિવારજનો]" } ] }
+  ],
+  // Photos for the sideways film strip (files in real/photos, p = portrait, l = landscape)
+  gallery: [["DSC01870", "p"], ["DSC00302", "l"], ["DSC00342", "p"], ["DSC01834", "l"], ["DSC01840", "l"]],
+  // Photo chapters: every photo from your shoot, grouped by place (p = portrait, l = landscape)
+  chapters: [
+    { en: "Our Story", gu: "અમારી સફર", photos: [["DSC00302","l"],["DSC00342","p"],["DSC01834","l"],["DSC01870","p"]] }
+  ],
+  endPhoto: "DSC01840",
+  // The 360 journey that opens the site: the five views you shared, in order (Google Maps photospheres by Orbit 360, Jul 2020)
+  tour: [
+    { pano: "CIHM0ogKEICAgIDyvbbEvAE", lat: 23.0300092, lng: 72.5917837, heading: 261.84, pitch: 17.36 },   // main gate
+    { pano: "CIHM0ogKEICAgIC8_uL9UQ",  lat: 23.0300070, lng: 72.5917556, heading: 261.84, pitch: 17.36 },   // courtyard and mandir
+    { pano: "CIHM0ogKEICAgIC8_uL2-gE", lat: 23.0300047, lng: 72.5917276, heading: 264.90, pitch: 8.78 },    // inner corridor
+    { pano: "CIHM0ogKEICAgIC8_uKYgwE", lat: 23.0300025, lng: 72.5916996, heading: 327.23, pitch: 8.54 },    // carved arches
+    { pano: "CIHM0ogKEICAgIC8_uLBlQE", lat: 23.0299959, lng: 72.5916111, heading: 330.10, pitch: 50.05 }    // painted dome
+  ],
+  // Optional: a Google Maps JavaScript API key. With it each 360 view also turns as you scroll.
+  mapsApiKey: "",
+       // the photograph waiting at the very end of the 3D journey
+  rsvpWhatsApp: "",           // e.g. "919876543210" (country code, no +). Leave "" to just show a thank-you.
+  defaultLang: "en",          // "en" or "gu". A link ending in ?lang=gu always opens in Gujarati.
+  music: true,                // gentle instrumental, starts only after the guest taps Enter
+  musicFile: ""               // optional: a licensed .mp3 to play instead
+};
+
+const T = {
+  en: {
+    welcome: "With the divine blessings of Shree Swaminarayan Bhagwan, we warmly invite you to celebrate our wedding.",
+    enter: "Enter Wedding Invitation", hint: "Then scroll slowly to walk in", keep: "Keep scrolling",
+    w1a: "Shree Swaminarayan Mandir", w1b: "Kalupur · Ahmedabad", w1c: "Where every auspicious beginning seeks His blessings",
+    w2a: "Together with our families", w2b: "we joyfully invite you to celebrate the wedding of",
+    coupleEy: "The Couple", groomPre: "Chi.", bridePre: "Chi. Sau. Ka.", sonOf: "Son of {p}", daughterOf: "Daughter of {p}",
+    storyQ: "Two hearts, one journey, blessed by family and faith.",
+    galEy2: "Our moments", galEy: "Together, Always",
+    dateEy: "Save the Date", muhurat: "Shubh Muhurat · {t}", days: "Days", hours: "Hours", mins: "Minutes", secs: "Seconds", cal: "Add to Calendar", today: "The auspicious day is here",
+    evEy2: "Celebrations", evEy: "Wedding Festivities", evSub: "Your presence at each celebration would mean the world to us.", dress: "Dress", dir: "Directions",
+    venueEy: "The Venue", map: "Open in Google Maps",
+    famEy2: "With warm regards", famEy: "Our Families", famSub: "Awaiting your gracious presence and blessings",
+    rsvpEy2: "RSVP", rsvpEy: "Kindly Confirm Your Presence", fName: "Your name", fAttend: "Will you join us?", yes: "Yes, with joy", no: "Sorry, I can't",
+    fGuests: "Number of guests", fMsg: "Blessings or message (optional)", send: "Send RSVP", needName: "Please write your name.",
+    thanks: "Thank you, {n}! Your reply has been noted.",
+    closeQ: "Your presence will make our celebration complete.",
+    footer: "With love, the families of Deep & Hinal",
+    wa: "Jai Shree Swaminarayan! RSVP for Deep & Hinal's wedding\nName: {n}\nAttending: {a}\nGuests: {g}\nMessage: {m}", waYes: "Yes", waNo: "No",
+    chap: "Chapter {n}",
+    look360: "Look around 360°", lookDone: "Done looking", scroll360: "Scroll to walk in", credit360: "360° views: Orbit 360 on Google Maps",
+    calTitle: "Wedding of Deep & Hinal", langLabel: "Switch to Gujarati", mute: "Mute music", play: "Play music"
+  },
+  gu: {
+    welcome: "શ્રી સ્વામિનારાયણ ભગવાનના દિવ્ય આશીર્વાદ સાથે, અમારા લગ્નોત્સવમાં પધારવા આપને હાર્દિક નિમંત્રણ પાઠવીએ છીએ.",
+    enter: "લગ્ન કંકોત્રી ખોલો", hint: "પછી અંદર પ્રવેશવા ધીમે ધીમે સ્ક્રોલ કરો", keep: "આગળ સ્ક્રોલ કરો",
+    w1a: "શ્રી સ્વામિનારાયણ મંદિર", w1b: "કાલુપુર · અમદાવાદ", w1c: "જ્યાં દરેક શુભ શરૂઆત પ્રભુના આશીર્વાદથી થાય છે",
+    w2a: "અમારા પરિવારજનો સાથે", w2b: "શુભ લગ્નોત્સવમાં પધારવા આપને સહર્ષ નિમંત્રણ પાઠવીએ છીએ",
+    coupleEy: "વર અને કન્યા", groomPre: "ચિ.", bridePre: "ચિ. સૌ. કાં.", sonOf: "{p} ના સુપુત્ર", daughterOf: "{p} ની સુપુત્રી",
+    storyQ: "બે હૃદય, એક સફર, પરિવાર અને શ્રદ્ધાના આશીર્વાદ સાથે.",
+    galEy2: "અમારી યાદગાર પળો", galEy: "સદા સાથે",
+    dateEy: "શુભ દિવસ", muhurat: "શુભ મુહૂર્ત · {t}", days: "દિવસ", hours: "કલાક", mins: "મિનિટ", secs: "સેકન્ડ", cal: "કેલેન્ડરમાં ઉમેરો", today: "શુભ દિવસ આવી પહોંચ્યો",
+    evEy2: "શુભ પ્રસંગો", evEy: "લગ્નોત્સવના પ્રસંગો", evSub: "દરેક પ્રસંગે આપની ઉપસ્થિતિ અમારા માટે સૌભાગ્ય રહેશે.", dress: "પહેરવેશ", dir: "રસ્તો જુઓ",
+    venueEy: "લગ્ન સ્થળ", map: "Google Maps માં જુઓ",
+    famEy2: "દર્શનાભિલાષી", famEy: "અમારો પરિવાર", famSub: "આપની ઉપસ્થિતિ અને આશીર્વાદની અપેક્ષા સાથે",
+    rsvpEy2: "આપનો જવાબ", rsvpEy: "આપની હાજરીની જાણ કરશો", fName: "આપનું નામ", fAttend: "આપ પધારશો?", yes: "હા, આનંદથી", no: "માફ કરશો, નહીં આવી શકું",
+    fGuests: "મહેમાનોની સંખ્યા", fMsg: "આશીર્વાદ કે સંદેશ (વૈકલ્પિક)", send: "જવાબ મોકલો", needName: "કૃપા કરીને આપનું નામ લખો.",
+    thanks: "આભાર, {n}! આપનો જવાબ મળી ગયો છે.",
+    closeQ: "આપની ઉપસ્થિતિથી જ અમારો આ શુભ પ્રસંગ પૂર્ણ થશે.",
+    footer: "સ્નેહ સહ, દીપ અને હિનલના પરિવારજનો",
+    wa: "જય શ્રી સ્વામિનારાયણ! દીપ અને હિનલના લગ્ન માટે જવાબ\nનામ: {n}\nહાજરી: {a}\nમહેમાનો: {g}\nસંદેશ: {m}", waYes: "હા", waNo: "ના",
+    chap: "પ્રકરણ {n}",
+    look360: "૩૬૦° માં આસપાસ જુઓ", lookDone: "બસ, આગળ વધો", scroll360: "અંદર પ્રવેશવા સ્ક્રોલ કરો", credit360: "૩૬૦° દૃશ્યો: Google Maps પર Orbit 360",
+    calTitle: "દીપ અને હિનલના શુભ લગ્ન", langLabel: "Switch to English", mute: "સંગીત બંધ કરો", play: "સંગીત વગાડો"
+  }
+};
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const PHONE = matchMedia('(max-width: 760px)').matches || /Mobi|Android/i.test(navigator.userAgent);
+let LANG = (() => { const q = new URLSearchParams(location.search).get('lang'); if (q === 'gu' || q === 'en') return q;
+  try { const s = localStorage.getItem('dh-lang'); if (s === 'gu' || s === 'en') return s; } catch (e) {} return CONFIG.defaultLang === 'gu' ? 'gu' : 'en'; })();
+
+/* ---------- language ---------- */
+const L = v => (v && typeof v === 'object') ? (v[LANG] || v.en) : (v || '');
+const fill = (s, o) => s.replace(/\{(\w)\}/g, (m, k) => o[k] != null ? o[k] : m);
+const WED = new Date(CONFIG.weddingISO);
+const locale = () => LANG === 'gu' ? 'gu-IN-u-nu-gujr' : 'en-IN';
+const num = n => LANG === 'gu' ? new Intl.NumberFormat('gu-IN-u-nu-gujr', { useGrouping: false }).format(n) : String(n);
+function fmtTime(hhmm){ const [h, m] = hhmm.split(':').map(Number);
+  if (LANG === 'gu') { const part = h < 12 ? 'સવારે' : h < 16 ? 'બપોરે' : h < 19 ? 'સાંજે' : 'રાત્રે'; const h12 = ((h + 11) % 12) + 1; return part + ' ' + num(h12) + ':' + num(String(m).padStart(2, '0')); }
+  const h12 = ((h + 11) % 12) + 1; return h12 + ':' + String(m).padStart(2, '0') + ' ' + (h < 12 ? 'AM' : 'PM'); }
+const fmtDate = (d, o) => d.toLocaleDateString(locale(), Object.assign({ timeZone: 'Asia/Kolkata' }, o));
+const wedHHMM = () => WED.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' });
+
+function applyLang(){
+  const t = T[LANG];
+  document.documentElement.lang = LANG;
+  $$('[data-t]').forEach(el => { const v = t[el.dataset.t]; if (v != null) el.textContent = v; });
+  const F = {
+    groom: L(CONFIG.groom), bride: L(CONFIG.bride),
+    both: L(CONFIG.groom) + ' & ' + L(CONFIG.bride),
+    groomOf: fill(t.sonOf, { p: L(CONFIG.groomParents) }), brideOf: fill(t.daughterOf, { p: L(CONFIG.brideParents) }),
+    dateCity: fmtDate(WED, { day: 'numeric', month: 'long', year: 'numeric' }) + ' · ' + L(CONFIG.city),
+    bigDate: fmtDate(WED, { day: 'numeric', month: 'long', year: 'numeric' }),
+    venueName: L(CONFIG.venueName), venueAddress: L(CONFIG.venueAddress)
+  };
+  F.muhurat = fmtDate(WED, { weekday: 'long' }) + '  ·  ' + fill(t.muhurat, { t: fmtTime(wedHHMM()) });
+  $$('[data-f]').forEach(el => { if (F[el.dataset.f] != null) el.textContent = F[el.dataset.f]; });
+  $('#langBtn .to').textContent = LANG === 'gu' ? 'English' : 'ગુજરાતી';
+  $('#langBtn').setAttribute('aria-label', t.langLabel);
+  renderEvents(); renderFamily(); renderChapters(); tick();
+  if (window.__setMuteUI) window.__setMuteUI();
+}
+$('#langBtn').addEventListener('click', () => { LANG = LANG === 'gu' ? 'en' : 'gu'; try { localStorage.setItem('dh-lang', LANG); } catch (e) {} applyLang(); requestAnimationFrame(() => { sizeGallery(); onScroll(); }); });
+
+/* ---------- photo chapters ---------- */
+function renderChapters(){
+  $$('[data-chn]').forEach(el => { el.textContent = fill(T[LANG].chap, { n: num(String(+el.dataset.chn + 1).padStart(2, '0')) }); });
+  $$('[data-chname]').forEach(el => { el.textContent = L(CONFIG.chapters[+el.dataset.chname]); });
+  $$('.chap').forEach(sec => sec.style.setProperty('--n', CONFIG.chapters[+sec.dataset.ch].photos.length));
+}
+$$('[data-grid]').forEach(el => { el.innerHTML = CONFIG.chapters[+el.dataset.grid].photos.map(([n, o]) =>
+  `<figure class="${o}"><img src="real/photos/${n}-s.webp" alt="Deep and Hinal" loading="lazy" decoding="async"></figure>`).join(''); });
+
+/* ---------- events, family ---------- */
+const mapsLink = q => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
+function renderEvents(){
+  const t = T[LANG];
+  $('#evGrid').innerHTML = CONFIG.events.map((e, i) => {
+    const d = new Date(e.date + 'T12:00:00+05:30');
+    return `<article class="ev rv${i % 3 ? ' d' + (i % 3) : ''}${evSeen ? ' in' : ''}">
+      <p class="no">${String(i + 1).padStart(2, '0')}</p>
+      <h3>${L(e)}</h3>
+      <p class="when">${fmtDate(d, { weekday: 'short', day: 'numeric', month: 'short' })} · ${fmtTime(e.time)}</p>
+      <p class="where">${L(e.place)}</p>
+      <p class="dress">${e.colors.map(c => `<i class="sw" style="background:${c}"></i>`).join('')}<span><b>${t.dress}:</b> ${L(e.dress)}</span></p>
+      <a class="btn-line" href="${mapsLink(L(e.place).replace(/[\[\]]/g, '') + ', ' + CONFIG.mapsQuery)}" target="_blank" rel="noopener">${t.dir}</a>
+    </article>`; }).join('');
+  if (!evSeen) $$('#evGrid .rv').forEach(el => io && io.observe(el));
+}
+let evSeen = false;
+function renderFamily(){
+  $('#fam').innerHTML = CONFIG.families.map((f, i) => `<div class="card rv in${i ? ' d1' : ''}"><h3>${L(f)}</h3><ul>${f.names.map(n => `<li>${L(n)}</li>`).join('')}</ul></div>`).join('');
+}
+$('#mapBtn').href = mapsLink(CONFIG.mapsQuery);
+if (CONFIG.mapEmbed) { $('#mapBox').hidden = false; $('#mapBox').innerHTML = `<iframe src="${CONFIG.mapEmbed}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe>`; }
+
+/* ---------- gallery strip ---------- */
+$('#track').innerHTML = CONFIG.gallery.map(([n, o]) => `<figure class="${o}"><img src="real/photos/${n}-s.webp" srcset="real/photos/${n}-s.webp ${o === 'p' ? 733 : 1100}w, real/photos/${n}-l.webp ${o === 'p' ? 1333 : 2000}w" sizes="${o === 'p' ? '(max-width:760px) 38vw, 30vw' : '(max-width:760px) 52vw, 70vw'}" alt="Deep and Hinal" loading="lazy" decoding="async"></figure>`).join('');
+let galSpan = 0;
+function sizeGallery(){ const tr = $('#track'); galSpan = Math.max(0, tr.scrollWidth - innerWidth);
+  $('#gallery').style.setProperty('--gh', (innerHeight + galSpan * 1.15) + 'px'); }
+
+/* ---------- countdown + calendar ---------- */
+function tick(){
+  let s = Math.max(0, Math.floor((WED - Date.now()) / 1000));
+  const d = Math.floor(s / 86400); s -= d * 86400; const h = Math.floor(s / 3600); s -= h * 3600; const m = Math.floor(s / 60); s -= m * 60;
+  $('#cdD').textContent = num(d); $('#cdH').textContent = num(String(h).padStart(2, '0')); $('#cdM').textContent = num(String(m).padStart(2, '0')); $('#cdS').textContent = num(String(s).padStart(2, '0'));
+}
+setInterval(tick, 1000);
+$('#calBtn').addEventListener('click', () => {
+  const z = d => d.toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+  const end = new Date(WED.getTime() + 3 * 3600e3);
+  const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//DeepHinal//Invite//EN', 'BEGIN:VEVENT', 'UID:deep-hinal-wedding@invite', 'DTSTAMP:' + z(new Date()),
+    'DTSTART:' + z(WED), 'DTEND:' + z(end), 'SUMMARY:' + T[LANG].calTitle, 'LOCATION:' + (L(CONFIG.venueName) + ', ' + L(CONFIG.venueAddress)).replace(/,/g, '\\,'), 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' })); a.download = 'Deep-Hinal-Wedding.ics'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+});
+
+/* ---------- RSVP ---------- */
+$('#rsvpForm').addEventListener('submit', e => {
+  e.preventDefault(); const t = T[LANG], name = $('#rName').value.trim();
+  if (!name) { $('#rName').focus(); $('#rName').setCustomValidity(t.needName); $('#rName').reportValidity(); return; }
+  const yes = document.querySelector('input[name=att]:checked').value === 'yes';
+  if (CONFIG.rsvpWhatsApp) {
+    const msg = fill(t.wa, { n: name, a: yes ? t.waYes : t.waNo, g: $('#rGuests').value, m: $('#rMsg').value.trim() || '-' });
+    window.open('https://wa.me/' + CONFIG.rsvpWhatsApp + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+  }
+  $('#thanks').textContent = fill(t.thanks, { n: name }); $('#rsvpForm').classList.add('sent');
+});
+$('#rName').addEventListener('input', () => $('#rName').setCustomValidity(''));
+
+/* ---------- reveal on view ---------- */
+const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); if (en.target.closest('#evGrid')) evSeen = true; } }), { rootMargin: '0px 0px -10% 0px' }) : null;
+
+/* ---------- the walk-in film: scroll scrubs the Kalupur video, frame by frame ---------- */
+const STEP = PHONE ? 2 : 1, TOTAL = 192, frames = [], SET = PHONE ? 'md' : 'hd';
+for (let i = 0; i < TOTAL; i += STEP) frames.push(i);
+const imgs = new Array(frames.length);
+const cv = $('#film'), cx = cv.getContext('2d');
+let cw = 0, ch = 0, curF = 0, tgtF = 0, drawn = -1;
+function fitCanvas(){ const dpr = Math.min(devicePixelRatio || 1, 2); cw = cv.clientWidth; ch = cv.clientHeight; cv.width = Math.round(cw * dpr); cv.height = Math.round(ch * dpr); cx.setTransform(dpr, 0, 0, dpr, 0, 0); cx.imageSmoothingQuality = 'high'; drawn = -1; }
+function nearestLoaded(k){ for (let r = 0; r < frames.length; r++) { if (imgs[k - r] && imgs[k - r].ok) return k - r; if (imgs[k + r] && imgs[k + r].ok) return k + r; } return -1; }
+function draw(k){
+  const j = nearestLoaded(k); if (j < 0 || j === drawn) return; drawn = j;
+  const im = imgs[j], iw = im.naturalWidth, ih = im.naturalHeight, s = Math.max(cw / iw, ch / ih);
+  const w = iw * s, h = ih * s; cx.drawImage(im, (cw - w) / 2, (ch - h) * .42, w, h);
+}
+if (!$('#walk').hidden) (function preload(){
+  // first frame, then a coarse pass (every 8th) so scrubbing works early, then fill the gaps
+  const order = [], seen = new Set(), push = k => { if (k < frames.length && !seen.has(k)) { seen.add(k); order.push(k); } };
+  push(0); for (const g of [8, 4, 2, 1]) for (let k = 0; k < frames.length; k += g) push(k);
+  let at = 0, live = 0; const MAX = 6;
+  const next = () => { while (live < MAX && at < order.length) { const k = order[at++], im = new Image(); live++; im.decoding = 'async';
+      im.onload = () => { im.ok = true; live--; if (k === 0 || Math.abs(k - Math.round(curF)) < 3) { drawn = -1; draw(Math.round(curF)); } next(); };
+      im.onerror = () => { live--; next(); }; im.src = `real/${SET}/f${String(frames[k]).padStart(3, '0')}.webp`; imgs[k] = im; } };
+  next();
+})();
+
+const walk = $('#walk'), ovs = $$('#walk .ov'), shadeFull = $('#shadeFull'), wbar = $('#wbar'), cue = $('#cue') || document.createElement('i');
+let walkP = 0;
+function onScroll(){
+  const r = walk.getBoundingClientRect(), span = walk.offsetHeight - innerHeight;
+  walkP = Math.min(1, Math.max(0, -r.top / span));
+  tgtF = walkP * (frames.length - 1);
+  if (REDUCE) curF = tgtF;
+  wbar.style.transform = `scaleX(${walkP})`;
+  shadeFull.style.opacity = Math.max(0, (walkP - .74) / .2).toFixed(3);
+  cue.classList.toggle('on', walkP > .02 && walkP < .97);
+  for (const o of ovs) {
+    const a = +o.dataset.a, b = +o.dataset.b, hold = o.dataset.hold === 'start';
+    let v, y;
+    if (hold) { v = 1 - Math.min(1, Math.max(0, (walkP - a) / (b - a))); y = -30 * (1 - v); if (!document.body.classList.contains('entered') && o.id === 'ovEnter') v = 1; }
+    else { const len = b - a, f = (walkP - a) / len; v = f < 0 || f > 1 ? 0 : Math.min(1, f / .22, (1 - f) / .22); y = (1 - Math.min(1, Math.max(0, f / .22))) * 40 - Math.max(0, (f - .78) / .22) * 30; }
+    o.style.opacity = Math.max(0, Math.min(1, v)).toFixed(3);
+    o.style.translate = `0 ${y.toFixed(1)}px`;
+    o.classList.toggle('live', v > .5);
+  }
+  // gallery: vertical scroll → sideways strip
+  const g = $('#gallery'), gr = g.getBoundingClientRect(), gspan = g.offsetHeight - innerHeight;
+  const gp = Math.min(1, Math.max(0, -gr.top / Math.max(1, gspan)));
+  $('#track').style.transform = `translate3d(${(-gp * galSpan).toFixed(1)}px,0,0)`;
+  $('#galBar').style.transform = `scaleX(${gp})`;
+  const n = CONFIG.gallery.length, idx = Math.min(n, 1 + Math.floor(gp * n));
+  $('#galCount').textContent = num(String(idx).padStart(2, '0')) + ' / ' + num(String(n).padStart(2, '0'));
+  if (document.body.classList.contains('w3d') && !REDUCE) for (const el of $$('#site3d-panels, .ivory>.wrap, .bleed .inner')) {
+    const r2 = el.getBoundingClientRect(), mid = innerHeight / 2; if (r2.bottom < -100 || r2.top > innerHeight + 100) continue;
+    const c = r2.top > mid ? (r2.top - mid) / innerHeight : r2.bottom < mid ? (r2.bottom - mid) / innerHeight : 0;
+    el.style.transform = `perspective(1200px) translate3d(0,0,${(-Math.abs(c) * 220).toFixed(0)}px) rotateX(${(c * -16).toFixed(2)}deg)`;
+    el.style.opacity = Math.max(.15, 1 - Math.max(0, Math.abs(c) - .25) * 1.6).toFixed(3); }
+  // gentle parallax on full-bleed photos
+  if (!REDUCE) for (const el of $$('[data-par]')) { const pr = el.parentElement.getBoundingClientRect(); if (pr.bottom < -50 || pr.top > innerHeight + 50) continue;
+    const c = (pr.top + pr.height / 2 - innerHeight / 2) / innerHeight; el.style.transform = `translate3d(0,${(c * -9).toFixed(2)}%,0)`; }
+}
+addEventListener('scroll', onScroll, { passive: true });
+addEventListener('resize', () => { fitCanvas(); sizeGallery(); onScroll(); });
+
+function loop(){
+  curF += (tgtF - curF) * (REDUCE ? 1 : .18);
+  if (Math.abs(tgtF - curF) < .01) curF = tgtF;
+  if (window.W3D) window.W3D.frame(Math.round(curF)); else draw(Math.round(curF));
+  requestAnimationFrame(loop);
+}
+
+/* ---------- music ---------- */
+let audio = null;
+function startMusic(){
+  if (!CONFIG.music || audio) return;
+  if (CONFIG.musicFile) { const a = new Audio(CONFIG.musicFile); a.loop = true; a.volume = .5; a.play().catch(() => {}); audio = { file: a, on: true }; return; }
+  const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+  const ac = new AC(), master = ac.createGain(); master.gain.value = 0; master.connect(ac.destination);
+  master.gain.linearRampToValueAtTime(.18, ac.currentTime + 4);
+  const rev = ac.createConvolver(), len = ac.sampleRate * 2.8, ir = ac.createBuffer(2, len, ac.sampleRate);
+  for (let c = 0; c < 2; c++) { const d = ir.getChannelData(c); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3); }
+  rev.buffer = ir; const wet = ac.createGain(); wet.gain.value = .55; rev.connect(wet); wet.connect(master);
+  const SA = 138.6, R = { S: 1, R: 9 / 8, G: 5 / 4, M: 45 / 32, P: 3 / 2, D: 5 / 3, N: 15 / 8, S2: 2 };
+  const drone = [SA * 1.5, SA * 2, SA * 2, SA];
+  function tanpura(f, t){ const o = ac.createOscillator(), o2 = ac.createOscillator(), g = ac.createGain(), lp = ac.createBiquadFilter();
+    o.type = 'sawtooth'; o2.type = 'triangle'; o.frequency.value = f; o2.frequency.value = f * 1.003; lp.type = 'lowpass';
+    lp.frequency.setValueAtTime(2200, t); lp.frequency.exponentialRampToValueAtTime(420, t + 2.6);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.1, t + .03); g.gain.exponentialRampToValueAtTime(.001, t + 3.4);
+    o.connect(lp); o2.connect(lp); lp.connect(g); g.connect(master); g.connect(rev); o.start(t); o2.start(t); o.stop(t + 3.5); o2.stop(t + 3.5); }
+  function santoor(f, t){ for (const [m, v] of [[1, .07], [2, .02], [3.01, .01]]) { const o = ac.createOscillator(), g = ac.createGain(); o.type = 'triangle'; o.frequency.value = f * m;
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v, t + .005); g.gain.exponentialRampToValueAtTime(.0008, t + 1.6); o.connect(g); g.connect(master); g.connect(rev); o.start(t); o.stop(t + 1.7); } }
+  function shehnai(f, t, dur){ const o = ac.createOscillator(), g = ac.createGain(), bp = ac.createBiquadFilter(), vib = ac.createOscillator(), vg = ac.createGain();
+    o.type = 'sawtooth'; o.frequency.setValueAtTime(f * .985, t); o.frequency.linearRampToValueAtTime(f, t + .12);
+    vib.frequency.value = 5.2; vg.gain.value = f * .007; vib.connect(vg); vg.connect(o.frequency);
+    bp.type = 'bandpass'; bp.frequency.value = f * 2.2; bp.Q.value = 1.6;
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.05, t + .18); g.gain.setValueAtTime(.05, t + dur - .25); g.gain.linearRampToValueAtTime(0, t + dur);
+    o.connect(bp); bp.connect(g); g.connect(master); g.connect(rev); o.start(t); vib.start(t); o.stop(t + dur + .05); vib.stop(t + dur + .05); }
+  const phrases = [['N', 'R', 'G', 'R', 'S'], ['G', 'M', 'P', 'M', 'G', 'R', 'S'], ['P', 'D', 'N', 'S2', 'N', 'D', 'P'], ['M', 'G', 'R', 'G', 'R', 'S'], ['N', 'R', 'G', 'M', 'P']];
+  let step = 0, next = ac.currentTime + .2, mel = ac.currentTime + 5, ph = 0, arp = ac.currentTime + 2;
+  const timer = setInterval(() => {
+    while (next < ac.currentTime + 1.5) { tanpura(drone[step++ % 4], next); next += 1.15; }
+    if (arp < ac.currentTime + 1.5) { let t = arp; for (const n of ['S', 'G', 'P', 'S2', 'P', 'G']) { santoor(SA * 2 * R[n], t); t += .22; } arp = t + 3.5 + Math.random() * 2; }
+    if (mel < ac.currentTime + 1.5) { let t = mel; for (const n of phrases[ph++ % phrases.length]) { const d = .7 + Math.random() * .7; shehnai(SA * 4 * R[n], t, d); t += d; } mel = t + 5 + Math.random() * 4; }
+  }, 300);
+  audio = { ac, master, timer, on: true };
+}
+function setMuteUI(){ const on = !!(audio && audio.on), b = $('#muBtn'); b.classList.toggle('off', !on); b.setAttribute('aria-label', on ? T[LANG].mute : T[LANG].play); }
+window.__setMuteUI = setMuteUI;
+$('#muBtn').addEventListener('click', () => {
+  if (!audio) { startMusic(); setMuteUI(); return; }
+  audio.on = !audio.on;
+  if (audio.file) { audio.on ? audio.file.play() : audio.file.pause(); }
+  else { audio.master.gain.cancelScheduledValues(audio.ac.currentTime); audio.master.gain.linearRampToValueAtTime(audio.on ? .18 : 0, audio.ac.currentTime + .6); }
+  setMuteUI();
+});
+document.addEventListener('visibilitychange', () => { if (audio && audio.ac) document.hidden ? audio.ac.suspend() : (audio.on && audio.ac.resume()); });
+
+/* ---------- Enter: start music, unlock, glide the first steps through the gate ---------- */
+$('#enterBtn') && $('#enterBtn').addEventListener('click', () => {
+  startMusic(); setMuteUI();
+  document.body.classList.remove('locked'); document.body.classList.add('entered');
+  if (REDUCE) return;
+  const from = scrollY, to = walk.offsetTop + (walk.offsetHeight - innerHeight) * .2, dur = 2600, t0 = performance.now();
+  let stop = false; const cancel = () => { stop = true; };
+  ['wheel', 'touchstart', 'keydown'].forEach(ev => addEventListener(ev, cancel, { once: true, passive: true }));
+  const ease = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+  (function glide(now){ if (stop) return; const k = Math.min(1, (now - t0) / dur); scrollTo(0, from + (to - from) * ease(k)); if (k < 1) requestAnimationFrame(glide); })(t0);
+});
+
+
+/* ---------- 360 journey: scroll carries you through the five views ---------- */
+(function(){
+  const TV = CONFIG.tour, sec = $('#tour'), stage = $('#tStage'); if (!TV || !sec) return;
+  const N = TV.length, layers = [], texts = $$('#tour .tv'), bar = $('#tbar');
+  sec.style.height = (N * 150 + 100) + 'vh';
+  const embed = v => `https://www.google.com/maps/embed?pb=!4v1731280000000!6m8!1m7!1s${v.pano}!2m2!1d${v.lat}!2d${v.lng}!3f${v.heading}!4f${v.pitch}!5f0.7820865974627469`;
+  let sv = null;
+  const POSTER = [0, 96, 120, 144, 180];   // matching moments from your walk-in video
+  TV.forEach((v, i) => { const L = document.createElement('div'); L.className = 't-layer';
+    L.style.backgroundImage = `url(real/${PHONE ? 'md' : 'hd'}/f${String(POSTER[i] - (PHONE ? POSTER[i] % 2 : 0)).padStart(3, '0')}.webp)`; stage.appendChild(L); layers.push({ el: L, v, f: null }); });
+  // only bring in the live 360 views when Google Maps is reachable from this page; otherwise the real video stills stay
+  let blocked = true; { const probe = new Image(); probe.onload = () => { blocked = false; }; probe.src = 'https://www.google.com/favicon.ico?' + Date.now(); }
+  document.addEventListener('securitypolicyviolation', e => { if (/frame/.test(e.violatedDirective || e.effectiveDirective || '')) { blocked = true; layers.forEach((o, k) => unmount(k)); } });
+  function mount(i){ const o = layers[i]; if (!o || o.f || sv || blocked) return; const f = document.createElement('iframe'); f.src = embed(o.v); f.title = '360 view, Shree Swaminarayan Mandir, Kalupur';
+    f.loading = 'eager'; f.referrerPolicy = 'no-referrer-when-downgrade'; f.tabIndex = -1; f.addEventListener('load', () => setTimeout(() => f.classList.add('on'), 600)); o.el.appendChild(f); o.f = f; }
+  function unmount(i){ const o = layers[i]; if (o && o.f) { o.f.remove(); o.f = null; } }
+  if (CONFIG.mapsApiKey) {
+    window.__svTour = () => { try {
+      const box = document.createElement('div'); box.className = 't-layer sv'; stage.appendChild(box); layers.forEach(o => o.el.style.display = 'none');
+      sv = new google.maps.StreetViewPanorama(box, { pano: TV[0].pano, pov: { heading: TV[0].heading, pitch: TV[0].pitch }, zoom: 0, disableDefaultUI: true, clickToGo: false,
+        linksControl: false, scrollwheel: false, motionTracking: false, motionTrackingControl: false, showRoadLabels: false });
+      sv.__box = box; sv.__at = 0;
+    } catch (e) { console.warn(e); sv = null; } };
+    const sc = document.createElement('script'); sc.async = true; sc.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(CONFIG.mapsApiKey) + '&callback=__svTour'; document.head.appendChild(sc);
+  }
+  let cur = 0, tgt = 0;
+  const upd = () => { const r = sec.getBoundingClientRect(), span = sec.offsetHeight - innerHeight; tgt = Math.min(1, Math.max(0, -r.top / Math.max(1, span))); };
+  addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); upd();
+  const sm = x => x * x * (3 - 2 * x), clamp = x => Math.min(1, Math.max(0, x));
+  (function tick(){
+    cur += (tgt - cur) * (REDUCE ? 1 : .14); if (Math.abs(tgt - cur) < 1e-4) cur = tgt;
+    const x = cur * N, i = Math.min(N - 1, Math.floor(x)), u = x - i;          // station i, progress u inside it
+    for (let k = 0; k < N; k++) { if (Math.abs(k - i) <= 1) mount(k); else unmount(k); }
+    layers.forEach((o, k) => {
+      let op = 0, sc = 1, ty = 0;
+      if (k === i) { const out = i < N - 1 ? sm(clamp((u - .72) / .28)) : 0; op = 1 - out; sc = 1 + .16 * u + .25 * out; ty = -1.5 * u; }
+      else if (k === i + 1) { const inn = sm(clamp((u - .72) / .28)); op = inn; sc = .9 + .1 * inn; }
+      o.el.style.opacity = op.toFixed(3); o.el.style.visibility = op > .002 ? 'visible' : 'hidden';
+      if (!REDUCE) o.el.style.transform = `translate3d(0,${ty.toFixed(2)}%,0) scale(${sc.toFixed(4)})`;
+    });
+    if (sv) { const v = TV[i]; if (sv.__at !== i) { sv.setPano(v.pano); sv.__at = i; }
+      sv.setPov({ heading: v.heading - 35 + 70 * sm(u), pitch: v.pitch }); sv.setZoom(.2 + 1.1 * sm(clamp((u - .55) / .45)));
+      sv.__box.style.opacity = (1 - .85 * Math.sin(Math.PI * clamp((u - .86) / .14))).toFixed(3); }
+    texts.forEach(t => { const st = +t.dataset.st, f = st === i ? u : -1;
+      let v = 0; if (f >= 0) v = st === N - 1 ? Math.min(1, f / .18) : Math.min(1, f / .18, (0.8 - f) / .14); if (st === 0 && i === 0) v = Math.min(1, (0.8 - u) / .14);
+      v = clamp(v); t.style.opacity = v.toFixed(3); t.style.translate = `0 ${((1 - v) * 24).toFixed(1)}px`; });
+    bar.style.transform = `scaleX(${cur})`;
+    requestAnimationFrame(tick);
+  })();
+})();
+/* music starts at the guest's first tap anywhere (browsers allow sound only after a tap) */
+addEventListener('pointerdown', e => { if (!audio && !e.target.closest('#muBtn')) { startMusic(); setMuteUI(); } }, { capture: true });
+addEventListener('keydown', () => { if (!audio) { startMusic(); setMuteUI(); } }, { once: true });
+
+/* ---------- start ---------- */
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+scrollTo(0, 0);
+applyLang();
+$$('.rv').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+fitCanvas(); sizeGallery(); onScroll(); requestAnimationFrame(loop);
+addEventListener('load', () => { sizeGallery(); onScroll(); });
+</script>
+<script>
+/* ================= FULL 3D: the walk-in film lives on a plane in a 3D space; you step through it
+   into four chapters of your real photographs. In each chapter the photos come to the centre one by one
+   and sweep aside as you pass; the invitation sections float in the open stretches between chapters.
+   three.js r128 from cdnjs. Without WebGL the page shows the chapters as simple photo grids. ================= */
+(function(){
+  const sc = document.createElement('script');
+  sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+  sc.crossOrigin = 'anonymous';
+  sc.onload = () => { try { init(); } catch (e) { console.warn('3D off', e); document.body.classList.remove('w3d'); window.W3D = null; } };
+  document.head.appendChild(sc);
+
+  function init(){
+    if (!window.THREE) return;
+    const cv = document.getElementById('three');
+    let R; try { R = new THREE.WebGLRenderer({ canvas: cv, antialias: !PHONE, alpha: false, powerPreference: 'high-performance' }); } catch (e) { return; }
+    if (!R.getContext()) return;
+    const GL2 = R.capabilities.isWebGL2;
+    R.setPixelRatio(Math.min(devicePixelRatio || 1, PHONE ? 1.75 : 2));
+    R.outputEncoding = THREE.sRGBEncoding;
+    const BG = 0x140507;
+    const scene = new THREE.Scene(); scene.background = new THREE.Color(BG); scene.fog = new THREE.FogExp2(BG, PHONE ? .045 : .04);
+    const cam = new THREE.PerspectiveCamera(50, 1, .05, 220);
+    const D = 10;
+    const tex = t => { t.encoding = THREE.sRGBEncoding; t.generateMipmaps = GL2; t.minFilter = GL2 ? THREE.LinearMipmapLinearFilter : THREE.LinearFilter; t.anisotropy = Math.min(4, R.capabilities.getMaxAnisotropy()); return t; };
+
+    // ---- the walk-in film ----
+    const filmTex = tex(new THREE.Texture()); filmTex.generateMipmaps = false; filmTex.minFilter = THREE.LinearFilter;
+    const filmMat = new THREE.MeshBasicMaterial({ map: filmTex, transparent: true, fog: false, depthWrite: false });
+    const film = new THREE.Mesh(new THREE.PlaneGeometry(16, 9), filmMat); film.renderOrder = 10; scene.add(film);
+    let filmShown = -1, filmCover = 1;
+
+    // ---- framed photographs ----
+    const frameMat = new THREE.MeshBasicMaterial({ color: 0xc9a254 });
+    const matte = new THREE.MeshBasicMaterial({ color: 0xf6ead2 });
+    const shadowTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d'); const r = g.createRadialGradient(64, 64, 10, 64, 64, 64);
+      r.addColorStop(0, 'rgba(0,0,0,.75)'); r.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = r; g.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c); })();
+    const shadowMat = new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false, opacity: .8 });
+    const loader = new THREE.TextureLoader();
+    const photos = [];
+    function framed(n, o, h){
+      const w = o === 'p' ? h * 2 / 3 : h * 3 / 2, g = new THREE.Group();
+      const sh = new THREE.Mesh(new THREE.PlaneGeometry(w * 1.5, h * 1.4), shadowMat); sh.position.set(.25, -.3, -.06); g.add(sh);
+      const fr = new THREE.Mesh(new THREE.PlaneGeometry(w + .16, h + .16), frameMat); fr.position.z = -.03; g.add(fr);
+      const mt = new THREE.Mesh(new THREE.PlaneGeometry(w + .07, h + .07), matte); mt.position.z = -.015; g.add(mt);
+      const ph = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: 0x2a0d0d })); g.add(ph);
+      g.userData = { n, ph, w, loaded: false, ph0: Math.random() * 6 }; scene.add(g); photos.push(g); return g;
+    }
+
+    // ---- lay the journey out along -z, one stretch per section ----
+    const secs = [...document.querySelectorAll('body > section')].filter(s => s.id !== 'walk' && s.id !== 'gallery' && s.id !== 'tour');
+    const GAP = PHONE ? 7 : 7.5, PANEL = 7;
+    let z = -1.5; const SEQ = [];
+    for (const el of secs) {
+      const ch = el.dataset.ch != null ? CONFIG.chapters[+el.dataset.ch] : null, z0 = z;
+      if (ch) {
+        ch.photos.forEach(([n, o], k) => {
+          const side = k % 2 ? 1 : -1, h = o === 'p' ? (PHONE ? 3.5 : 5.2) : (PHONE ? 2.35 : 3.9);
+          const g = framed(n, o, h), pz = z - 6 - k * GAP;
+          g.userData.side = side; g.userData.home = new THREE.Vector3(side * (PHONE ? .12 : .9), (PHONE ? .25 : -.35) + Math.sin(k * 1.7) * .2, pz);
+          g.userData.tilt = Math.sin(k * 2.3) * .04; g.position.copy(g.userData.home);
+        });
+        z = z - 6 - (ch.photos.length - 1) * GAP - 5.5;
+      } else z -= PANEL;
+      SEQ.push({ el, z0, z1: z });
+    }
+    // the last photograph waits at the end, facing you
+    const endP = framed(CONFIG.endPhoto, 'l', PHONE ? 3 : 5.6);
+    endP.userData.home = new THREE.Vector3(0, .35, z - 7); endP.position.copy(endP.userData.home); endP.userData.fixed = true;
+    SEQ[SEQ.length - 1].z1 = z - 7 + (PHONE ? 8.5 : 9.5);
+
+    // ---- warm bokeh ----
+    const bok = (() => { const c = document.createElement('canvas'); c.width = c.height = 64; const g = c.getContext('2d'); const r = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+      r.addColorStop(0, 'rgba(255,226,160,.9)'); r.addColorStop(.55, 'rgba(255,196,110,.35)'); r.addColorStop(.8, 'rgba(255,180,90,.12)'); r.addColorStop(1, 'rgba(255,170,80,0)'); g.fillStyle = r; g.fillRect(0, 0, 64, 64); return new THREE.CanvasTexture(c); })();
+    const BN = PHONE ? 300 : 600, bp = new Float32Array(BN * 3), depth = Math.abs(z) + 20;
+    for (let i = 0; i < BN; i++) { bp[i * 3] = (Math.random() - .5) * 22; bp[i * 3 + 1] = (Math.random() - .5) * 12; bp[i * 3 + 2] = 4 - Math.random() * depth; }
+    const bg = new THREE.BufferGeometry(); bg.setAttribute('position', new THREE.BufferAttribute(bp, 3));
+    const bokeh = new THREE.Points(bg, new THREE.PointsMaterial({ size: PHONE ? .32 : .26, map: bok, transparent: true, opacity: .55, blending: THREE.AdditiveBlending, depthWrite: false }));
+    scene.add(bokeh);
+
+    // ---- scroll → camera depth (piecewise, so each chapter plays while its section is on screen) ----
+    const walkEl = document.getElementById('walk').hidden ? document.getElementById('tour') : document.getElementById('walk');
+    let KEYS = [], keysAt = 0;
+    function buildKeys(){
+      const vh = innerHeight, walkEnd = walkEl.offsetTop + walkEl.offsetHeight - vh;
+      KEYS = [[walkEnd, D]];
+      for (const s of SEQ) { const top = s.el.offsetTop, h = s.el.offsetHeight;
+        KEYS.push([Math.max(walkEnd + 1, top - vh * .5), s.z0], [top + h - vh * .5, s.z1]); }
+    }
+    function zAt(y){
+      if (y <= KEYS[0][0]) return D;
+      for (let i = 1; i < KEYS.length; i++) if (y <= KEYS[i][0]) { const [a, za] = KEYS[i - 1], [b, zb] = KEYS[i]; const f = b > a ? (y - a) / (b - a) : 1; return za + (zb - za) * f; }
+      return KEYS[KEYS.length - 1][1];
+    }
+
+    function resize(){
+      const w = innerWidth, h = innerHeight; R.setSize(w, h, false); cam.aspect = w / h; cam.fov = w < h ? 60 : 50; cam.updateProjectionMatrix();
+      const Hv = 2 * D * Math.tan(cam.fov * Math.PI / 360), Wv = Hv * cam.aspect; filmCover = Math.max(Wv / 16, Hv / 9) * 1.06; buildKeys();
+    }
+    resize(); addEventListener('resize', resize); addEventListener('load', buildKeys);
+
+    let mx = 0, my = 0, tx = 0, ty = 0;
+    addEventListener('pointermove', e => { if (e.pointerType === 'mouse') { tx = e.clientX / innerWidth * 2 - 1; ty = e.clientY / innerHeight * 2 - 1; } }, { passive: true });
+    addEventListener('deviceorientation', e => { if (e.gamma != null) { tx = Math.max(-1, Math.min(1, e.gamma / 30)); ty = Math.max(-1, Math.min(1, (e.beta - 50) / 30)); } });
+
+    let camZ = D, t = 0, last = performance.now(), n = 0;
+    const smooth = x => x * x * (3 - 2 * x);
+    window.W3D = {
+      relayout: buildKeys,
+      frame(k){
+        const now = performance.now(), dt = Math.min(.05, (now - last) / 1000); last = now; t += dt;
+        if (++n % 45 === 0) buildKeys();
+        const j = nearestLoaded(k);
+        if (j >= 0 && j !== filmShown && imgs[j]) { filmTex.image = imgs[j]; filmTex.needsUpdate = true; filmShown = j; }
+        const target = zAt(scrollY);
+        camZ += (target - camZ) * (REDUCE ? 1 : Math.min(1, dt * 5));
+        mx += (tx - mx) * Math.min(1, dt * 2.5); my += (ty - my) * Math.min(1, dt * 2.5);
+        film.scale.setScalar(filmCover);
+        const through = Math.min(1, Math.max(0, (D - camZ) / (D - 1)));
+        filmMat.opacity = 1 - through * through; film.visible = filmShown >= 0 && filmMat.opacity > .01;
+        const inside = camZ < D - .01;
+        cam.position.set(mx * (inside ? .45 : .1), -my * (inside ? .28 : .06), camZ);
+        cam.lookAt(mx * (inside ? .8 : .04), -my * (inside ? .35 : .03), camZ - 10);
+        for (const g of photos) { const u = g.userData, dz = u.home.z - camZ;
+          if (!u.loaded && dz > -55 && dz < 10) { u.loaded = true; loader.load(`real/photos/${u.n}-s.webp`, tt => { tex(tt); u.ph.material.dispose(); u.ph.material = new THREE.MeshBasicMaterial({ map: tt }); }); }
+          if (u.fixed) { g.position.y = u.home.y + (REDUCE ? 0 : Math.sin(t * .5) * .05); continue; }
+          // ahead: waits near the centre; as you reach it, it sweeps aside and turns away
+          const d = -dz, a = smooth(Math.min(1, Math.max(0, (7.5 - d) / 6.5)));
+          const out = u.side * ((PHONE ? 3.6 : 5.4) + u.w * .3) * a;
+          g.position.set(u.home.x + out, u.home.y + (REDUCE ? 0 : Math.sin(t * .6 + u.ph0) * .07) + a * .2, u.home.z);
+          g.rotation.set(0, -u.side * (.08 + a * 1.0), u.tilt * (1 - a));
+        }
+        bokeh.rotation.z = Math.sin(t * .05) * .03; bokeh.position.y = Math.sin(t * .3) * .2;
+        R.render(scene, cam);
+      }
+    };
+    document.body.classList.add('w3d');
+    requestAnimationFrame(buildKeys);
+  }
+})();
+
+</script>
+</body>
+</html>
