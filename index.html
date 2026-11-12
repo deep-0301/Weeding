@@ -49,7 +49,7 @@ body.entered #muBtn{display:inline-flex}
 #muBtn:not(.off) .x{display:none}
 
 /* ---------- walk-in: scroll plays the Kalupur video ---------- */
-#walk{position:relative;height:540vh}
+#walk{position:relative;height:600vh}
 #walk .stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#1a0c08 url(real/flow/md/f000.webp) center/cover no-repeat}
 #film{position:absolute;inset:0;width:100%;height:100%;display:block}
 #walk .shade{position:absolute;inset:0;pointer-events:none;
@@ -351,37 +351,25 @@ body.w3d footer{background:transparent}
     <div class="shade" aria-hidden="true"></div>
     <div class="shade full" id="shadeFull" aria-hidden="true"></div>
 
-    <div class="ov ov-top" data-a=".02" data-b=".42" data-hold="start">
+    <div class="ov ov-top" data-a=".02" data-b=".26" data-hold="start">
       <p class="greet">|| શ્રી સ્વામિનારાયણ ||</p>
       <p class="greet">|| શ્રી ગણેશાય નમઃ ||</p>
     </div>
-    <div class="ov ov-bot" data-a=".02" data-b=".42" data-hold="start">
+    <div class="ov ov-bot" data-a=".02" data-b=".26" data-hold="start">
       <p class="welcome" data-t="welcome"></p>
     </div>
-
-    <div class="wbar" id="wbar"></div>
-  </div>
-</section>
-
-<!-- ============ 360 JOURNEY: five real 360 views, gate → courtyard → corridor → arches → dome ============ -->
-<section id="tour" aria-label="Shree Swaminarayan Mandir, Kalupur">
-  <div class="t-stick">
-    <div class="t-stage" id="tStage"></div>
-    <div class="t-shade" aria-hidden="true"></div>
-    <div class="tv" data-st="0" data-pos="bot"><span class="eyebrow" data-t="w1b"></span><h2 data-t="w1a"></h2><p class="sub" data-t="w1c"></p></div>
-    <div class="tv" data-st="2" data-pos="bot"><span class="eyebrow" data-t="w2a"></span><p class="sub big" data-t="w2b"></p></div>
-    <div class="tv" data-st="3" data-pos="bot">
-      <p class="pp"><span class="pre" data-t="groomPre"></span> <b data-f="groom"></b></p><p class="of" data-f="groomOf"></p>
-      <p class="amp2">&amp;</p>
-      <p class="pp"><span class="pre" data-t="bridePre"></span> <b data-f="bride"></b></p><p class="of" data-f="brideOf"></p>
+    <div class="ov ov-bot" data-a=".3" data-b=".56">
+      <span class="eyebrow" data-t="w1b"></span>
+      <h2 data-t="w1a"></h2>
+      <p class="sub" data-t="w1c"></p>
     </div>
-    <div class="tv" data-st="4" data-pos="mid">
+    <div class="ov ov-mid" data-a=".62" data-b="1.2">
       <p class="shubh">|| શુભ લગ્ન ||</p>
       <h1 class="names-big"><span class="gold" data-f="groom"></span><span class="amp">&amp;</span><span class="gold" data-f="bride"></span></h1>
       <p class="wdate" data-f="dateCity"></p>
     </div>
-    <p class="t-credit" data-t="credit360"></p>
-    <div class="wbar" id="tbar"></div>
+
+    <div class="wbar" id="wbar"></div>
   </div>
 </section>
 
@@ -1011,7 +999,7 @@ addEventListener('load', () => { sizeGallery(); onScroll(); });
     scene.add(bokeh);
 
     // ---- scroll → camera depth (piecewise, so each chapter plays while its section is on screen) ----
-    const walkEl = document.getElementById('tour');
+    const walkEl = document.getElementById('walk');
     let KEYS = [], keysAt = 0;
     function buildKeys(){
       const vh = innerHeight, walkEnd = walkEl.offsetTop + walkEl.offsetHeight - vh;
