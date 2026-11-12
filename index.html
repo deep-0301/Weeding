@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+Gujarati:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="real/md/f000.webp">
+<link rel="preload" as="image" href="real/flow/md/f000.webp">
 <style>
 :root{
   color-scheme:dark;
@@ -49,8 +49,8 @@ body.entered #muBtn{display:inline-flex}
 #muBtn:not(.off) .x{display:none}
 
 /* ---------- walk-in: scroll plays the Kalupur video ---------- */
-#walk{position:relative;height:620vh}
-#walk .stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#1a0c08 url(real/md/f000.webp) center/cover no-repeat}
+#walk{position:relative;height:540vh}
+#walk .stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#1a0c08 url(real/flow/md/f000.webp) center/cover no-repeat}
 #film{position:absolute;inset:0;width:100%;height:100%;display:block}
 #walk .shade{position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(180deg,rgba(14,4,5,.78) 0%,rgba(14,4,5,.2) 26%,rgba(14,4,5,0) 45%,rgba(14,4,5,.25) 62%,rgba(14,4,5,.86) 100%)}
@@ -344,14 +344,31 @@ body.w3d footer{background:transparent}
 </div>
 
 <canvas id="three" aria-hidden="true"></canvas>
+<!-- ============ WALK-IN: scrolling plays the walk through Kalupur Mandir ============ -->
+<section id="walk" aria-label="Walking in through the gate of Shree Swaminarayan Mandir, Kalupur">
+  <div class="stick">
+    <canvas id="film" aria-hidden="true"></canvas>
+    <div class="shade" aria-hidden="true"></div>
+    <div class="shade full" id="shadeFull" aria-hidden="true"></div>
+
+    <div class="ov ov-top" data-a=".02" data-b=".42" data-hold="start">
+      <p class="greet">|| શ્રી સ્વામિનારાયણ ||</p>
+      <p class="greet">|| શ્રી ગણેશાય નમઃ ||</p>
+    </div>
+    <div class="ov ov-bot" data-a=".02" data-b=".42" data-hold="start">
+      <p class="welcome" data-t="welcome"></p>
+    </div>
+
+    <div class="wbar" id="wbar"></div>
+  </div>
+</section>
+
 <!-- ============ 360 JOURNEY: five real 360 views, gate → courtyard → corridor → arches → dome ============ -->
 <section id="tour" aria-label="Shree Swaminarayan Mandir, Kalupur">
   <div class="t-stick">
     <div class="t-stage" id="tStage"></div>
     <div class="t-shade" aria-hidden="true"></div>
-    <div class="tv" data-st="0" data-pos="top"><p class="greet">|| શ્રી સ્વામિનારાયણ ||</p><p class="greet">|| શ્રી ગણેશાય નમઃ ||</p></div>
-    <div class="tv" data-st="0" data-pos="bot"><p class="welcome" data-t="welcome"></p></div>
-    <div class="tv" data-st="1" data-pos="bot"><span class="eyebrow" data-t="w1b"></span><h2 data-t="w1a"></h2><p class="sub" data-t="w1c"></p></div>
+    <div class="tv" data-st="0" data-pos="bot"><span class="eyebrow" data-t="w1b"></span><h2 data-t="w1a"></h2><p class="sub" data-t="w1c"></p></div>
     <div class="tv" data-st="2" data-pos="bot"><span class="eyebrow" data-t="w2a"></span><p class="sub big" data-t="w2b"></p></div>
     <div class="tv" data-st="3" data-pos="bot">
       <p class="pp"><span class="pre" data-t="groomPre"></span> <b data-f="groom"></b></p><p class="of" data-f="groomOf"></p>
@@ -365,32 +382,6 @@ body.w3d footer{background:transparent}
     </div>
     <p class="t-credit" data-t="credit360"></p>
     <div class="wbar" id="tbar"></div>
-  </div>
-</section>
-
-<!-- ============ WALK-IN: scrolling plays the walk through Kalupur Mandir ============ -->
-<section id="walk" aria-hidden="true" hidden>
-  <div class="stick">
-    <canvas id="film" aria-hidden="true"></canvas>
-    <div class="shade" aria-hidden="true"></div>
-    <div class="shade full" id="shadeFull" aria-hidden="true"></div>
-
-    <div class="ov ov-bot" data-a=".03" data-b=".4">
-      <span class="eyebrow" data-t="w1b"></span>
-      <h2 data-t="w1a"></h2>
-      <p class="sub" data-t="w1c"></p>
-    </div>
-    <div class="ov ov-bot" data-a=".46" data-b=".72">
-      <span class="eyebrow" data-t="w2a"></span>
-      <p class="sub" data-t="w2b" style="font-size:clamp(22px,5.6vw,34px)"></p>
-    </div>
-    <div class="ov ov-mid" data-a=".78" data-b="1.2">
-      <p class="shubh">|| શુભ લગ્ન ||</p>
-      <h1 class="names-big"><span class="gold" data-f="groom"></span><span class="amp">&amp;</span><span class="gold" data-f="bride"></span></h1>
-      <p class="wdate" data-f="dateCity"></p>
-    </div>
-
-    <div class="wbar" id="wbar"></div>
   </div>
 </section>
 
@@ -750,7 +741,7 @@ $('#rName').addEventListener('input', () => $('#rName').setCustomValidity(''));
 const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); if (en.target.closest('#evGrid')) evSeen = true; } }), { rootMargin: '0px 0px -10% 0px' }) : null;
 
 /* ---------- the walk-in film: scroll scrubs the Kalupur video, frame by frame ---------- */
-const STEP = PHONE ? 2 : 1, TOTAL = 192, frames = [], SET = PHONE ? 'md' : 'hd';
+const STEP = PHONE ? 2 : 1, TOTAL = 168, frames = [], SET = PHONE ? 'flow/md' : 'flow/hd';
 for (let i = 0; i < TOTAL; i += STEP) frames.push(i);
 const imgs = new Array(frames.length);
 const cv = $('#film'), cx = cv.getContext('2d');
@@ -1020,7 +1011,7 @@ addEventListener('load', () => { sizeGallery(); onScroll(); });
     scene.add(bokeh);
 
     // ---- scroll → camera depth (piecewise, so each chapter plays while its section is on screen) ----
-    const walkEl = document.getElementById('walk').hidden ? document.getElementById('tour') : document.getElementById('walk');
+    const walkEl = document.getElementById('tour');
     let KEYS = [], keysAt = 0;
     function buildKeys(){
       const vh = innerHeight, walkEnd = walkEl.offsetTop + walkEl.offsetHeight - vh;
