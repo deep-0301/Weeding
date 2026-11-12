@@ -54,6 +54,9 @@ body.entered #muBtn{display:inline-flex}
 #film{position:absolute;inset:0;width:100%;height:100%;display:block}
 #walk .shade{position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(180deg,rgba(14,4,5,.78) 0%,rgba(14,4,5,.2) 26%,rgba(14,4,5,0) 45%,rgba(14,4,5,.25) 62%,rgba(14,4,5,.86) 100%)}
+.lb{position:absolute;left:0;right:0;height:calc(var(--lb,0) * 11vh);background:#050102;z-index:2;pointer-events:none}
+.lb-t{top:0}.lb-b{bottom:0}
+@media (orientation:portrait){.lb{height:calc(var(--lb,0) * 6vh)}}
 #walk .shade.full{background:rgba(14,4,5,.38);opacity:0;transition:none}
 .ov{position:absolute;left:0;right:0;padding:0 max(20px,env(safe-area-inset-left));text-align:center;opacity:0;pointer-events:none;will-change:opacity,transform}
 .ov.live{pointer-events:auto}
@@ -312,8 +315,8 @@ body.w3d .chap-head .h-sec{font-size:clamp(26px,6.4vw,44px)}
 /* ============ FULL 3D MODE ============ */
 #three{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;pointer-events:none;opacity:0;transition:opacity .6s}
 body.w3d #three{opacity:1}
-body.w3d #film{visibility:hidden}
-body.w3d #walk .stick{background:transparent}
+
+
 body.w3d #walk,body.w3d section,body.w3d footer{position:relative;z-index:1}
 body.w3d #gallery{display:none}
 body.w3d .ivory{background:transparent}
@@ -369,6 +372,7 @@ body.w3d footer{background:transparent}
       <p class="wdate" data-f="dateCity"></p>
     </div>
 
+    <div class="lb lb-t" aria-hidden="true"></div><div class="lb lb-b" aria-hidden="true"></div>
     <div class="wbar" id="wbar"></div>
   </div>
 </section>
@@ -729,7 +733,8 @@ $('#rName').addEventListener('input', () => $('#rName').setCustomValidity(''));
 const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); if (en.target.closest('#evGrid')) evSeen = true; } }), { rootMargin: '0px 0px -10% 0px' }) : null;
 
 /* ---------- the walk-in film: scroll scrubs the Kalupur video, frame by frame ---------- */
-const STEP = PHONE ? 2 : 1, TOTAL = 168, frames = [], SET = PHONE ? 'flow/md' : 'flow/hd';
+const PXW = innerWidth * (devicePixelRatio || 1), STEP = PHONE ? 2 : 1, TOTAL = 168, frames = [],
+  SET = PHONE ? 'flow/md' : PXW >= 2400 ? 'flow/k4' : 'flow/fhd';
 for (let i = 0; i < TOTAL; i += STEP) frames.push(i);
 const imgs = new Array(frames.length);
 const cv = $('#film'), cx = cv.getContext('2d');
@@ -761,6 +766,7 @@ function onScroll(){
   if (REDUCE) curF = tgtF;
   wbar.style.transform = `scaleX(${walkP})`;
   shadeFull.style.opacity = Math.max(0, (walkP - .74) / .2).toFixed(3);
+  { const sm = x => { x = Math.min(1, Math.max(0, x)); return x * x * (3 - 2 * x); }; walk.style.setProperty('--lb', (sm((walkP - .2) / .12) * (1 - sm((walkP - .9) / .1))).toFixed(3)); }
   cue.classList.toggle('on', walkP > .02 && walkP < .97);
   for (const o of ovs) {
     const a = +o.dataset.a, b = +o.dataset.b, hold = o.dataset.hold === 'start';
@@ -793,7 +799,8 @@ addEventListener('resize', () => { fitCanvas(); sizeGallery(); onScroll(); });
 function loop(){
   curF += (tgtF - curF) * (REDUCE ? 1 : .18);
   if (Math.abs(tgtF - curF) < .01) curF = tgtF;
-  if (window.W3D) window.W3D.frame(Math.round(curF)); else draw(Math.round(curF));
+  if (walkP < 1 || !window.W3D) draw(Math.round(curF));
+  if (window.W3D) window.W3D.frame(Math.round(curF));
   requestAnimationFrame(loop);
 }
 
@@ -1031,7 +1038,7 @@ addEventListener('load', () => { sizeGallery(); onScroll(); });
         const now = performance.now(), dt = Math.min(.05, (now - last) / 1000); last = now; t += dt;
         if (++n % 45 === 0) buildKeys();
         const j = nearestLoaded(k);
-        if (j >= 0 && j !== filmShown && imgs[j]) { filmTex.image = imgs[j]; filmTex.needsUpdate = true; filmShown = j; }
+        if (j >= 0 && j !== filmShown && imgs[j] && walkP > .9) { filmTex.image = imgs[j]; filmTex.needsUpdate = true; filmShown = j; }
         const target = zAt(scrollY);
         camZ += (target - camZ) * (REDUCE ? 1 : Math.min(1, dt * 5));
         mx += (tx - mx) * Math.min(1, dt * 2.5); my += (ty - my) * Math.min(1, dt * 2.5);
