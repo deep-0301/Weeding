@@ -16,7 +16,7 @@
 <style>
 :root{
   color-scheme:dark;
-  --kumkum:#7a1420;--kumkum-d:#3d0910;--night:#140507;
+  --kumkum:#7a1420;--kumkum-d:#3d0910;--night:#3d1a19;
   --ivory:#fbf3e4;--ivory-2:#f3e4c8;
   --gold:#d9a84e;--gold-l:#f5d996;--gold-d:#9c6b23;
   --ink:#33160f;--ink-2:#6a3c2a;
@@ -51,13 +51,18 @@ body.entered #muBtn{display:inline-flex}
 /* ---------- walk-in: scroll plays the Kalupur video ---------- */
 #walk{position:relative;height:600vh}
 #walk .stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#1a0c08 url(real/flow/md/f000.webp) center/cover no-repeat}
-#film{position:absolute;inset:0;width:100%;height:100%;display:block}
+#film{position:absolute;inset:-6%;width:112%;height:112%;display:block;transform-origin:50% 55%;will-change:transform}
+#dust{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none;z-index:1}
+#walk .stick{perspective:900px;perspective-origin:50% 45%}
+#walk .names-big,#walk .shubh,#walk .wdate,#walk h2,#walk .eyebrow{filter:drop-shadow(0 3px 18px rgba(25,6,6,.7))}
+#walk .ov-mid::before{content:"";position:absolute;inset:-12% -10%;z-index:-1;background:radial-gradient(closest-side,rgba(25,6,6,.42),rgba(25,6,6,0));pointer-events:none}
+#walk .ov{z-index:3}
 #walk .shade{position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(14,4,5,.78) 0%,rgba(14,4,5,.2) 26%,rgba(14,4,5,0) 45%,rgba(14,4,5,.25) 62%,rgba(14,4,5,.86) 100%)}
-.lb{position:absolute;left:0;right:0;height:calc(var(--lb,0) * 11vh);background:#050102;z-index:2;pointer-events:none}
+  background:linear-gradient(180deg,rgba(14,4,5,.42) 0%,rgba(14,4,5,0) 22%,rgba(14,4,5,0) 60%,rgba(14,4,5,.5) 100%)}
+.lb{position:absolute;left:0;right:0;height:calc(var(--lb,0) * 8vh);background:#050102;z-index:2;pointer-events:none}
 .lb-t{top:0}.lb-b{bottom:0}
-@media (orientation:portrait){.lb{height:calc(var(--lb,0) * 6vh)}}
-#walk .shade.full{background:rgba(14,4,5,.38);opacity:0;transition:none}
+@media (orientation:portrait){.lb{height:calc(var(--lb,0) * 4vh)}}
+#walk .shade.full{background:rgba(14,4,5,.16);opacity:0;transition:none}
 .ov{position:absolute;left:0;right:0;padding:0 max(20px,env(safe-area-inset-left));text-align:center;opacity:0;pointer-events:none;will-change:opacity,transform}
 .ov.live{pointer-events:auto}
 .ov-top{top:max(70px,calc(env(safe-area-inset-top) + 64px))}
@@ -351,6 +356,7 @@ body.w3d footer{background:transparent}
 <section id="walk" aria-label="Walking in through the gate of Shree Swaminarayan Mandir, Kalupur">
   <div class="stick">
     <canvas id="film" aria-hidden="true"></canvas>
+    <canvas id="dust" aria-hidden="true"></canvas>
     <div class="shade" aria-hidden="true"></div>
     <div class="shade full" id="shadeFull" aria-hidden="true"></div>
 
@@ -774,7 +780,9 @@ function onScroll(){
     if (hold) { v = 1 - Math.min(1, Math.max(0, (walkP - a) / (b - a))); y = -30 * (1 - v); if (!document.body.classList.contains('entered') && o.id === 'ovEnter') v = 1; }
     else { const len = b - a, f = (walkP - a) / len; v = f < 0 || f > 1 ? 0 : Math.min(1, f / .22, (1 - f) / .22); y = (1 - Math.min(1, Math.max(0, f / .22))) * 40 - Math.max(0, (f - .78) / .22) * 30; }
     o.style.opacity = Math.max(0, Math.min(1, v)).toFixed(3);
-    o.style.translate = `0 ${y.toFixed(1)}px`;
+    let zz = 0;
+    if (!REDUCE) { if (hold) zz = (1 - v) * 260; else { const f2 = (walkP - a) / (b - a); zz = f2 < .22 ? -320 * (1 - Math.max(0, f2) / .22) : f2 > .78 ? 260 * Math.min(1, (f2 - .78) / .22) : 0; } }
+    o.style.translate = `0 ${y.toFixed(1)}px ${zz.toFixed(0)}px`;
     o.classList.toggle('live', v > .5);
   }
   // gallery: vertical scroll → sideways strip
@@ -796,7 +804,39 @@ function onScroll(){
 addEventListener('scroll', onScroll, { passive: true });
 addEventListener('resize', () => { fitCanvas(); sizeGallery(); onScroll(); });
 
+/* ---------- 3D depth on the walk-in: the camera sways and tilts, golden dust drifts past ---------- */
+let px3 = 0, py3 = 0, qx3 = 0, qy3 = 0;
+addEventListener('pointermove', e => { if (e.pointerType === 'mouse') { qx3 = e.clientX / innerWidth * 2 - 1; qy3 = e.clientY / innerHeight * 2 - 1; } }, { passive: true });
+addEventListener('deviceorientation', e => { if (e.gamma != null) { qx3 = Math.max(-1, Math.min(1, e.gamma / 25)); qy3 = Math.max(-1, Math.min(1, (e.beta - 50) / 25)); } });
+const dcv = $('#dust'), dcx = dcv.getContext('2d'), DN = PHONE ? 70 : 140, dust = [];
+const spr = (() => { const c = document.createElement('canvas'); c.width = c.height = 64; const g = c.getContext('2d'), r = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+  r.addColorStop(0, 'rgba(255,236,190,1)'); r.addColorStop(.35, 'rgba(255,210,130,.55)'); r.addColorStop(1, 'rgba(255,190,100,0)'); g.fillStyle = r; g.fillRect(0, 0, 64, 64); return c; })();
+for (let i = 0; i < DN; i++) dust.push({ x: (Math.random() - .5) * 2.4, y: (Math.random() - .5) * 1.6, z: Math.random() * 3 + .15, s: Math.random() * .6 + .4, ph: Math.random() * 6 });
+let dW = 0, dH = 0, lastWP = 0, tt3 = 0;
+function fitDust(){ const dpr = Math.min(devicePixelRatio || 1, 2); dW = dcv.clientWidth; dH = dcv.clientHeight; dcv.width = Math.round(dW * dpr); dcv.height = Math.round(dH * dpr); dcx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+fitDust(); addEventListener('resize', fitDust);
+function depth3d(){
+  if (REDUCE || walkP >= 1) return;
+  tt3 += 1 / 60;
+  px3 += (qx3 - px3) * .05; py3 += (qy3 - py3) * .05;
+  const sway = Math.sin(walkP * Math.PI * 2) * 2.2, push = 1 + walkP * .06;
+  cv.style.transform = `translate3d(${(-px3 * 14).toFixed(1)}px,${(-py3 * 10).toFixed(1)}px,0) rotateY(${(px3 * 3.5 + sway).toFixed(2)}deg) rotateX(${(-py3 * 2.5).toFixed(2)}deg) rotateZ(${(sway * .25).toFixed(2)}deg) scale(${push.toFixed(3)})`;
+  // dust: scrolling forward moves you through it
+  const dz = (walkP - lastWP) * 9 + .0025; lastWP = walkP;
+  dcx.clearRect(0, 0, dW, dH); dcx.globalCompositeOperation = 'lighter';
+  const f = Math.min(dW, dH) * .9;
+  for (const d of dust) {
+    d.z -= dz; if (d.z < .12) { d.z += 3; d.x = (Math.random() - .5) * 2.4; d.y = (Math.random() - .5) * 1.6; }
+    if (d.z > 3.15) d.z -= 3;
+    const sx = dW / 2 + (d.x + Math.sin(tt3 * .6 + d.ph) * .03 - px3 * .08 / d.z) * f / d.z, sy = dH / 2 + (d.y + Math.cos(tt3 * .5 + d.ph) * .03 - py3 * .06 / d.z) * f / d.z;
+    const r = d.s * 7 / d.z, a = Math.min(1, (3.15 - d.z) / .8) * Math.min(1, d.z / .5) * .5;
+    if (sx < -r || sx > dW + r || sy < -r || sy > dH + r) continue;
+    dcx.globalAlpha = a; dcx.drawImage(spr, sx - r, sy - r, r * 2, r * 2);
+  }
+  dcx.globalAlpha = 1; dcx.globalCompositeOperation = 'source-over';
+}
 function loop(){
+  depth3d();
   curF += (tgtF - curF) * (REDUCE ? 1 : .18);
   if (Math.abs(tgtF - curF) < .01) curF = tgtF;
   if (walkP < 1 || !window.W3D) draw(Math.round(curF));
@@ -945,8 +985,8 @@ addEventListener('load', () => { sizeGallery(); onScroll(); });
     const GL2 = R.capabilities.isWebGL2;
     R.setPixelRatio(Math.min(devicePixelRatio || 1, PHONE ? 1.75 : 2));
     R.outputEncoding = THREE.sRGBEncoding;
-    const BG = 0x140507;
-    const scene = new THREE.Scene(); scene.background = new THREE.Color(BG); scene.fog = new THREE.FogExp2(BG, PHONE ? .045 : .04);
+    const BG = 0x3d1a19;
+    const scene = new THREE.Scene(); scene.background = new THREE.Color(BG); scene.fog = new THREE.FogExp2(BG, PHONE ? .032 : .028);
     const cam = new THREE.PerspectiveCamera(50, 1, .05, 220);
     const D = 10;
     const tex = t => { t.encoding = THREE.sRGBEncoding; t.generateMipmaps = GL2; t.minFilter = GL2 ? THREE.LinearMipmapLinearFilter : THREE.LinearFilter; t.anisotropy = Math.min(4, R.capabilities.getMaxAnisotropy()); return t; };
@@ -1048,6 +1088,7 @@ addEventListener('load', () => { sizeGallery(); onScroll(); });
         const inside = camZ < D - .01;
         cam.position.set(mx * (inside ? .45 : .1), -my * (inside ? .28 : .06), camZ);
         cam.lookAt(mx * (inside ? .8 : .04), -my * (inside ? .35 : .03), camZ - 10);
+        if (inside && !REDUCE) cam.rotateZ(Math.sin(camZ * .12) * .035);
         for (const g of photos) { const u = g.userData, dz = u.home.z - camZ;
           if (!u.loaded && dz > -55 && dz < 10) { u.loaded = true; loader.load(`real/photos/${u.n}-s.webp`, tt => { tex(tt); u.ph.material.dispose(); u.ph.material = new THREE.MeshBasicMaterial({ map: tt }); }); }
           if (u.fixed) { g.position.y = u.home.y + (REDUCE ? 0 : Math.sin(t * .5) * .05); continue; }
@@ -1055,7 +1096,7 @@ addEventListener('load', () => { sizeGallery(); onScroll(); });
           const d = -dz, a = smooth(Math.min(1, Math.max(0, (7.5 - d) / 6.5)));
           const out = u.side * ((PHONE ? 3.6 : 5.4) + u.w * .3) * a;
           g.position.set(u.home.x + out, u.home.y + (REDUCE ? 0 : Math.sin(t * .6 + u.ph0) * .07) + a * .2, u.home.z);
-          g.rotation.set(0, -u.side * (.08 + a * 1.0), u.tilt * (1 - a));
+          g.rotation.set(REDUCE ? 0 : Math.sin(t * .4 + u.ph0) * .06, -u.side * (.2 + a * 1.25), u.tilt * (1 - a) + (REDUCE ? 0 : Math.sin(t * .3 + u.ph0) * .02));
         }
         bokeh.rotation.z = Math.sin(t * .05) * .03; bokeh.position.y = Math.sin(t * .3) * .2;
         R.render(scene, cam);
