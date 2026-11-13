@@ -162,6 +162,14 @@ html[lang=gu] .bleed .by{font:600 17px/1.4 var(--f-guj);letter-spacing:.02em}
 
 /* ---------- date + countdown ---------- */
 #date .inner{max-width:760px}
+.scratch{position:relative;max-width:620px;margin:16px auto 6px;border-radius:18px;overflow:hidden;
+  box-shadow:0 30px 60px -24px rgba(0,0,0,.7),0 0 0 1px rgba(245,217,150,.6),inset 0 0 0 6px rgba(20,5,7,.25)}
+.sc-face{padding:clamp(26px,5vw,40px) 16px clamp(22px,4vw,34px);background:radial-gradient(120% 100% at 50% 0%,rgba(90,22,28,.85),rgba(30,8,10,.92))}
+.sc-face .big-date{margin:0 0 8px}
+.sc-foil{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:none;transition:opacity .9s}
+.scratch.done .sc-foil{opacity:0;pointer-events:none}
+.sc-hide{opacity:0!important;visibility:hidden;transition:opacity .8s,visibility 0s .8s}
+.revealed .sc-hide{opacity:1!important;visibility:visible;transition:opacity .8s .3s}
 .big-date{font:600 clamp(40px,11vw,92px)/1.08 var(--f-display);letter-spacing:.02em;margin:10px 0 6px}
 html[lang=gu] .big-date{font:700 clamp(36px,10vw,80px)/1.3 var(--f-guj)}
 .muh{font:600 clamp(16px,4.2vw,21px)/1.5 var(--f-display);letter-spacing:.16em;color:var(--gold-l);text-transform:uppercase}
@@ -411,16 +419,6 @@ body.w3d footer{background:transparent}
   <div class="chap-grid" data-grid="0"></div>
 </section>
 
-<section class="bleed" id="story">
-  <div class="bg" data-par><picture>
-    <img src="real/photos/DSC01840-l.webp" srcset="real/photos/DSC01840-s.webp 1100w, real/photos/DSC01840-l.webp 2000w" sizes="100vw" alt="" loading="lazy">
-  </picture></div>
-  <div class="inner">
-    <p class="quote rv" data-t="storyQ"></p>
-    <p class="by rv d1" data-f="both"></p>
-  </div>
-</section>
-
 <!-- ============ GALLERY ============ -->
 <section id="gallery" aria-label="Photos">
   <div class="stick">
@@ -440,15 +438,17 @@ body.w3d footer{background:transparent}
   </picture></div>
   <div class="inner">
     <span class="eyebrow rv" data-t="dateEy"></span>
-    <p class="big-date gold rv d1" data-f="bigDate"></p>
-    <p class="muh rv d2" data-f="muhurat"></p>
-    <div class="cd rv d2" id="cd" aria-live="off">
+    <div class="scratch rv d1" id="scratch">
+      <div class="sc-face"><p class="big-date gold" data-f="bigDate"></p><p class="muh" data-f="muhurat"></p></div>
+      <canvas class="sc-foil" id="scFoil" aria-label="Scratch to reveal the date"></canvas>
+    </div>
+    <div class="cd rv d2 sc-hide" id="cd" aria-live="off">
       <div><b id="cdD">0</b><span data-t="days"></span></div>
       <div><b id="cdH">0</b><span data-t="hours"></span></div>
       <div><b id="cdM">0</b><span data-t="mins"></span></div>
       <div><b id="cdS">0</b><span data-t="secs"></span></div>
     </div>
-    <button class="btn-line rv d3" id="calBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4"/></svg><span data-t="cal"></span></button>
+    <button class="btn-line rv d3 sc-hide" id="calBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4"/></svg><span data-t="cal"></span></button>
   </div>
 </section>
 
@@ -592,6 +592,7 @@ const T = {
     coupleEy: "The Couple", groomPre: "Chi.", bridePre: "Chi. Sau. Ka.", sonOf: "Son of {p}", daughterOf: "Daughter of {p}",
     storyQ: "Two hearts, one journey, blessed by family and faith.",
     galEy2: "Our moments", galEy: "Together, Always",
+    scratch: "Scratch to reveal the date", scratchHint: "rub the gold card",
     dateEy: "Save the Date", muhurat: "Shubh Muhurat · {t}", days: "Days", hours: "Hours", mins: "Minutes", secs: "Seconds", cal: "Add to Calendar", today: "The auspicious day is here",
     evEy2: "Celebrations", evEy: "Wedding Festivities", evSub: "Your presence at each celebration would mean the world to us.", dress: "Dress", dir: "Directions",
     venueEy: "The Venue", map: "Open in Google Maps",
@@ -614,6 +615,7 @@ const T = {
     coupleEy: "વર અને કન્યા", groomPre: "ચિ.", bridePre: "ચિ. સૌ. કાં.", sonOf: "{p} ના સુપુત્ર", daughterOf: "{p} ની સુપુત્રી",
     storyQ: "બે હૃદય, એક સફર, પરિવાર અને શ્રદ્ધાના આશીર્વાદ સાથે.",
     galEy2: "અમારી યાદગાર પળો", galEy: "સદા સાથે",
+    scratch: "શુભ તારીખ જોવા કાર્ડ ઘસો", scratchHint: "સોનેરી કાર્ડ પર આંગળી ફેરવો",
     dateEy: "શુભ દિવસ", muhurat: "શુભ મુહૂર્ત · {t}", days: "દિવસ", hours: "કલાક", mins: "મિનિટ", secs: "સેકન્ડ", cal: "કેલેન્ડરમાં ઉમેરો", today: "શુભ દિવસ આવી પહોંચ્યો",
     evEy2: "શુભ પ્રસંગો", evEy: "લગ્નોત્સવના પ્રસંગો", evSub: "દરેક પ્રસંગે આપની ઉપસ્થિતિ અમારા માટે સૌભાગ્ય રહેશે.", dress: "પહેરવેશ", dir: "રસ્તો જુઓ",
     venueEy: "લગ્ન સ્થળ", map: "Google Maps માં જુઓ",
@@ -656,7 +658,7 @@ function applyLang(){
     groom: L(CONFIG.groom), bride: L(CONFIG.bride),
     both: L(CONFIG.groom) + ' & ' + L(CONFIG.bride),
     groomOf: fill(t.sonOf, { p: L(CONFIG.groomParents) }), brideOf: fill(t.daughterOf, { p: L(CONFIG.brideParents) }),
-    dateCity: fmtDate(WED, { day: 'numeric', month: 'long', year: 'numeric' }) + ' · ' + L(CONFIG.city),
+    dateCity: L(CONFIG.city),   // the date itself stays hidden until the guest scratches the card
     bigDate: fmtDate(WED, { day: 'numeric', month: 'long', year: 'numeric' }),
     venueName: L(CONFIG.venueName), venueAddress: L(CONFIG.venueAddress)
   };
@@ -667,7 +669,7 @@ function applyLang(){
   renderEvents(); renderFamily(); renderChapters(); tick();
   if (window.__setMuteUI) window.__setMuteUI();
 }
-$('#langBtn').addEventListener('click', () => { LANG = LANG === 'gu' ? 'en' : 'gu'; try { localStorage.setItem('dh-lang', LANG); } catch (e) {} applyLang(); requestAnimationFrame(() => { sizeGallery(); onScroll(); }); });
+$('#langBtn').addEventListener('click', () => { LANG = LANG === 'gu' ? 'en' : 'gu'; try { localStorage.setItem('dh-lang', LANG); } catch (e) {} applyLang(); if (window.paintFoil) paintFoil(); requestAnimationFrame(() => { sizeGallery(); onScroll(); }); });
 
 /* ---------- photo chapters ---------- */
 function renderChapters(){
@@ -956,6 +958,60 @@ $('#enterBtn') && $('#enterBtn').addEventListener('click', () => {
 /* music starts at the guest's first tap anywhere (browsers allow sound only after a tap) */
 addEventListener('pointerdown', e => { if (!audio && !e.target.closest('#muBtn')) { startMusic(); setMuteUI(); } }, { capture: true });
 addEventListener('keydown', () => { if (!audio) { startMusic(); setMuteUI(); } }, { once: true });
+
+/* ---------- scratch card: the guest rubs the gold foil to reveal the date ---------- */
+(function(){
+  const box = $('#scratch'), fc = $('#scFoil'), sec = $('#date'); if (!box || !fc) return;
+  const g = fc.getContext('2d'); let W = 0, H = 0, done = false, cells = null, CW = 0, CH = 0, scratched = 0, down = false, lx = 0, ly = 0;
+  const GRID = 24;
+  window.paintFoil = () => {
+    if (done) return;
+    const dpr = Math.min(devicePixelRatio || 1, 2), r = box.getBoundingClientRect();
+    W = box.offsetWidth; H = box.offsetHeight; if (!W || !H) return;
+    fc.width = Math.round(W * dpr); fc.height = Math.round(H * dpr); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g.globalCompositeOperation = 'source-over';
+    // brushed gold foil
+    const lg = g.createLinearGradient(0, 0, W, H);
+    lg.addColorStop(0, '#b8862f'); lg.addColorStop(.22, '#f6dc96'); lg.addColorStop(.42, '#c99a43'); lg.addColorStop(.6, '#fbe7ad'); lg.addColorStop(.8, '#b98330'); lg.addColorStop(1, '#e8c272');
+    g.fillStyle = lg; g.fillRect(0, 0, W, H);
+    for (let i = 0; i < W * H / 60; i++) { g.fillStyle = Math.random() < .5 ? 'rgba(255,248,220,.10)' : 'rgba(90,55,10,.08)'; g.fillRect(Math.random() * W, Math.random() * H, Math.random() * 30 + 4, 1); }
+    const sh = g.createLinearGradient(0, 0, W, 0); sh.addColorStop(0, 'rgba(255,255,255,0)'); sh.addColorStop(.5, 'rgba(255,255,240,.28)'); sh.addColorStop(1, 'rgba(255,255,255,0)');
+    g.fillStyle = sh; g.fillRect(0, 0, W, H);
+    g.strokeStyle = 'rgba(110,64,12,.55)'; g.lineWidth = 1.5; g.strokeRect(10, 10, W - 20, H - 20);
+    g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillStyle = '#5a1418';
+    const big = Math.max(18, Math.min(30, W / 17));
+    g.font = `700 ${big}px ${LANG === 'gu' ? '"Noto Serif Gujarati",serif' : '"Cinzel",Georgia,serif'}`;
+    g.fillText(T[LANG].scratch, W / 2, H / 2 - big * .35);
+    g.font = `500 ${Math.round(big * .55)}px ${LANG === 'gu' ? '"Noto Serif Gujarati",serif' : 'Georgia,serif'}`; g.fillStyle = 'rgba(90,20,24,.75)';
+    g.fillText('✦  ' + T[LANG].scratchHint + '  ✦', W / 2, H / 2 + big * .75);
+    fc.setAttribute('aria-label', T[LANG].scratch);
+    CW = Math.ceil(W / GRID); CH = Math.ceil(H / GRID); cells = new Uint8Array(CW * CH); scratched = 0;
+  };
+  function rub(x, y){
+    const R = Math.max(22, Math.min(40, W / 14));
+    g.globalCompositeOperation = 'destination-out'; g.lineCap = 'round'; g.lineWidth = R * 2;
+    g.beginPath(); g.moveTo(lx, ly); g.lineTo(x, y); g.stroke();
+    g.beginPath(); g.arc(x, y, R, 0, Math.PI * 2); g.fill();
+    // count cleared area on a coarse grid along the stroke
+    const steps = Math.max(1, Math.ceil(Math.hypot(x - lx, y - ly) / (R / 2)));
+    for (let k = 0; k <= steps; k++) { const cx = lx + (x - lx) * k / steps, cy = ly + (y - ly) * k / steps;
+      for (let gy = Math.floor((cy - R) / GRID); gy <= Math.floor((cy + R) / GRID); gy++) for (let gx = Math.floor((cx - R) / GRID); gx <= Math.floor((cx + R) / GRID); gx++) {
+        if (gx < 0 || gy < 0 || gx >= CW || gy >= CH) continue; const mx = gx * GRID + GRID / 2, my = gy * GRID + GRID / 2;
+        if (Math.hypot(mx - cx, my - cy) < R && !cells[gy * CW + gx]) { cells[gy * CW + gx] = 1; scratched++; } } }
+    lx = x; ly = y;
+    if (scratched / (CW * CH) > .45) reveal();
+  }
+  function reveal(){ if (done) return; done = true; box.classList.add('done'); sec.classList.add('revealed'); if (navigator.vibrate) try { navigator.vibrate(30); } catch (e) {} }
+  const pos = e => { const r = fc.getBoundingClientRect(); return [(e.clientX - r.left) * W / r.width, (e.clientY - r.top) * H / r.height]; };
+  fc.addEventListener('pointerdown', e => { if (done) return; down = true; fc.setPointerCapture(e.pointerId); [lx, ly] = pos(e); rub(lx, ly); e.preventDefault(); });
+  fc.addEventListener('pointermove', e => { if (!down || done) return; const [x, y] = pos(e); rub(x, y); e.preventDefault(); });
+  const up = () => { down = false; }; fc.addEventListener('pointerup', up); fc.addEventListener('pointercancel', up);
+  fc.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') reveal(); }); fc.tabIndex = 0;
+  if (REDUCE) { /* still a card to tap: one tap reveals */ fc.addEventListener('click', reveal); }
+  addEventListener('resize', () => { if (!done) paintFoil(); });
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => paintFoil());
+  paintFoil();
+})();
 
 /* ---------- start ---------- */
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
