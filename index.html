@@ -321,7 +321,7 @@ html[lang=gu] .tv .of{font-size:clamp(15px,4vw,19px);font-weight:500}
 .chap-grid figure.l{grid-column:span 2;aspect-ratio:3/2}
 .chap-grid img{width:100%;height:100%;object-fit:cover}
 @media (min-width:760px){.chap-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}}
-body.w3d .chap{background:transparent;padding:0;height:calc(var(--n,6) * 64vh + 80vh)}
+body.w3d .chap{background:transparent;padding:0;height:calc(var(--n,6) * 30vh)}
 body.w3d .chap-grid{display:none}
 body.w3d .chap-head{position:sticky;top:max(72px,calc(env(safe-area-inset-top) + 64px));margin:0;padding:20px 16px 0;text-shadow:0 2px 18px rgba(255,246,238,.95),0 0 4px rgba(255,246,238,.9);pointer-events:none}
 body.w3d .chap-head .h-sec{font-size:clamp(26px,6.4vw,44px)}
@@ -334,10 +334,10 @@ body.w3d #three{opacity:1}
 body.w3d #walk,body.w3d section,body.w3d footer{position:relative;z-index:1}
 body.w3d #gallery{display:none}
 body.w3d .ivory{background:transparent}
-body.w3d .ivory.pad,body.w3d #rsvp.pad{padding-top:34vh!important;padding-bottom:34vh}
+body.w3d .ivory.pad{padding-top:12vh!important;padding-bottom:12vh}
 body.w3d .ivory>.wrap{background:linear-gradient(180deg,rgba(251,243,228,.96),rgba(243,228,200,.95));border-radius:22px;padding:46px clamp(18px,5vw,56px);
   box-shadow:0 40px 80px -30px rgba(110,40,40,.38),0 0 0 1px rgba(217,168,78,.75),inset 0 0 0 7px rgba(251,243,228,.7),inset 0 0 0 8px rgba(217,168,78,.4);transform-origin:50% 50%;will-change:transform,opacity}
-body.w3d .bleed{min-height:auto;padding:34vh max(16px,env(safe-area-inset-left))}
+body.w3d .bleed{min-height:auto;padding:12vh max(16px,env(safe-area-inset-left))}
 body.w3d .bleed::after,body.w3d .bleed .bg{display:none}
 body.w3d .bleed .inner{background:linear-gradient(180deg,rgba(150,64,72,.95),rgba(108,34,46,.96));border-radius:22px;padding:46px clamp(20px,5vw,56px);width:100%;
   box-shadow:0 40px 80px -30px rgba(110,40,40,.38),0 0 0 1px rgba(245,217,150,.45);transform-origin:50% 50%;will-change:transform,opacity}
@@ -487,32 +487,6 @@ body.w3d footer{background:transparent}
   </div>
 </section>
 
-<!-- ============ RSVP ============ -->
-<section id="rsvp" class="ivory pad" style="padding-top:20px">
-  <div class="wrap grid">
-    <div class="ph rv"><img src="real/photos/DSC00342-s.webp" srcset="real/photos/DSC00342-s.webp 733w, real/photos/DSC00342-l.webp 1333w" sizes="(min-width:880px) 440px, 92vw" alt="Deep and Hinal" loading="lazy"></div>
-    <div>
-      <div class="center" style="margin-bottom:26px">
-        <span class="eyebrow rv" data-t="rsvpEy2"></span>
-        <h2 class="h-sec rv d1" data-t="rsvpEy"></h2>
-      </div>
-      <form id="rsvpForm" class="rv d2" novalidate>
-        <label class="f"><span data-t="fName"></span><input type="text" id="rName" autocomplete="name" required></label>
-        <div role="radiogroup" aria-labelledby="attL" style="display:grid;gap:6px"><span class="f" id="attL" data-t="fAttend"></span>
-          <div class="choice">
-            <label><input type="radio" name="att" value="yes" checked><span data-t="yes"></span></label>
-            <label><input type="radio" name="att" value="no"><span data-t="no"></span></label>
-          </div>
-        </div>
-        <label class="f"><span data-t="fGuests"></span><select id="rGuests"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select></label>
-        <label class="f"><span data-t="fMsg"></span><textarea id="rMsg"></textarea></label>
-        <button class="btn-gold" type="submit"><span data-t="send"></span></button>
-        <p class="thanks" id="thanks"></p>
-      </form>
-    </div>
-  </div>
-</section>
-
 <!-- ============ CLOSING ============ -->
 <section class="bleed" id="closing">
   <div class="bg" data-par><picture>
@@ -579,7 +553,7 @@ const CONFIG = {
   mapsApiKey: "",
        // the photograph waiting at the very end of the 3D journey
   rsvpWhatsApp: "",           // e.g. "919876543210" (country code, no +). Leave "" to just show a thank-you.
-  defaultLang: "en",          // "en" or "gu". A link ending in ?lang=gu always opens in Gujarati.
+  defaultLang: "gu",          // "en" or "gu". A link ending in ?lang=gu always opens in Gujarati.
   music: true,                // gentle instrumental, starts only after the guest taps Enter
   musicFile: ""               // optional: a licensed .mp3 to play instead
 };
@@ -637,7 +611,7 @@ const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAl
 const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const PHONE = matchMedia('(max-width: 760px)').matches || /Mobi|Android/i.test(navigator.userAgent);
 let LANG = (() => { const q = new URLSearchParams(location.search).get('lang'); if (q === 'gu' || q === 'en') return q;
-  try { const s = localStorage.getItem('dh-lang'); if (s === 'gu' || s === 'en') return s; } catch (e) {} return CONFIG.defaultLang === 'gu' ? 'gu' : 'en'; })();
+  try { const s = localStorage.getItem('dh-lang2'); if (s === 'gu' || s === 'en') return s; } catch (e) {} return CONFIG.defaultLang === 'gu' ? 'gu' : 'en'; })();
 
 /* ---------- language ---------- */
 const L = v => (v && typeof v === 'object') ? (v[LANG] || v.en) : (v || '');
@@ -670,7 +644,7 @@ function applyLang(){
   renderEvents(); renderFamily(); renderChapters(); tick();
   if (window.__setMuteUI) window.__setMuteUI();
 }
-$('#langBtn').addEventListener('click', () => { LANG = LANG === 'gu' ? 'en' : 'gu'; try { localStorage.setItem('dh-lang', LANG); } catch (e) {} applyLang(); if (window.paintFoil) paintFoil(); requestAnimationFrame(() => { sizeGallery(); onScroll(); }); });
+$('#langBtn').addEventListener('click', () => { LANG = LANG === 'gu' ? 'en' : 'gu'; try { localStorage.setItem('dh-lang2', LANG); } catch (e) {} applyLang(); if (window.paintFoil) paintFoil(); requestAnimationFrame(() => { sizeGallery(); onScroll(); }); });
 
 /* ---------- photo chapters ---------- */
 function renderChapters(){
@@ -724,19 +698,6 @@ $('#calBtn').addEventListener('click', () => {
     'DTSTART:' + z(WED), 'DTEND:' + z(end), 'SUMMARY:' + T[LANG].calTitle, 'LOCATION:' + (L(CONFIG.venueName) + ', ' + L(CONFIG.venueAddress)).replace(/,/g, '\\,'), 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
   const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' })); a.download = 'Deep-Hinal-Wedding.ics'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
 });
-
-/* ---------- RSVP ---------- */
-$('#rsvpForm').addEventListener('submit', e => {
-  e.preventDefault(); const t = T[LANG], name = $('#rName').value.trim();
-  if (!name) { $('#rName').focus(); $('#rName').setCustomValidity(t.needName); $('#rName').reportValidity(); return; }
-  const yes = document.querySelector('input[name=att]:checked').value === 'yes';
-  if (CONFIG.rsvpWhatsApp) {
-    const msg = fill(t.wa, { n: name, a: yes ? t.waYes : t.waNo, g: $('#rGuests').value, m: $('#rMsg').value.trim() || '-' });
-    window.open('https://wa.me/' + CONFIG.rsvpWhatsApp + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
-  }
-  $('#thanks').textContent = fill(t.thanks, { n: name }); $('#rsvpForm').classList.add('sent');
-});
-$('#rName').addEventListener('input', () => $('#rName').setCustomValidity(''));
 
 /* ---------- reveal on view ---------- */
 const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); if (en.target.closest('#evGrid')) evSeen = true; } }), { rootMargin: '0px 0px -10% 0px' }) : null;
@@ -1068,23 +1029,23 @@ addEventListener('load', () => { sizeGallery(); onScroll(); });
       const fr = new THREE.Mesh(new THREE.PlaneGeometry(w + .16, h + .16), frameMat); fr.position.z = -.03; g.add(fr);
       const mt = new THREE.Mesh(new THREE.PlaneGeometry(w + .07, h + .07), matte); mt.position.z = -.015; g.add(mt);
       const ph = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: 0x2a0d0d })); g.add(ph);
-      g.userData = { n, ph, w, loaded: false, ph0: Math.random() * 6 }; scene.add(g); photos.push(g); return g;
+      g.userData = { n, ph, w, h, loaded: false, ph0: Math.random() * 6 }; scene.add(g); photos.push(g); return g;
     }
 
     // ---- lay the journey out along -z, one stretch per section ----
     const secs = [...document.querySelectorAll('body > section')].filter(s => s.id !== 'walk' && s.id !== 'gallery' && s.id !== 'tour');
-    const GAP = PHONE ? 7 : 7.5, PANEL = 7;
+    const GAP = PHONE ? 4.2 : 4.6, PANEL = 5;
     let z = -1.5; const SEQ = [];
     for (const el of secs) {
       const ch = el.dataset.ch != null ? CONFIG.chapters[+el.dataset.ch] : null, z0 = z;
       if (ch) {
         ch.photos.forEach(([n, o], k) => {
           const side = k % 2 ? 1 : -1, h = o === 'p' ? (PHONE ? 3.5 : 5.2) : (PHONE ? 2.35 : 3.9);
-          const g = framed(n, o, h), pz = z - 6 - k * GAP;
-          g.userData.side = side; g.userData.home = new THREE.Vector3(side * (PHONE ? .12 : .9), (PHONE ? .25 : -.35) + Math.sin(k * 1.7) * .2, pz);
+          const g = framed(n, o, h), pz = z - (PHONE ? 5 : 6) - k * GAP;
+          g.userData.cz0 = z0; g.userData.side = side; g.userData.home = new THREE.Vector3(side * (PHONE ? .12 : .9), (PHONE ? .25 : -.35) + Math.sin(k * 1.7) * .2, pz);
           g.userData.tilt = Math.sin(k * 2.3) * .04; g.position.copy(g.userData.home);
         });
-        z = z - 6 - (ch.photos.length - 1) * GAP - 5.5;
+        z = z - (PHONE ? 5 : 6) - (ch.photos.length - 1) * GAP + (PHONE ? 3.6 : 4.2);
       } else z -= PANEL;
       SEQ.push({ el, z0, z1: z });
     }
@@ -1103,6 +1064,7 @@ addEventListener('load', () => { sizeGallery(); onScroll(); });
     scene.add(bokeh);
 
     // ---- scroll → camera depth (piecewise, so each chapter plays while its section is on screen) ----
+    let fitW = 9, fitH = 5;
     const walkEl = document.getElementById('walk');
     let KEYS = [], keysAt = 0;
     function buildKeys(){
@@ -1119,7 +1081,8 @@ addEventListener('load', () => { sizeGallery(); onScroll(); });
 
     function resize(){
       const w = innerWidth, h = innerHeight; R.setSize(w, h, false); cam.aspect = w / h; cam.fov = w < h ? 60 : 50; cam.updateProjectionMatrix();
-      const Hv = 2 * D * Math.tan(cam.fov * Math.PI / 360), Wv = Hv * cam.aspect; filmCover = Math.max(Wv / 16, Hv / 9) * 1.06; buildKeys();
+      const Hv = 2 * D * Math.tan(cam.fov * Math.PI / 360), Wv = Hv * cam.aspect; filmCover = Math.max(Wv / 16, Hv / 9) * 1.06;
+      const hv = 2 * (PHONE ? 4.3 : 5.6) * Math.tan(cam.fov * Math.PI / 360); fitW = hv * cam.aspect; fitH = hv; buildKeys();
     }
     resize(); addEventListener('resize', resize); addEventListener('load', buildKeys);
 
@@ -1148,9 +1111,11 @@ addEventListener('load', () => { sizeGallery(); onScroll(); });
         if (inside && !REDUCE) cam.rotateZ(Math.sin(camZ * .12) * .035);
         for (const g of photos) { const u = g.userData, dz = u.home.z - camZ;
           if (!u.loaded && dz > -55 && dz < 10) { u.loaded = true; loader.load(`real/photos/${u.n}-s.webp`, tt => { tex(tt); u.ph.material.dispose(); u.ph.material = new THREE.MeshBasicMaterial({ map: tt }); }); }
-          if (u.fixed) { g.position.y = u.home.y + (REDUCE ? 0 : Math.sin(t * .5) * .05); continue; }
+          g.scale.setScalar(Math.min(1, .86 * fitW / (u.w + .2), .66 * fitH / (u.h + .2)));
+          if (u.fixed) { g.visible = dz > -22; g.position.y = u.home.y + (REDUCE ? 0 : Math.sin(t * .5) * .05); continue; }
+          g.visible = camZ < u.cz0 - .4;
           // ahead: waits near the centre; as you reach it, it sweeps aside and turns away
-          const d = -dz, a = smooth(Math.min(1, Math.max(0, (7.5 - d) / 6.5)));
+          const d = -dz, a = PHONE ? smooth(Math.min(1, Math.max(0, (4.2 - d) / 3.4))) : smooth(Math.min(1, Math.max(0, (5.2 - d) / 4.2)));
           const out = u.side * ((PHONE ? 3.6 : 5.4) + u.w * .3) * a;
           g.position.set(u.home.x + out, u.home.y + (REDUCE ? 0 : Math.sin(t * .6 + u.ph0) * .07) + a * .2, u.home.z);
           g.rotation.set(REDUCE ? 0 : Math.sin(t * .4 + u.ph0) * .06, -u.side * (.2 + a * 1.25), u.tilt * (1 - a) + (REDUCE ? 0 : Math.sin(t * .3 + u.ph0) * .02));
