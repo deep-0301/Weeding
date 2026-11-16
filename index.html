@@ -384,7 +384,6 @@ body.w3d footer{background:transparent}
     <div class="ov ov-mid" data-a=".62" data-b="1.2">
       <p class="shubh">|| શુભ લગ્ન ||</p>
       <h1 class="names-big"><span class="gold" data-f="groom"></span><span class="amp">&amp;</span><span class="gold" data-f="bride"></span></h1>
-      <p class="wdate" data-f="dateCity"></p>
     </div>
 
     <div class="lb lb-t" aria-hidden="true"></div><div class="lb lb-b" aria-hidden="true"></div>
@@ -508,31 +507,32 @@ body.w3d footer{background:transparent}
 const CONFIG = {
   groom: { en: "Deep", gu: "દીપ" },
   bride: { en: "Hinal", gu: "હિનલ" },
-  groomParents: { en: "Shri Kiritbhai Patel & Smt. [Mother's name]", gu: "શ્રી કિરીટભાઈ પટેલ તથા શ્રીમતી [માતાનું નામ]" },
-  brideParents: { en: "Shri Arvindbhai Patel & Smt. [Mother's name]", gu: "શ્રી અરવિંદભાઈ પટેલ તથા શ્રીમતી [માતાનું નામ]" },
+  groomParents: { en: "Shri Kiritbhai Patel & Smt. Rekhaben Kiritbhai Patel", gu: "શ્રી કિરીટભાઈ પટેલ તથા શ્રીમતી રેખાબેન કિરીટભાઈ પટેલ" },
+  brideParents: { en: "Shri Arvindbhai Patel & Smt. Sharmishthaben Arvindbhai Patel", gu: "શ્રી અરવિંદભાઈ પટેલ તથા શ્રીમતી શર્મિષ્ઠાબેન અરવિંદભાઈ પટેલ" },
   city: { en: "Ahmedabad", gu: "અમદાવાદ" },
   weddingISO: "2027-01-28T10:30:00+05:30",     // 28 January 2027 (the 10:30 muhurat time is still a SAMPLE): drives the countdown and calendar
-  venueName: { en: "[Venue name]", gu: "[લગ્ન સ્થળનું નામ]" },
-  venueAddress: { en: "[Street, Area], Ahmedabad, Gujarat", gu: "[સરનામું], અમદાવાદ, ગુજરાત" },
+  venueName: { en: "Chuval Dangarava Gam", gu: "ચુંવાળ ડાંગરવા ગામ" },
+  venueAddress: { en: "Hast Melap & Reception", gu: "હસ્તમેળાપ અને સ્વાગત સમારંભ" },
   mapsQuery: "Ahmedabad, Gujarat",
+  mapsUrl: "https://maps.app.goo.gl/6UWzchW45vTfbxfb7",   // wedding venue on Google Maps
   mapEmbed: "",                                  // optional Google Maps embed URL
-  events: [                                      // SAMPLE times and places around the 28 Jan wedding (time is 24-hour)
-    { en: "Ganesh Sthapana", gu: "ગણેશ સ્થાપના", date: "2027-01-25", time: "09:00", place: { en: "Groom's residence", gu: "વરપક્ષનું નિવાસસ્થાન" }, dress: { en: "Yellow & ivory", gu: "પીળો અને ક્રીમ" }, colors: ["#f3c23c", "#fbf3e4"] },
-    { en: "Mehndi Rasam", gu: "મહેંદી રસમ", date: "2027-01-26", time: "16:00", place: { en: "Bride's residence", gu: "કન્યાપક્ષનું નિવાસસ્થાન" }, dress: { en: "Shades of green", gu: "લીલા રંગના શેડ્સ" }, colors: ["#3f7a2a", "#9cc46a"] },
-    { en: "Pithi", gu: "પીઠી", date: "2027-01-27", time: "10:00", place: { en: "Both residences", gu: "બંને નિવાસસ્થાને" }, dress: { en: "Haldi yellow", gu: "હળદરિયો પીળો" }, colors: ["#f2b21b", "#ffde7a"] },
-    { en: "Sangeet & Garba", gu: "સંગીત સંધ્યા અને ગરબા", date: "2027-01-27", time: "19:30", place: { en: "[Party plot], Ahmedabad", gu: "[પાર્ટી પ્લોટ], અમદાવાદ" }, dress: { en: "Chaniya choli & kediyu", gu: "ચણિયાચોળી અને કેડિયું" }, colors: ["#d6336c", "#2a6fd6", "#f2b21b"] },
-    { en: "Hast Melap", gu: "હસ્તમેળાપ", date: "2027-01-28", time: "10:30", place: { en: "[Venue name]", gu: "[લગ્ન સ્થળ]" }, dress: { en: "Traditional red & gold", gu: "પરંપરાગત લાલ અને સોનેરી" }, colors: ["#a3182a", "#d9a84e"] },
-    { en: "Reception", gu: "સ્વાગત સમારંભ", date: "2027-01-28", time: "19:30", place: { en: "[Venue name]", gu: "[લગ્ન સ્થળ]" }, dress: { en: "Indo-western formal", gu: "ઇન્ડો-વેસ્ટર્ન ફોર્મલ" }, colors: ["#2b0a0c", "#e9b7a6"] }
+  events: [                                     // time "" = not decided yet (only the day is shown)
+    { en: "Ganesh Sthapana", gu: "ગણેશ સ્થાપના", date: "2027-01-25", time: "09:00" },
+    { en: "Lagna Lekhan", gu: "લગ્ન લેખન", date: "2027-01-26", time: "", place: { en: "At home · B-6 Ambika Krupa Society, Ranip, Ahmedabad", gu: "નિવાસસ્થાને · બી-૬, અંબિકા કૃપા સોસાયટી, રાણીપ, અમદાવાદ" } },
+    { en: "Garba", gu: "ગરબા", date: "2027-01-26", time: "", place: { en: "Chuval Dangarava Gam", gu: "ચુંવાળ ડાંગરવા ગામ" } },
+    { en: "Pithi", gu: "પીઠી", date: "2027-01-27", time: "10:00", place: { en: "But Bhawani Farm", gu: "બુટભવાની ફાર્મ" } },
+    { en: "Sangeet & Garba", gu: "સંગીત સંધ્યા અને ગરબા", date: "2027-01-27", time: "19:30", place: { en: "But Bhawani Farm", gu: "બુટભવાની ફાર્મ" } },
+    { en: "Hast Melap", gu: "હસ્તમેળાપ", date: "2027-01-28", time: "10:30", place: { en: "Chuval Dangarava Gam", gu: "ચુંવાળ ડાંગરવા ગામ" } },
+    { en: "Reception", gu: "સ્વાગત સમારંભ", date: "2027-01-28", time: "19:30", place: { en: "Chuval Dangarava Gam", gu: "ચુંવાળ ડાંગરવા ગામ" } }
   ],
-  families: [                                    // SAMPLE
+  families: [
     { en: "Groom's family", gu: "વરપક્ષ", names: [
-      { en: "Shri Kiritbhai Patel & Smt. [Name]", gu: "શ્રી કિરીટભાઈ પટેલ તથા શ્રીમતી [નામ]" },
-      { en: "Shri [Name] & Smt. [Name]", gu: "શ્રી [નામ] તથા શ્રીમતી [નામ]" },
-      { en: "[Siblings & cousins]", gu: "[ભાઈ-બહેન તથા પરિવારજનો]" } ] },
+      { en: "Shri Kiritbhai Patel & Smt. Rekhaben Kiritbhai Patel", gu: "શ્રી કિરીટભાઈ પટેલ તથા શ્રીમતી રેખાબેન કિરીટભાઈ પટેલ" },
+      { en: "Grandfather: Shri Shankarbhai Narottamdas Patel", gu: "દાદા: શ્રી શંકરભાઈ નરોત્તમદાસ પટેલ" },
+      { en: "Sister: Pinkal Kaushal Patel", gu: "બહેન: પિંકલ કૌશલ પટેલ" } ] },
     { en: "Bride's family", gu: "કન્યાપક્ષ", names: [
-      { en: "Shri Arvindbhai Patel & Smt. [Name]", gu: "શ્રી અરવિંદભાઈ પટેલ તથા શ્રીમતી [નામ]" },
-      { en: "Shri [Name] & Smt. [Name]", gu: "શ્રી [નામ] તથા શ્રીમતી [નામ]" },
-      { en: "[Siblings & cousins]", gu: "[ભાઈ-બહેન તથા પરિવારજનો]" } ] }
+      { en: "Shri Arvindbhai Patel & Smt. Sharmishthaben Arvindbhai Patel", gu: "શ્રી અરવિંદભાઈ પટેલ તથા શ્રીમતી શર્મિષ્ઠાબેન અરવિંદભાઈ પટેલ" },
+      { en: "Brother: Mihir Arvindbhai Patel", gu: "ભાઈ: મિહિર અરવિંદભાઈ પટેલ" } ] }
   ],
   // Photos for the sideways film strip (files in real/photos, p = portrait, l = landscape)
   gallery: [["DSC01870", "p"], ["DSC00302", "l"], ["DSC00342", "p"], ["DSC01834", "l"], ["DSC01840", "l"]],
@@ -620,7 +620,7 @@ const WED = new Date(CONFIG.weddingISO);
 const locale = () => LANG === 'gu' ? 'gu-IN-u-nu-gujr' : 'en-IN';
 const num = n => LANG === 'gu' ? new Intl.NumberFormat('gu-IN-u-nu-gujr', { useGrouping: false }).format(n) : String(n);
 function fmtTime(hhmm){ const [h, m] = hhmm.split(':').map(Number);
-  if (LANG === 'gu') { const part = h < 12 ? 'સવારે' : h < 16 ? 'બપોરે' : h < 19 ? 'સાંજે' : 'રાત્રે'; const h12 = ((h + 11) % 12) + 1; return part + ' ' + num(h12) + ':' + num(String(m).padStart(2, '0')); }
+  if (LANG === 'gu') { const part = h < 12 ? 'સવારે' : h < 16 ? 'બપોરે' : h < 19 ? 'સાંજે' : 'રાત્રે'; const h12 = ((h + 11) % 12) + 1; return part + ' ' + num(h12) + ':' + String(m).padStart(2, '0').split('').map(num).join(''); }
   const h12 = ((h + 11) % 12) + 1; return h12 + ':' + String(m).padStart(2, '0') + ' ' + (h < 12 ? 'AM' : 'PM'); }
 const fmtDate = (d, o) => d.toLocaleDateString(locale(), Object.assign({ timeZone: 'Asia/Kolkata' }, o));
 const wedHHMM = () => WED.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' });
@@ -664,10 +664,8 @@ function renderEvents(){
     return `<article class="ev rv${i % 3 ? ' d' + (i % 3) : ''}${evSeen ? ' in' : ''}">
       <p class="no">${String(i + 1).padStart(2, '0')}</p>
       <h3>${L(e)}</h3>
-      <p class="when">${fmtDate(d, { weekday: 'short', day: 'numeric', month: 'short' })} · ${fmtTime(e.time)}</p>
-      <p class="where">${L(e.place)}</p>
-      <p class="dress">${e.colors.map(c => `<i class="sw" style="background:${c}"></i>`).join('')}<span><b>${t.dress}:</b> ${L(e.dress)}</span></p>
-      <a class="btn-line" href="${mapsLink(L(e.place).replace(/[\[\]]/g, '') + ', ' + CONFIG.mapsQuery)}" target="_blank" rel="noopener">${t.dir}</a>
+      <p class="when">${fmtDate(d, { weekday: 'short', day: 'numeric', month: 'short' })}${e.time ? ' · ' + fmtTime(e.time) : ''}</p>
+      ${e.place ? `<p class="where">${L(e.place)}</p>` : ''}
     </article>`; }).join('');
   if (!evSeen) $$('#evGrid .rv').forEach(el => io && io.observe(el));
 }
@@ -675,7 +673,7 @@ let evSeen = false;
 function renderFamily(){
   $('#fam').innerHTML = CONFIG.families.map((f, i) => `<div class="card rv in${i ? ' d1' : ''}"><h3>${L(f)}</h3><ul>${f.names.map(n => `<li>${L(n)}</li>`).join('')}</ul></div>`).join('');
 }
-$('#mapBtn').href = mapsLink(CONFIG.mapsQuery);
+$('#mapBtn').href = CONFIG.mapsUrl || mapsLink(CONFIG.mapsQuery);
 if (CONFIG.mapEmbed) { $('#mapBox').hidden = false; $('#mapBox').innerHTML = `<iframe src="${CONFIG.mapEmbed}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe>`; }
 
 /* ---------- gallery strip ---------- */
