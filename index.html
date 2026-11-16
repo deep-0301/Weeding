@@ -351,6 +351,18 @@ body.w3d .chap-grid{display:none}
 body.w3d .chap-head{position:sticky;top:max(72px,calc(env(safe-area-inset-top) + 64px));margin:0;padding:20px 16px 0;text-shadow:0 2px 18px rgba(255,246,238,.95),0 0 4px rgba(255,246,238,.9);pointer-events:none}
 body.w3d .chap-head .h-sec{font-size:clamp(26px,6.4vw,44px)}
 
+
+/* ============ EVERY SECTION IN 3D: each section is its own stage with a camera that follows the screen ============ */
+body.w3d .ivory,body.w3d .bleed{perspective:1000px;perspective-origin:50% 50%}
+body.w3d .ivory>.wrap,body.w3d .bleed .inner,body.w3d .ivory .grid>div,body.w3d .fam,body.w3d .person{transform-style:preserve-3d}
+body.w3d .ivory>.wrap,body.w3d .bleed .inner{will-change:transform}
+body.w3d .bleed{position:relative}
+body.w3d .bleed .bg{display:none;position:absolute;inset:4vh 3vw;z-index:0;border-radius:26px;overflow:hidden;translate:0 0 -420px;scale:1.42;opacity:.9;
+  box-shadow:0 60px 120px -40px rgba(110,40,40,.45);pointer-events:none}
+body.w3d .bleed .bg img{width:100%;height:100%;object-fit:cover;filter:brightness(1.06) saturate(.95)}
+body.w3d .bleed .inner{position:relative;z-index:1}
+body.w3d .fam .card{box-shadow:0 30px 60px -28px rgba(110,40,40,.5),0 0 0 1px rgba(217,168,78,.35)}
+@media (prefers-reduced-motion:reduce){body.w3d .bleed .bg{translate:none;scale:1}}
 /* ============ FULL 3D MODE ============ */
 #three{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;pointer-events:none;opacity:0;transition:opacity .6s}
 body.w3d #three{opacity:1}
@@ -783,6 +795,30 @@ function soundScroll(){
   if (walkP > .66 && !bellAt.b) { bellAt.b = true; SFX('bell', 440, .8); setTimeout(() => SFX('bell', 330, .6), 380); } if (walkP < .55) bellAt.b = false;
 }
 setInterval(() => { if (airV > .01) { airV *= .7; SFX('air', airV * .3); } if (musE > .01) { musE *= .8; SFX('scroll', musE < .02 ? 0 : musE, curSection(), walkP); } }, 120);
+/* ---------- every section as a 3D stage: panels swing in from depth, their contents float at different depths ---------- */
+const DEPTH = [['.frame', 70], ['.eyebrow', 36], ['.h-sec', 64], ['.rule', 18], ['.person', 56], ['.amp-sm', 96], ['.scratch', 84], ['.cd', 46],
+  ['.v-name', 72], ['.v-addr', 40], ['.btn-line', 58], ['.quote', 42], ['.names-big', 96], ['.jai', 30], ['.fam .card', 52], [':scope > p', 26]];
+let tiltX = 0, tiltY = 0, tgtTX = 0, tgtTY = 0, scratching = false, s3raf = 0;
+function scene3d(){
+  if (!document.body.classList.contains('w3d') || REDUCE) return;
+  const vh = innerHeight, mid = vh / 2, wide = innerWidth >= 760;
+  $$('.ivory, .bleed').forEach((sec, i) => {
+    const panel = sec.querySelector(':scope > .wrap, :scope > .inner'); if (!panel) return;
+    const sr = sec.getBoundingClientRect(); if (sr.bottom < -200 || sr.top > vh + 200) return;
+    sec.style.perspectiveOrigin = `50% ${(mid - sr.top).toFixed(0)}px`;
+    const r = panel.getBoundingClientRect(), c = Math.max(-1.2, Math.min(1.2, r.top > mid ? (r.top - mid) / vh : r.bottom < mid ? (r.bottom - mid) / vh : 0));
+    const side = i % 2 ? -1 : 1, t = scratching ? 0 : 1;
+    panel.style.transform = `translate3d(0,0,${(-Math.abs(c) * (wide ? 340 : 220)).toFixed(0)}px) rotateX(${(c * (wide ? -16 : -11) - tiltY * 5 * t).toFixed(2)}deg) rotateY(${(side * c * (wide ? 18 : 9) + tiltX * 7 * t).toFixed(2)}deg)`;
+    const k = 1 + Math.abs(c) * 2.2;
+    for (const [q, z] of DEPTH) for (const el of panel.querySelectorAll(q)) { if (el.dataset.z3) continue; el.dataset.z3 = z; }
+    for (const el of panel.querySelectorAll('[data-z3]')) el.style.translate = `0 0 ${(+el.dataset.z3 * (wide ? 1 : .7) * k).toFixed(0)}px`;
+  });
+}
+addEventListener('pointermove', e => { if (e.pointerType !== 'mouse') return; tgtTX = e.clientX / innerWidth * 2 - 1; tgtTY = e.clientY / innerHeight * 2 - 1;
+  if (!s3raf) s3raf = requestAnimationFrame(function step(){ tiltX += (tgtTX - tiltX) * .08; tiltY += (tgtTY - tiltY) * .08; scene3d();
+    s3raf = Math.abs(tgtTX - tiltX) + Math.abs(tgtTY - tiltY) > .004 ? requestAnimationFrame(step) : 0; }); }, { passive: true });
+addEventListener('pointerdown', e => { if (e.target.closest('#scratch')) scratching = true; }, { passive: true });
+addEventListener('pointerup', () => { scratching = false; }, { passive: true });
 function onScroll(){
   const r = walk.getBoundingClientRect(), span = walk.offsetHeight - innerHeight;
   walkP = Math.min(1, Math.max(0, -r.top / span));
@@ -810,11 +846,7 @@ function onScroll(){
   $('#galBar').style.transform = `scaleX(${gp})`;
   const n = CONFIG.gallery.length, idx = Math.min(n, 1 + Math.floor(gp * n));
   $('#galCount').textContent = num(String(idx).padStart(2, '0')) + ' / ' + num(String(n).padStart(2, '0'));
-  if (document.body.classList.contains('w3d') && !REDUCE) for (const el of $$('#site3d-panels, .ivory>.wrap, .bleed .inner')) {
-    const r2 = el.getBoundingClientRect(), mid = innerHeight / 2; if (r2.bottom < -100 || r2.top > innerHeight + 100) continue;
-    const c = r2.top > mid ? (r2.top - mid) / innerHeight : r2.bottom < mid ? (r2.bottom - mid) / innerHeight : 0;
-    el.style.transform = `perspective(1200px) translate3d(0,0,${(-Math.abs(c) * 220).toFixed(0)}px) rotateX(${(c * -16).toFixed(2)}deg)`;
-    el.style.opacity = Math.max(.15, 1 - Math.max(0, Math.abs(c) - .25) * 1.6).toFixed(3); }
+  scene3d();
   // gentle parallax on full-bleed photos
   if (!REDUCE) for (const el of $$('[data-par]')) { const pr = el.parentElement.getBoundingClientRect(); if (pr.bottom < -50 || pr.top > innerHeight + 50) continue;
     const c = (pr.top + pr.height / 2 - innerHeight / 2) / innerHeight; el.style.transform = `translate3d(0,${(c * -9).toFixed(2)}%,0)`; }
