@@ -749,7 +749,7 @@ setInterval(tick, 1000);
 const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); if (en.target.closest('#evGrid')) evSeen = true; } }), { rootMargin: '0px 0px -10% 0px' }) : null;
 
 /* ---------- the walk-in film: scroll scrubs the Kalupur video, frame by frame ---------- */
-const PXW = innerWidth * (devicePixelRatio || 1), STEP = 1, TOTAL = 192, frames = [],
+const PXW = innerWidth * (devicePixelRatio || 1), STEP = 1, TOTAL = 168, frames = [],
   // phones in portrait get full-4K-height frames cropped to the part a tall screen shows
   SET = PHONE && innerHeight > innerWidth ? 'flow/p4' : PXW >= 1700 ? 'flow/k4' : 'flow/fhd';
 for (let i = 0; i < TOTAL; i += STEP) frames.push(i);
