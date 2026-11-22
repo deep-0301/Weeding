@@ -6,6 +6,7 @@ A simple one-page expense book for the groom side (વરપક્ષ) of our Gu
 - **Expenses by category**: venue, catering & Gujarati thali, mandap decor, gorji/maharaj, dhol & garba singers, photo/video, panetar/gharchola/sherwani, jewellery, makeup & mehndi, kankotri, gifts & mameru, transport, guest stay, other. Categories can be renamed, added or removed.
 - **Totals by category** on the Overview: total, paid, still to pay and share of the whole.
 - **Payments**: total, advance paid, balance, due date, payment mode, status (Pending, Advance paid, Paid, Overdue).
+- **History**: each phone asks for the user's name once; every add, change, mark-paid and delete is logged with who and when (History tab, CSV export).
 - **Export** to CSV (Excel / Google Sheets) and JSON backup / restore.
 - **Mobile first**: bottom tabs, a floating Add expense button, expense cards and a bottom-sheet form with the amount first.
 - **Gujarati and English**: toggle at the top right.

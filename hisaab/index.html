@@ -4,8 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#7A1420">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="description" content="Deep & Hinal wedding: groom side expense book in Gujarati and English, totals by category.">
+<meta name="description" content="Deep & Hinal wedding: groom side expense book in Gujarati and English, totals by category, with history of who added or deleted entries.">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}img{max-width:100%}</style>
 <title>Deep & Hinal · Lagna Hisaab</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -178,6 +177,7 @@ main{padding-bottom:110px}
   nav.tabs a{flex:1;text-align:center;padding:14px 6px 12px;border-bottom:0;border-top:3px solid transparent;font-size:13px}
   nav.tabs a[aria-current="page"]{border-top-color:var(--kumkum)}
   .fab{bottom:calc(env(safe-area-inset-bottom,0px) + 72px)}
+  .toast{bottom:calc(env(safe-area-inset-bottom,0px) + 140px)}
   main{padding-bottom:160px;padding-top:14px}
   header.band{padding-bottom:14px;padding-top:calc(env(safe-area-inset-top,0px) + 14px)}
   .tiles{grid-template-columns:1fr 1fr;gap:10px}
@@ -209,7 +209,8 @@ main{padding-bottom:110px}
   <div class="wrap">
     <a href="#overview">Overview</a>
     <a href="#expenses">Expenses</a>
-    <a href="#setup">Setup &amp; Export</a>
+    <a href="#history">History</a>
+    <a href="#setup">Setup</a>
   </div>
 </nav>
 <main class="wrap" id="main"></main>
@@ -232,8 +233,8 @@ const LANG_KEY = KEY + ".lang";
 let lang = "gu";
 try { lang = localStorage.getItem(LANG_KEY) || "gu"; } catch(e) {}
 const GU = {
-"Overview":"સારાંશ","Expenses":"ખર્ચ","Chandlo":"ચાંદલો","Setup & Export":"સેટઅપ અને ડાઉનલોડ",
-"Total budget":"કુલ બજેટ","Total expense":"કુલ ખર્ચ","of total":"કુલમાંથી","Nothing added yet":"હજુ કંઈ ઉમેર્યું નથી","tap a category to see its expenses":"પ્રકાર પર ટેપ કરી તેના ખર્ચ જુઓ","Entries":"નોંધ","Share":"હિસ્સો","No expenses yet.":"હજુ કોઈ ખર્ચ નથી.","Booked so far":"અત્યાર સુધી નક્કી","Paid":"ચૂકવેલ","Still to pay":"બાકી ચૂકવણી","Chandlo received":"મળેલ ચાંદલો",
+"Overview":"સારાંશ","Expenses":"ખર્ચ","Chandlo":"ચાંદલો","Setup & Export":"સેટઅપ અને ડાઉનલોડ","Setup":"સેટઅપ",
+"Total budget":"કુલ બજેટ","History":"ઇતિહાસ","Who is using this phone?":"આ ફોન કોણ વાપરે છે?","Your name is saved on this phone and shown next to every entry you add, change or delete.":"તમારું નામ આ ફોનમાં સેવ થશે અને તમે ઉમેરો, બદલો કે કાઢો તે દરેક નોંધ સાથે દેખાશે.","Your name":"તમારું નામ","Continue":"આગળ વધો","Enter your name.":"તમારું નામ લખો.","added":"ઉમેર્યું","edited":"બદલ્યું","deleted":"કાઢી નાખ્યું","marked paid":"ચૂકવેલ કર્યું","by":"દ્વારા","Everyone":"બધા","No history yet. Every add, change and delete will show here with the name of who did it.":"હજુ કોઈ ઇતિહાસ નથી. દરેક ઉમેરો, ફેરફાર અને કાઢવાનું અહીં કરનારના નામ સાથે દેખાશે.","You are":"તમે છો","Change name":"નામ બદલો","History (.csv)":"ઇતિહાસ (.csv)","Added by":"ઉમેરનાર","was":"પહેલાં","Total expense":"કુલ ખર્ચ","of total":"કુલમાંથી","Nothing added yet":"હજુ કંઈ ઉમેર્યું નથી","tap a category to see its expenses":"પ્રકાર પર ટેપ કરી તેના ખર્ચ જુઓ","Entries":"નોંધ","Share":"હિસ્સો","No expenses yet.":"હજુ કોઈ ખર્ચ નથી.","Booked so far":"અત્યાર સુધી નક્કી","Paid":"ચૂકવેલ","Still to pay":"બાકી ચૂકવણી","Chandlo received":"મળેલ ચાંદલો",
 "set per category below":"નીચે દરેક પ્રકાર મુજબ","Type budgets in the table below":"નીચેના કોઠામાં બજેટ લખો","left in budget":"બજેટમાં બાકી","over budget":"બજેટ કરતાં વધુ",
 "expenses":"ખર્ચ","of booked":"નક્કી કરેલમાંથી","Nothing booked yet":"હજુ કંઈ નક્કી નથી","overdue":"મુદત વીતી","see the list":"યાદી જુઓ",
 "By category":"પ્રકાર મુજબ","type a budget, it saves as you go":"બજેટ લખો, આપોઆપ સેવ થશે","Category":"પ્રકાર","Budget (₹)":"બજેટ (₹)","Booked":"નક્કી",
@@ -301,7 +302,7 @@ const DEFAULT_CATEGORIES = [
 
 function freshState(){
   return {version:2, sample:false, settings:{bride:"Hinal", groom:"Deep", date:"2027-01-28"},
-    categories: DEFAULT_CATEGORIES.map(([id,en]) => ({id,en,gu:GU_CATS[id]||"",budget:0})), expenses:[], vyavhar:[]};
+    categories: DEFAULT_CATEGORIES.map(([id,en]) => ({id,en,gu:GU_CATS[id]||"",budget:0})), expenses:[], vyavhar:[], history:[]};
 }
 function sampleState(){
   const s = freshState(); s.sample = true;
@@ -321,6 +322,9 @@ function sampleState(){
     E("2026-11-21","transport","Krishna Travels","Ghodi, dhol and 2 buses for the jaan",35000,0,"groom","Cash","2027-01-28"),
     E("2026-11-21","catering","Shree Annapurna Caterers","Reception dinner for 400 guests",520000,0,"groom","Bank transfer","2027-02-05")
   ];
+  s.expenses.forEach((x, i) => { x.by = i % 3 === 1 ? "Kiritbhai" : "Deep"; });
+  s.history = s.expenses.map((x, i) => ({id:uid(), at:x.date + "T1" + (i % 9) + ":15:00", who:x.by, action:"added", expenseId:x.id, vendor:x.vendor, category:x.category, amount:x.amount, extra:""}));
+  s.history.push({id:uid(), at:"2026-11-21T18:40:00", who:"Kiritbhai", action:"deleted", expenseId:"x", vendor:"Duplicate dhol booking (example)", category:"music", amount:15000, extra:""});
   return s;
 }
 
@@ -337,7 +341,8 @@ function normalize(p){
     settings:Object.assign(base.settings, p.settings||{}),
     categories: cats,
     expenses: (p.expenses||[]).map(x => Object.assign({id:uid(),notes:"",due:""}, x, {amount:+x.amount||0, paid:+x.paid||0})),
-    vyavhar: (p.vyavhar||[]).map(x => Object.assign({id:uid(),notes:"",item:""}, x, {amount:+x.amount||0}))
+    vyavhar: (p.vyavhar||[]).map(x => Object.assign({id:uid(),notes:"",item:""}, x, {amount:+x.amount||0})),
+    history: Array.isArray(p.history) ? p.history : []
   };
 }
 let saveWarned = false;
@@ -366,6 +371,28 @@ function toast(msg){
   document.body.appendChild(t); setTimeout(() => t.remove(), 2600);
 }
 
+const WHO_KEY = KEY + ".who";
+let who = ""; try { who = localStorage.getItem(WHO_KEY) || ""; } catch(e) {}
+function withName(fn){
+  if (who) { fn(); return; }
+  sheet(`<h2>${T("Who is using this phone?")}</h2><p class="muted" style="margin:0">${T("Your name is saved on this phone and shown next to every entry you add, change or delete.")}</p>
+    <div class="chips">${["Deep","Kiritbhai","Rekhaben","Pinkal"].map(n => `<button type="button" class="chip" data-who="${n}">${n}</button>`).join("")}</div>
+    <label>${T("Your name")}<input id="w_name" autocomplete="name"></label>
+    <p id="w_err" style="color:var(--kumkum);margin:0" hidden></p>
+    <div class="foot"><button type="button" class="btn" data-close>${T("Cancel")}</button><button class="btn primary" type="submit">${T("Continue")}</button></div>`,
+  (form, close) => {
+    form.querySelectorAll("[data-who]").forEach(b => b.onclick = () => { $("#w_name").value = b.dataset.who; });
+    form.addEventListener("submit", e => { e.preventDefault(); const v = $("#w_name").value.trim();
+      if (!v) { $("#w_err").textContent = T("Enter your name."); $("#w_err").hidden = false; return; }
+      who = v; try { localStorage.setItem(WHO_KEY, v); } catch(err) {} close(); fn(); });
+  });
+}
+function logH(action, x, extra){
+  state.history = state.history || [];
+  state.history.push({id:uid(), at:new Date().toISOString(), who, action, expenseId:x.id, vendor:x.vendor || x.desc || "", category:x.category, amount:+x.amount||0, extra:extra||""});
+}
+const fmtWhen = iso => { const d = new Date(iso); return d.toLocaleDateString(lang === "gu" ? "gu-IN" : "en-IN", {day:"numeric", month:"short"}) + ", " + d.toLocaleTimeString(lang === "gu" ? "gu-IN" : "en-IN", {hour:"numeric", minute:"2-digit"}); };
+
 function renderHeader(){
   const {bride, groom, date} = state.settings;
   $("#hdrTitle").innerHTML = `${esc(groom || "Groom")} &amp; ${esc(bride || "Bride")}` + (groom === "Deep" && bride === "Hinal" ? ` <span class="gu">દીપ &amp; હિનલ</span>` : "");
@@ -377,7 +404,7 @@ function renderHeader(){
   } else cd.innerHTML = "";
 }
 
-const VIEWS = {overview:renderOverview, expenses:renderExpenses, setup:renderSetup};
+const VIEWS = {overview:renderOverview, expenses:renderExpenses, history:renderHistory, setup:renderSetup};
 const ui = {q:"", fk:"", fs:"", fst:"", vq:"", vdir:""};
 try { Object.assign(ui, JSON.parse(sessionStorage.getItem(KEY + ".ui") || "{}")); } catch(e) {}
 const keepUi = () => { try { sessionStorage.setItem(KEY + ".ui", JSON.stringify(ui)); } catch(e) {} };
@@ -427,7 +454,7 @@ function renderOverview(sec){
     </div>`);
 }
 
-function addFab(sec){ sec.insertAdjacentHTML("beforeend", `<button class="fab" id="fab" type="button" aria-label="${T("Add expense")}"><span>+</span>${T("Add expense")}</button>`); $("#fab").onclick = () => expenseForm(); }
+function addFab(sec){ sec.insertAdjacentHTML("beforeend", `<button class="fab" id="fab" type="button" aria-label="${T("Add expense")}"><span>+</span>${T("Add expense")}</button>`); $("#fab").onclick = () => withName(() => expenseForm()); }
 
 function opts(list, sel, all){ return (all ? `<option value="">${T(all)}</option>` : "") + list.map(o => `<option value="${esc(o.id)}"${o.id === sel ? " selected" : ""}>${esc(o.budget !== undefined ? cname(o) : T(o.en))}</option>`).join(""); }
 
@@ -452,7 +479,7 @@ function renderExpenses(sec){
         <div class="top"><div class="who"><b>${esc(x.vendor || x.desc)}</b><span>${esc(cname(cat(x.category)))} · ${fmtDate(x.date)}</span></div>
           <div class="amt num"><b>${inr(x.amount)}</b>${bal ? `<span class="muted" style="font-size:14px">${T("Balance")} ${inr(bal)}</span>` : ""}</div></div>
         ${x.vendor && x.desc ? `<div class="desc">${esc(x.desc)}</div>` : ""}${x.notes ? `<div class="desc" style="font-size:14px">${esc(x.notes)}</div>` : ""}
-        <div class="meta"><span class="pill ${st.k}">${T(st.t)}</span>${x.paid ? `<span class="num">${T("Paid")} ${inr(x.paid)}</span>` : ""}${x.due && st.k !== "paid" ? `<span>${T("due")} ${fmtDate(x.due)}</span>` : ""}${x.mode ? `<span>${esc(T(x.mode))}</span>` : ""}</div>
+        <div class="meta"><span class="pill ${st.k}">${T(st.t)}</span>${x.paid ? `<span class="num">${T("Paid")} ${inr(x.paid)}</span>` : ""}${x.due && st.k !== "paid" ? `<span>${T("due")} ${fmtDate(x.due)}</span>` : ""}${x.mode ? `<span>${esc(T(x.mode))}</span>` : ""}${x.by ? `<span>· ${T("Added by")} ${esc(x.by)}</span>` : ""}</div>
         <div class="acts">${st.k !== "paid" ? `<button class="btn small" data-pay="${x.id}">${T("Mark paid")}</button>` : ""}<button class="btn small" data-edit="${x.id}">${T("Edit")}</button><button class="btn small danger" data-del="${x.id}">${T("Delete")}</button></div>
       </article>`; }).join("")}</div>` : `<div class="panel empty">${state.expenses.length ? T("No expenses match these filters.") : T("No expenses yet. Add the first booking, for example the caterer's advance.")}</div>`;
   };
@@ -461,9 +488,9 @@ function renderExpenses(sec){
   addFab(sec);
   $("#expTable").addEventListener("click", e => {
     const b = e.target.closest("button"); if (!b) return;
-    if (b.dataset.edit) expenseForm(state.expenses.find(x => x.id === b.dataset.edit));
-    if (b.dataset.pay) { const x = state.expenses.find(x => x.id === b.dataset.pay); x.paid = x.amount; save(); draw(); toast(T("Marked as paid") + ": " + (x.vendor || "")); }
-    if (b.dataset.del) armDelete(b, () => { state.expenses = state.expenses.filter(x => x.id !== b.dataset.del); save(); draw(); toast(T("Expense deleted")); });
+    if (b.dataset.edit) withName(() => expenseForm(state.expenses.find(x => x.id === b.dataset.edit)));
+    if (b.dataset.pay) withName(() => { const x = state.expenses.find(x => x.id === b.dataset.pay); const was = x.paid; x.paid = x.amount; logH("marked paid", x, inr(was) + " → " + inr(x.amount)); save(); draw(); toast(T("Marked as paid") + ": " + (x.vendor || "")); });
+    if (b.dataset.del) armDelete(b, () => withName(() => { const x = state.expenses.find(x => x.id === b.dataset.del); logH("deleted", x); state.expenses = state.expenses.filter(y => y.id !== x.id); save(); draw(); toast(T("Expense deleted")); }));
   });
 }
 
@@ -519,7 +546,8 @@ function expenseForm(x){
       if (!rec.amount) { err.textContent = T("Enter the total amount for this expense."); err.hidden = false; $("#f_amount").focus(); return; }
       if (!rec.vendor && !rec.desc) { err.textContent = T("Add a vendor name or what the expense is for, so you can find it later."); err.hidden = false; $("#f_vendor").focus(); return; }
       if (rec.paid > rec.amount) { err.textContent = T("Paid is more than the total. Check both amounts.") + ` (${inr(rec.paid)} > ${inr(rec.amount)})`; err.hidden = false; return; }
-      if (isNew) state.expenses.push(Object.assign({id:uid()}, rec)); else Object.assign(x, rec);
+      if (isNew) { const nx = Object.assign({id:uid(), by:who, at:new Date().toISOString()}, rec); state.expenses.push(nx); logH("added", nx); }
+      else { const ch = ["amount","paid","vendor","desc","category","due","mode","date","notes"].filter(k => String(x[k] ?? "") !== String(rec[k] ?? "")).map(k => k === "amount" || k === "paid" ? `${k}: ${inr(x[k])} → ${inr(rec[k])}` : k === "category" ? `${k}: ${cname(cat(x.category))} → ${cname(cat(rec.category))}` : `${k}: ${x[k] || "–"} → ${rec[k] || "–"}`).join("; "); Object.assign(x, rec); logH("edited", x, ch); }
       save(); close(); route(); toast(isNew ? T("Expense added") : T("Expense saved"));
     });
   });
@@ -548,6 +576,30 @@ function deliver(name, text, mime){
   () => { $("#copyExport").onclick = () => { const ta = $("#exportText"); try { navigator.clipboard.writeText(ta.value).then(() => toast(T("Copied")), () => { ta.select(); toast("Press Ctrl+C or ⌘C to copy"); }); } catch(e) { ta.select(); toast("Press Ctrl+C or ⌘C to copy"); } }; });
 }
 
+function renderHistory(sec){
+  const h = (state.history || []).slice().reverse();
+  const people = [...new Set(h.map(e => e.who).filter(Boolean))];
+  ui.hw = ui.hw || "";
+  sec.insertAdjacentHTML("beforeend", `<div class="sumbar"><span>${who ? `${T("You are")} <b>${esc(who)}</b>` : ""}</span>${who ? `<button class="btn small" id="chWho">${T("Change name")}</button>` : ""}</div>
+    ${people.length > 1 ? `<div class="chips">${["", ...people].map(p => `<button type="button" class="chip" data-hw="${esc(p)}" style="${ui.hw === p ? "background:var(--kumkum);color:var(--kumkum-ink);border-color:var(--kumkum)" : ""}">${p ? esc(p) : T("Everyone")}</button>`).join("")}</div>` : ""}
+    <div id="hList"></div>`);
+  const ICON = {added:"+", edited:"✎", deleted:"✕", "marked paid":"✓"};
+  const COL = {added:"var(--mehndi)", edited:"var(--haldi)", deleted:"var(--kumkum)", "marked paid":"var(--mehndi)"};
+  const list = h.filter(e => !ui.hw || e.who === ui.hw);
+  $("#hList").innerHTML = list.length ? `<div class="panel"><div class="catlist">${list.map(e => `<div class="catrow" style="grid-template-columns:28px minmax(0,1fr) auto">
+      <span style="color:${COL[e.action]};font-weight:700;font-size:18px">${ICON[e.action] || "•"}</span>
+      <span class="nm">${esc(e.vendor || "—")} <span class="muted" style="font-weight:500">· ${esc(cname(cat(e.category)))}</span></span>
+      <span class="tt num" style="${e.action === "deleted" ? "text-decoration:line-through;color:var(--muted)" : ""}">${inr(e.amount)}</span>
+      <span class="sm" style="grid-column:2/-1"><b style="color:var(--ink)">${esc(e.who || "?")}</b> ${T(e.action)} · ${fmtWhen(e.at)}${e.extra ? `<br>${esc(e.extra)}` : ""}</span></div>`).join("")}</div></div>`
+    : `<div class="panel empty">${T("No history yet. Every add, change and delete will show here with the name of who did it.")}</div>`;
+  sec.querySelectorAll("[data-hw]").forEach(b => b.onclick = () => { ui.hw = b.dataset.hw; keepUi(); route(); });
+  const cw = $("#chWho"); if (cw) cw.onclick = () => { who = ""; try { localStorage.removeItem(WHO_KEY); } catch(e) {} withName(() => route()); };
+}
+function historyCsv(){
+  return csv([["When","Who","Action","Vendor","Category","Amount (INR)","Details"],
+    ...(state.history || []).map(e => [e.at, e.who, e.action, e.vendor, cname(cat(e.category)), e.amount, e.extra])]);
+}
+
 function renderSetup(sec){
   const s = state.settings, stamp = today();
   sec.insertAdjacentHTML("beforeend", `
@@ -563,6 +615,7 @@ function renderSetup(sec){
       <div class="toolbar">
         <button class="btn" id="exExp">${T("Expenses (.csv)")}</button>
         <button class="btn" id="exCat">${T("Category summary (.csv)")}</button>
+        <button class="btn" id="exHist">${T("History (.csv)")}</button>
       </div>
       <h2 style="margin-top:18px">${T("Backup")} <small>${T("to move to another phone or laptop")}</small></h2>
       <div class="toolbar">
@@ -579,6 +632,7 @@ function renderSetup(sec){
   </div>`);
   ["bride","groom","date"].forEach(k => $("#s_" + k).addEventListener("change", e => { state.settings[k] = e.target.value.trim(); save(); renderHeader(); toast(T("Saved")); }));
   $("#exExp").onclick = () => deliver(`wedding-expenses-${stamp}.csv`, expensesCsv(), "text/csv");
+  $("#exHist").onclick = () => deliver(`history-${stamp}.csv`, historyCsv(), "text/csv");
   $("#exCat").onclick = () => deliver(`category-summary-${stamp}.csv`, categoryCsv(), "text/csv");
   $("#exJson").onclick = () => deliver(`lagna-hisaab-backup-${stamp}.json`, JSON.stringify(state, null, 1), "application/json");
   $("#imp").addEventListener("change", e => {
