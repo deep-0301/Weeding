@@ -7,6 +7,7 @@ A simple one-page expense book for the groom side (વરપક્ષ) of our Gu
 - **Totals by category** on the Overview: total, paid, still to pay and share of the whole.
 - **Payments**: total, advance paid, balance, due date, payment mode, status (Pending, Advance paid, Paid, Overdue).
 - **Export** to CSV (Excel / Google Sheets) and JSON backup / restore.
+- **Mobile first**: bottom tabs, a floating Add expense button, expense cards and a bottom-sheet form with the amount first.
 - **Gujarati and English**: toggle at the top right.
 
 Styled to match the invitation site (deep-0301.github.io/Weeding).
