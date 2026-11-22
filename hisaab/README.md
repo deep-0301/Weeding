@@ -7,7 +7,6 @@ A simple one-page expense book for our Gujarati wedding (28 Jan 2027), in Gujara
 - **Budget vs actual** per category, typed straight into the Overview table.
 - **Payments**: total, advance paid, balance, due date, payment mode, status (Pending, Advance paid, Paid, Overdue).
 - **Paid by**: Groom side (વરપક્ષ, Kiritbhai Patel family), Bride side (કન્યાપક્ષ, Arvindbhai Patel family) or Shared.
-
 - **Export** to CSV (Excel / Google Sheets) and JSON backup / restore.
 - **Gujarati and English**: toggle at the top right.
 
