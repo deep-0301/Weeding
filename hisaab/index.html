@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="gu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Deep & Hinal wedding expense book in Gujarati and English: budget vs actual by category, groom and bride side.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Deep & Hinal · Lagna Hisaab</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@500;600;700&family=Noto+Serif+Gujarati:wght@400;500;600&display=swap">
+<style>
+/* Layout: bandhani-dotted header band, tab bar, then one working view at a time (overview, expenses, budget, chandlo, setup). */
+:root{
+  --bg:#FBF3E4; --surface:#FFFAF1; --sunk:#F3E4C8; --ink:#33160F; --muted:#6A3C2A; --line:#E8D2AE;
+  --kumkum:#7A1420; --kumkum-ink:#FBF3E4; --haldi:#9C6B23; --mehndi:#3D6B2C; --warn:#B4441A;
+  --gold:#D9A84E; --gold-l:#F5D996;
+  --band:#3D0910; --band-2:#7A1420; --band-dot:rgba(245,217,150,.18);
+  --display:"Cinzel","Trajan Pro",Georgia,serif;
+  --body:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --guj:"Noto Serif Gujarati","Shruti",serif;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1A0A0C; --surface:#26100F; --sunk:#200C0D; --ink:#F5E6DC; --muted:#CDAE94; --line:#4A2422;
+  --kumkum:#E77A84; --kumkum-ink:#1A0A0C; --haldi:#D9A84E; --mehndi:#94C47E; --warn:#F09060;
+  --gold:#D9A84E; --gold-l:#F5D996;
+  --band:#2A0609; --band-2:#5A0F18; --band-dot:rgba(245,217,150,.14); color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#1A0A0C; --surface:#26100F; --sunk:#200C0D; --ink:#F5E6DC; --muted:#CDAE94; --line:#4A2422;
+  --kumkum:#E77A84; --kumkum-ink:#1A0A0C; --haldi:#D9A84E; --mehndi:#94C47E; --warn:#F09060;
+  --gold:#D9A84E; --gold-l:#F5D996;
+  --band:#2A0609; --band-2:#5A0F18; --band-dot:rgba(245,217,150,.14); color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;font-weight:500;line-height:1.45;margin:0;font-variant-numeric:lining-nums}
+.gu,[lang="gu"]{font-family:var(--guj)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:.02em;line-height:1.2;text-wrap:balance;margin:0}
+.num{font-variant-numeric:lining-nums tabular-nums}
+header.band{background-color:var(--band);background-image:radial-gradient(var(--band-dot) 1.4px,transparent 1.6px),linear-gradient(160deg,var(--band-2),var(--band));background-size:14px 14px,100% 100%;color:var(--gold-l);border-bottom:3px double var(--gold);
+  margin-top:calc(-1 * env(safe-area-inset-top,0px));padding-top:calc(env(safe-area-inset-top,0px) + 22px);padding-bottom:18px}
+.band .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between}
+.band h1{font-size:32px;font-weight:600;color:#FBF3E4}
+.band .invoc{font-family:var(--guj);font-size:13px;color:var(--gold);letter-spacing:.04em;margin-bottom:4px}
+.band .gu{font-family:var(--guj);font-weight:500;color:var(--gold-l);font-size:18px;margin-left:8px}
+.band p{margin:4px 0 0;color:var(--gold-l);font-size:17px}
+.countdown{font-family:var(--display);text-align:right;font-size:13px;color:var(--gold-l);letter-spacing:.06em}
+.hdr-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.langbtn{font-family:var(--guj),var(--body);font-size:15px;font-weight:600;color:var(--gold-l);background:transparent;border:1px solid var(--gold);border-radius:999px;padding:4px 14px;cursor:pointer}
+html[lang="gu"] .tile .lbl,html[lang="gu"] th,html[lang="gu"] nav.tabs a,html[lang="gu"] .countdown{font-family:var(--guj);font-size:13px;letter-spacing:.01em;text-transform:none}
+html[lang="gu"] .panel h2,html[lang="gu"] .sheet h2{font-family:var(--guj);font-weight:600}
+.langbtn:hover{background:rgba(217,168,78,.15)}
+.countdown b{font-size:30px;display:block;line-height:1;color:#FBF3E4}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.tabs a{flex:none;padding:12px 14px;color:var(--muted);text-decoration:none;font-family:var(--display);font-size:13px;letter-spacing:.05em;font-weight:600;border-bottom:3px solid transparent}
+nav.tabs a[aria-current="page"]{color:var(--kumkum);border-color:var(--kumkum)}
+nav.tabs a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--haldi);outline-offset:2px}
+main{padding-block:20px 60px}
+section.view{display:grid;gap:20px;grid-template-columns:minmax(0,1fr)}
+section.view>*{min-width:0}
+.notice{background:var(--sunk);border:1px dashed var(--haldi);border-radius:var(--r);padding:10px 14px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;border-top:2px solid var(--gold)}
+.tile .lbl{font-family:var(--display);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:600}
+.tile .val{font-family:var(--body);font-size:30px;font-weight:700;margin-top:2px;font-variant-numeric:lining-nums}
+.tile .sub{font-size:15px;color:var(--muted)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:20px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;min-width:0}
+.panel h2{font-size:18px;margin-bottom:12px;display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.panel h2 small{font-family:var(--body);font-size:15px;letter-spacing:0;color:var(--muted);font-weight:500}
+.bars{display:grid;gap:12px}
+.bar-row .top{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.bar-row .top span:first-child{font-weight:600;min-width:0;overflow-wrap:anywhere}
+.bar-row .top .gu{color:var(--muted);font-weight:400;margin-left:4px}
+.track{position:relative;height:10px;border-radius:5px;background:var(--sunk);margin-top:5px;overflow:hidden;border:1px solid var(--line)}
+.track i{position:absolute;inset:0 auto 0 0;background:var(--gold);border-radius:5px}
+.track i.paid{background:var(--mehndi)}
+.track i.over{background:var(--kumkum)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:10px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px;background:var(--c)}
+.split{display:flex;height:14px;border-radius:7px;overflow:hidden;background:var(--sunk);margin:6px 0 10px}
+.split i{display:block;height:100%}
+.sched{display:grid;gap:0}
+.sched .ev{display:grid;grid-template-columns:76px 1fr auto;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line);align-items:baseline}
+.sched .ev:last-child{border-bottom:0}
+.sched .d{font-family:var(--display);font-size:12px;color:var(--kumkum);letter-spacing:.05em;line-height:1.3}
+.sched .d b{display:block;font-size:20px}
+.sched .n b{display:block}
+.sched .n span{font-size:14px;color:var(--muted)}
+@media (max-width:480px){.sched .ev{grid-template-columns:60px 1fr}.sched .ev .num{grid-column:2}}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:16px}
+th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);background:var(--sunk);font-weight:600;white-space:nowrap}
+td.r,th.r{text-align:right}
+tfoot td{font-weight:700;background:var(--sunk);border-bottom:0}
+tbody tr:last-child td{border-bottom:0}
+td .muted,.muted{color:var(--muted)}
+td.desc{min-width:180px}
+.pill{display:inline-block;padding:1px 9px;border-radius:999px;font-size:13px;font-weight:600;white-space:nowrap;border:1px solid}
+.pill.paid{color:var(--mehndi);border-color:var(--mehndi)}
+.pill.partial{color:var(--haldi);border-color:var(--haldi)}
+.pill.pending{color:var(--kumkum);border-color:var(--kumkum)}
+.pill.overdue{background:var(--kumkum);color:var(--kumkum-ink);border-color:var(--kumkum)}
+.side{font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.toolbar .grow{flex:1 1 200px}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:70px}
+label{display:grid;gap:4px;font-size:13px;font-weight:600;color:var(--muted)}
+.btn{font:inherit;font-weight:700;border-radius:8px;padding:8px 14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--kumkum);border-color:var(--kumkum);color:var(--kumkum-ink)}
+.btn.small{padding:4px 9px;font-size:13px}
+.btn.danger{color:var(--kumkum)}
+.btn.danger.armed{background:var(--kumkum);color:var(--kumkum-ink);border-color:var(--kumkum)}
+.row-actions{display:flex;gap:6px;justify-content:flex-end}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px}
+.form .wide{grid-column:1/-1}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:inherit;font-size:13px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:var(--sunk);color:var(--ink);cursor:pointer}
+.overlay{position:fixed;inset:0;z-index:20;background:rgba(20,6,8,.5);display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;
+  padding:calc(env(safe-area-inset-top,0px) + 24px) max(12px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 24px) max(12px,env(safe-area-inset-left,0px))}
+.sheet{background:var(--surface);border-radius:14px;border:1px solid var(--line);width:100%;max-width:720px;padding:18px;display:grid;gap:14px}
+.sheet h2{font-size:22px}
+.sheet .foot{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.empty{text-align:center;color:var(--muted);padding:28px 10px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;z-index:30;font-weight:600;max-width:calc(100% - 32px)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:14px}
+.kv dt{color:var(--muted)} .kv dd{margin:0;text-align:right;font-weight:600}
+.ceremony-cell b{display:block}
+.ceremony-cell span{font-size:12px;color:var(--muted)}
+.tag{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--haldi)}
+@media (max-width:560px){.band h1{font-size:25px}.tile .val{font-size:22px}.countdown{text-align:left}.hdr-right{align-items:flex-start;flex-direction:row-reverse;justify-content:space-between;width:100%}}
+@media (prefers-reduced-motion:no-preference){.track i{transition:width .4s ease}}
+</style>
+</head>
+<body>
+
+<header class="band">
+  <div class="wrap">
+    <div>
+      <div class="invoc" lang="gu">|| શ્રી ગણેશાય નમઃ ||</div>
+      <h1 id="hdrTitle">Deep &amp; Hinal <span class="gu">દીપ &amp; હિનલ</span></h1>
+      <p id="hdrSub">Lagna Hisaab · લગ્ન હિસાબ</p>
+    </div>
+    <div class="hdr-right"><button class="langbtn" id="langBtn" type="button">English</button><div class="countdown" id="countdown"></div></div>
+  </div>
+</header>
+<nav class="tabs" aria-label="Sections">
+  <div class="wrap">
+    <a href="#overview">Overview</a>
+    <a href="#expenses">Expenses</a>
+    <a href="#setup">Setup &amp; Export</a>
+  </div>
+</nav>
+<main class="wrap" id="main"></main>
+<div id="layer"></div>
+
+<script>
+(function(){
+"use strict";
+const KEY = "lagnaHisaab.v1";
+const $ = (s, el=document) => el.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const uid = () => Math.random().toString(36).slice(2,8) + Date.now().toString(36).slice(-4);
+const inrFmt = new Intl.NumberFormat("en-IN", {style:"currency", currency:"INR", maximumFractionDigits:0});
+const inr = n => inrFmt.format(Math.round(+n || 0));
+const lakh = n => { n = +n||0; if (Math.abs(n) >= 1e7) return "₹" + (n/1e7).toFixed(2).replace(/\.?0+$/,"") + " Cr"; if (Math.abs(n) >= 1e5) return "₹" + (n/1e5).toFixed(2).replace(/\.?0+$/,"") + " L"; return inr(n); };
+const today = () => new Date().toISOString().slice(0,10);
+const fmtDate = d => d ? new Date(d + "T00:00:00").toLocaleDateString(lang === "gu" ? "gu-IN" : "en-IN", {day:"numeric", month:"short", year:"numeric"}) : "";
+
+const LANG_KEY = KEY + ".lang";
+let lang = "gu";
+try { lang = localStorage.getItem(LANG_KEY) || "gu"; } catch(e) {}
+const GU = {
+"Overview":"સારાંશ","Expenses":"ખર્ચ","Chandlo":"ચાંદલો","Setup & Export":"સેટઅપ અને ડાઉનલોડ",
+"Total budget":"કુલ બજેટ","Booked so far":"અત્યાર સુધી નક્કી","Paid":"ચૂકવેલ","Still to pay":"બાકી ચૂકવણી","Chandlo received":"મળેલ ચાંદલો",
+"set per category below":"નીચે દરેક પ્રકાર મુજબ","Type budgets in the table below":"નીચેના કોઠામાં બજેટ લખો","left in budget":"બજેટમાં બાકી","over budget":"બજેટ કરતાં વધુ",
+"expenses":"ખર્ચ","of booked":"નક્કી કરેલમાંથી","Nothing booked yet":"હજુ કંઈ નક્કી નથી","overdue":"મુદત વીતી","see the list":"યાદી જુઓ",
+"By category":"પ્રકાર મુજબ","type a budget, it saves as you go":"બજેટ લખો, આપોઆપ સેવ થશે","Category":"પ્રકાર","Budget (₹)":"બજેટ (₹)","Booked":"નક્કી",
+"To pay":"બાકી","Left / over":"બચત / વધારો","Used":"વપરાયેલ","no budget":"બજેટ નથી","Total":"કુલ","Who is paying":"કોણ ચૂકવે છે","by side":"પક્ષ મુજબ","due":"બાકી",
+"Next payments due":"આગામી ચૂકવણી","Nothing pending. Every booked expense is paid.":"કંઈ બાકી નથી. બધા ખર્ચ ચૂકવાઈ ગયા છે.",
+"Overdue":"મુદત વીતી","Advance paid":"એડવાન્સ આપેલ","Pending":"બાકી",
+"+ Add expense":"+ ખર્ચ ઉમેરો","Search vendor or details":"વેપારી કે વિગત શોધો","All categories":"બધા પ્રકાર","Both sides":"બધા પક્ષ","Any status":"કોઈપણ સ્થિતિ","Not fully paid":"પૂરું ચૂકવેલ નથી",
+"Date":"તારીખ","Vendor & details":"વેપારી અને વિગત","Paid by":"કોણે ચૂકવ્યું","Amount":"રકમ","Balance":"બાકી રકમ","Status":"સ્થિતિ",
+"Mark paid":"ચૂકવેલ કરો","Edit":"ફેરફાર","Delete":"કાઢો","Remove":"કાઢો","Confirm":"ખાતરી કરો",
+"No expenses match these filters.":"આ પસંદગીમાં કોઈ ખર્ચ નથી.","No expenses yet. Add the first booking, for example the caterer's advance.":"હજુ કોઈ ખર્ચ નથી. પહેલું બુકિંગ ઉમેરો, જેમ કે કેટરરનું એડવાન્સ.",
+"Add expense":"ખર્ચ ઉમેરો","Edit expense":"ખર્ચમાં ફેરફાર","Vendor / paid to":"વેપારી / કોને ચૂકવ્યા","What for":"શેના માટે","Total amount (₹)":"કુલ રકમ (₹)","Paid so far (₹)":"અત્યાર સુધી ચૂકવેલ (₹)",
+"Paid in full":"પૂરા ચૂકવ્યા","50% advance":"50% એડવાન્સ","Nothing paid yet":"હજુ કંઈ ચૂકવ્યું નથી","Payment mode":"ચૂકવણીની રીત","Balance due by":"બાકી રકમની છેલ્લી તારીખ","Notes":"નોંધ",
+"Cancel":"રદ કરો","Save changes":"સેવ કરો","Cash":"રોકડા","Bank transfer":"બેંક ટ્રાન્સફર","Cheque":"ચેક","Card":"કાર્ડ",
+"Enter the total amount for this expense.":"આ ખર્ચની કુલ રકમ લખો.","Add a vendor name or what the expense is for, so you can find it later.":"વેપારીનું નામ અથવા ખર્ચ શેના માટે છે તે લખો, જેથી પછી શોધી શકાય.",
+"Paid is more than the total. Check both amounts.":"ચૂકવેલ રકમ કુલ રકમ કરતાં વધુ છે. બંને રકમ તપાસો.",
+"Expense added":"ખર્ચ ઉમેરાયો","Expense saved":"ખર્ચ સેવ થયો","Expense deleted":"ખર્ચ કાઢી નાખ્યો","Marked as paid":"ચૂકવેલ તરીકે નોંધ્યું",
+"Given to others":"બીજાને આપેલ","vyavhar to return":"પાછો વાળવાનો વ્યવહાર","entries":"નોંધ","gifts":"ભેટ","received":"ને મળેલ",
+"+ Add chandlo / gift":"+ ચાંદલો / ભેટ ઉમેરો","Search name, relation or city":"નામ, સંબંધ કે ગામ શોધો","Received and given":"મળેલ અને આપેલ","Received":"મળેલ","Given":"આપેલ",
+"Name":"નામ","Relation / city":"સંબંધ / ગામ","Side":"પક્ષ","Amount / gift":"રકમ / ભેટ","Gift":"ભેટ","No entries match.":"કોઈ નોંધ મળી નથી.",
+"No chandlo recorded yet. Add entries as envelopes are opened after each function.":"હજુ કોઈ ચાંદલો નોંધાયો નથી. દરેક પ્રસંગ પછી કવર ખોલો ત્યારે નોંધ ઉમેરો.",
+"Add chandlo or gift":"ચાંદલો કે ભેટ ઉમેરો","Edit entry":"નોંધમાં ફેરફાર","Received or given":"મળેલ કે આપેલ","Cash or gift":"રોકડ કે ભેટ","Cash chandlo":"રોકડ ચાંદલો","Gift item":"ભેટ વસ્તુ",
+"Relation":"સંબંધ","City / village":"શહેર / ગામ","Amount (₹)":"રકમ (₹)","Add entry":"નોંધ ઉમેરો",
+"Enter the person or family name.":"વ્યક્તિ કે પરિવારનું નામ લખો.","Enter the chandlo amount, or switch to Gift item.":"ચાંદલાની રકમ લખો, અથવા ભેટ વસ્તુ પસંદ કરો.","Describe the gift item.":"ભેટ વસ્તુ લખો.",
+"Entry added":"નોંધ ઉમેરાઈ","Entry saved":"નોંધ સેવ થઈ","Entry deleted":"નોંધ કાઢી નાખી",
+"Wedding details":"લગ્નની વિગત","Groom's name":"વરનું નામ","Bride's name":"કન્યાનું નામ","Lagna date":"લગ્ન તારીખ","Export":"ડાઉનલોડ","opens in Excel or Google Sheets":"Excel કે Google Sheets માં ખુલશે",
+"Expenses (.csv)":"ખર્ચ (.csv)","Category summary (.csv)":"પ્રકાર સારાંશ (.csv)","Chandlo list (.csv)":"ચાંદલા યાદી (.csv)","Backup":"બેકઅપ","to move to another phone or laptop":"બીજા ફોન કે લેપટોપમાં લઈ જવા",
+"Save backup (.json)":"બેકઅપ સેવ કરો (.json)","Restore from backup":"બેકઅપમાંથી પાછું લાવો",
+"Entries are saved in this browser only. Save a backup every few days, and before clearing browser data.":"નોંધો ફક્ત આ બ્રાઉઝરમાં સેવ થાય છે. દર થોડા દિવસે, અને બ્રાઉઝર ડેટા સાફ કરતાં પહેલાં, બેકઅપ સેવ કરો.",
+"Categories":"પ્રકાર","in use":"વપરાશમાં","Add":"ઉમેરો","Add a category, e.g. Farsan & mithai boxes":"નવો પ્રકાર, જેમ કે ફરસાણ અને મીઠાઈ બોક્સ","Saved":"સેવ થયું","Renamed":"નામ બદલ્યું","Category added":"પ્રકાર ઉમેરાયો",
+"These are example entries":"આ ઉદાહરણ નોંધો છે","so you can see how the book works. Clear them when you are ready to add your own.":"જેથી તમે જોઈ શકો કે હિસાબ કેવી રીતે કામ કરે છે. તમારી પોતાની નોંધો ઉમેરવા તૈયાર હો ત્યારે તેને કાઢી નાખો.",
+"Clear examples and start":"ઉદાહરણ કાઢીને શરૂ કરો","Keep examples":"ઉદાહરણ રાખો","Examples cleared. Add your first expense.":"ઉદાહરણ કાઢી નાખ્યા. પહેલો ખર્ચ ઉમેરો.",
+"days to shubh lagna":"દિવસ શુભ લગ્નને","Today":"આજે","shubh lagna":"શુભ લગ્ન","days since lagna":"દિવસ લગ્નને થયા",
+"Downloads are blocked in this preview. Copy the text below and paste it into a file named":"આ પ્રિવ્યૂમાં ડાઉનલોડ બંધ છે. નીચેનું લખાણ કૉપિ કરીને આ નામની ફાઇલમાં મૂકો:",
+"or open the GitHub Pages version to download directly.":"અથવા GitHub Pages વાળું વર્ઝન ખોલીને સીધું ડાઉનલોડ કરો.","Close":"બંધ કરો","Copy":"કૉપિ","Copied":"કૉપિ થયું","Downloaded":"ડાઉનલોડ થયું",
+"Groom side":"વરપક્ષ","Bride side":"કન્યાપક્ષ","Shared":"સંયુક્ત","Kiritbhai Patel family":"કિરીટભાઈ પટેલ પરિવાર","Arvindbhai Patel family":"અરવિંદભાઈ પટેલ પરિવાર","Both families":"બંને પરિવાર",
+"Replace everything here with the backup?":"અહીંની બધી નોંધો બેકઅપથી બદલવી છે?","Replace":"બદલો","Backup restored":"બેકઅપ પાછું આવ્યું","That file is not a Lagna Hisaab backup.":"આ ફાઇલ લગ્ન હિસાબનું બેકઅપ નથી."
+};
+const T = s => (lang === "gu" && GU[s]) || s;
+const GU_CATS = {venue:"સ્થળ / ફાર્મ / પાર્ટી પ્લોટ",catering:"રસોઈ અને ગુજરાતી થાળી",decor:"મંડપ અને શણગાર",pandit:"ગોરજી / મહારાજ અને પૂજા સામગ્રી",music:"ઢોલ, બેન્ડ, DJ અને ગરબા ગાયક",photo:"ફોટોગ્રાફી અને વિડિયો",clothes:"કપડાં (પાનેતર, ઘરચોળું, શેરવાની)",jewellery:"દાગીના અને સોનું",beauty:"મેકઅપ, મહેંદી અને પીઠી",stationery:"કંકોત્રી અને છાપકામ",gifts:"ભેટ, મામેરું અને રિટર્ન ગિફ્ટ",transport:"વાહન (જાન બસ, ઘોડી, ગાડી)",stay:"મહેમાન રહેઠાણ અને સરભરા",other:"અન્ય"};
+const cname = c => (lang === "gu" && c.gu) ? c.gu : c.en;
+const inFrame = (() => { try { return window.self !== window.top; } catch(e) { return true; } })();
+
+const SIDES = [
+  {id:"groom", en:"Groom side", gu:"વરપક્ષ", fam:"Kiritbhai Patel family", c:"var(--kumkum)"},
+  {id:"bride", en:"Bride side", gu:"કન્યાપક્ષ", fam:"Arvindbhai Patel family", c:"var(--gold)"},
+  {id:"shared", en:"Shared", gu:"સંયુક્ત", fam:"Both families", c:"var(--mehndi)"}
+];
+const MODES = ["Cash","UPI","Bank transfer","Cheque","Card"];
+const DEFAULT_CATEGORIES = [
+  ["venue","Venue / Farm / Party plot"],
+  ["catering","Catering & Gujarati thali"],
+  ["decor","Mandap & decoration"],
+  ["pandit","Gorji / Maharaj & puja samagri"],
+  ["music","Dhol, band, DJ & garba singers"],
+  ["photo","Photography & video"],
+  ["clothes","Clothes (Panetar, Gharchola, Sherwani)"],
+  ["jewellery","Jewellery & gold"],
+  ["beauty","Makeup, mehndi & pithi"],
+  ["stationery","Kankotri & stationery"],
+  ["gifts","Gifts, Mameru & return gifts"],
+  ["transport","Transport (Jaan bus, ghodi, cars)"],
+  ["stay","Guest stay & hospitality"],
+  ["other","Other"]
+];
+
+function freshState(){
+  return {version:2, sample:false, settings:{bride:"Hinal", groom:"Deep", date:"2027-01-28"},
+    categories: DEFAULT_CATEGORIES.map(([id,en]) => ({id,en,gu:GU_CATS[id]||"",budget:0})), expenses:[], vyavhar:[]};
+}
+function sampleState(){
+  const s = freshState(); s.sample = true;
+  const budgets = {venue:400000,catering:800000,decor:250000,pandit:30000,music:150000,photo:200000,clothes:200000,jewellery:400000,beauty:40000,stationery:50000,gifts:150000,transport:100000,stay:80000,other:50000};
+  s.categories.forEach(c => c.budget = budgets[c.id] || 0);
+  const E = (date,category,vendor,desc,amount,paid,side,mode,due) => ({id:uid(),date,category,vendor,desc,amount,paid,side,mode,due:due||"",notes:""});
+  s.expenses = [
+    E("2026-10-04","catering","Shree Annapurna Caterers","Sagai: Gujarati thali for 150 guests",180000,180000,"bride","Bank transfer"),
+    E("2026-10-04","jewellery","Soni Jewellers","Engagement rings",95000,95000,"groom","Card"),
+    E("2026-11-02","stationery","Laxmi Card Press","500 kankotri with envelopes",42000,42000,"shared","UPI"),
+    E("2026-11-10","music","Rangtaali Orchestra","Garba singer + 6-piece orchestra, 4 hours",85000,25000,"bride","UPI","2027-01-20"),
+    E("2026-11-12","venue","Shubh Party Plot","Venue for pithi, garba and lagna days",350000,150000,"bride","Cheque","2027-01-15"),
+    E("2026-11-12","decor","Kesar Decorators","Mandap, stage and entrance flowers",220000,100000,"bride","Bank transfer","2027-01-22"),
+    E("2026-11-15","photo","Moments Studio","Candid photo + video, 3 days",175000,50000,"shared","UPI","2027-01-25"),
+    E("2026-11-18","clothes","Panetar House","Panetar and Gharchola",68000,68000,"bride","Card"),
+    E("2026-11-18","clothes","Royal Menswear","Sherwani and safo",45000,45000,"groom","Card"),
+    E("2026-11-20","beauty","Henna & makeup artist","Pithi and mehndi artists",18000,5000,"shared","UPI","2027-01-20"),
+    E("2026-11-20","pandit","Shastri Maharaj","Ganesh sthapana dakshina and puja samagri",11000,0,"bride","Cash","2027-01-26"),
+    E("2026-11-21","transport","Krishna Travels","Ghodi, dhol and 2 buses for the jaan",35000,0,"groom","Cash","2027-01-28"),
+    E("2026-11-21","catering","Shree Annapurna Caterers","Reception dinner for 400 guests",520000,0,"groom","Bank transfer","2027-02-05")
+  ];
+  return s;
+}
+
+let state;
+function load(){
+  try { const raw = localStorage.getItem(KEY); if (raw) { const p = JSON.parse(raw); if (p && Array.isArray(p.expenses)) { if (p.sample) return sampleState(); return normalize(p); } } } catch(e) {}
+  return sampleState();
+}
+function normalize(p){
+  const base = freshState();
+  let cats = Array.isArray(p.categories) && p.categories.length ? p.categories.map(c => Object.assign({budget:0, gu:GU_CATS[c.id]||""}, c)) : base.categories;
+  return {
+    version:2, sample:!!p.sample,
+    settings:Object.assign(base.settings, p.settings||{}),
+    categories: cats,
+    expenses: (p.expenses||[]).map(x => Object.assign({id:uid(),notes:"",due:""}, x, {amount:+x.amount||0, paid:+x.paid||0})),
+    vyavhar: (p.vyavhar||[]).map(x => Object.assign({id:uid(),notes:"",item:""}, x, {amount:+x.amount||0}))
+  };
+}
+let saveWarned = false;
+function save(){
+  try { localStorage.setItem(KEY, JSON.stringify(state)); }
+  catch(e) { if (!saveWarned) { saveWarned = true; toast("This browser is not saving data. Export a backup from Setup & Export."); } }
+}
+state = load();
+
+const cat = id => state.categories.find(c => c.id === id) || {id, en:"(removed category)", budget:0};
+const side = id => SIDES.find(s => s.id === id) || SIDES[2];
+function statusOf(x){
+  const amt = +x.amount||0, paid = +x.paid||0;
+  if (amt > 0 && paid >= amt) return {k:"paid", t:"Paid"};
+  if (x.due && x.due < today()) return {k:"overdue", t:"Overdue"};
+  if (paid > 0) return {k:"partial", t:"Advance paid"};
+  return {k:"pending", t:"Pending"};
+}
+const sum = (arr, f) => arr.reduce((a, x) => a + (+f(x)||0), 0);
+function totals(list = state.expenses){
+  const amount = sum(list, x => x.amount), paid = sum(list, x => Math.min(x.paid, x.amount || x.paid));
+  return {amount, paid, due: Math.max(0, amount - paid)};
+}
+function toast(msg){
+  const t = document.createElement("div"); t.className = "toast"; t.setAttribute("role","status"); t.textContent = msg;
+  document.body.appendChild(t); setTimeout(() => t.remove(), 2600);
+}
+
+function renderHeader(){
+  const {bride, groom, date} = state.settings;
+  $("#hdrTitle").innerHTML = `${esc(groom || "Groom")} &amp; ${esc(bride || "Bride")}` + (groom === "Deep" && bride === "Hinal" ? ` <span class="gu">દીપ &amp; હિનલ</span>` : "");
+  $("#hdrSub").textContent = "Lagna Hisaab · લગ્ન હિસાબ" + (date ? " · " + fmtDate(date) : "");
+  const cd = $("#countdown");
+  if (date) {
+    const days = Math.round((new Date(date + "T00:00:00") - new Date(today() + "T00:00:00")) / 864e5);
+    cd.innerHTML = days > 0 ? `<b class="num">${days}</b> ${T("days to shubh lagna")}` : days === 0 ? `<b>${T("Today")}</b> ${T("shubh lagna")}` : `<b class="num">${-days}</b> ${T("days since lagna")}`;
+  } else cd.innerHTML = "";
+}
+
+const VIEWS = {overview:renderOverview, expenses:renderExpenses, setup:renderSetup};
+const ui = {q:"", fk:"", fs:"", fst:"", vq:"", vdir:""};
+try { Object.assign(ui, JSON.parse(sessionStorage.getItem(KEY + ".ui") || "{}")); } catch(e) {}
+const keepUi = () => { try { sessionStorage.setItem(KEY + ".ui", JSON.stringify(ui)); } catch(e) {} };
+
+function route(){
+  let v = (location.hash || "").slice(1);
+  if (!VIEWS[v]) v = "overview";
+  document.documentElement.lang = lang;
+  document.querySelectorAll("nav.tabs a").forEach(a => { a.textContent = T(a.dataset.en || (a.dataset.en = a.textContent)); });
+  const lb = $("#langBtn"); if (lb) lb.textContent = lang === "gu" ? "English" : "ગુજરાતી";
+  document.querySelectorAll("nav.tabs a").forEach(a => { if (a.getAttribute("href") === "#" + v) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+  renderHeader();
+  $("#main").innerHTML = "";
+  const sec = document.createElement("section"); sec.className = "view"; $("#main").appendChild(sec);
+  if (state.sample) sec.insertAdjacentHTML("beforeend", `<div class="notice"><span><b>${T("These are example entries")}</b> ${T("so you can see how the book works. Clear them when you are ready to add your own.")}</span><span class="toolbar"><button class="btn small primary" id="clearSample">${T("Clear examples and start")}</button><button class="btn small" id="keepSample">${T("Keep examples")}</button></span></div>`);
+  VIEWS[v](sec);
+  const cs = $("#clearSample"); if (cs) cs.onclick = () => { const s = freshState(); s.settings = state.settings; state = s; save(); route(); toast(T("Examples cleared. Add your first expense.")); };
+  const ks = $("#keepSample"); if (ks) ks.onclick = () => { state.sample = false; save(); route(); };
+}
+window.addEventListener("hashchange", route);
+document.addEventListener("click", e => { if (e.target.id === "langBtn") { lang = lang === "gu" ? "en" : "gu"; try { localStorage.setItem(LANG_KEY, lang); } catch(err) {} route(); } });
+
+function renderOverview(sec){
+  const t = totals();
+  const budget = sum(state.categories, c => c.budget);
+  const left = budget - t.amount;
+  sec.insertAdjacentHTML("beforeend", `
+  <div class="tiles">
+    <div class="tile"><div class="lbl">${T("Total budget")}</div><div class="val num">${lakh(budget)}</div><div class="sub">${budget ? T("set per category below") : T("Type budgets in the table below")}</div></div>
+    <div class="tile"><div class="lbl">${T("Booked so far")}</div><div class="val num">${lakh(t.amount)}</div><div class="sub">${budget ? (left >= 0 ? lakh(left) + " " + T("left in budget") : lakh(-left) + " " + T("over budget")) : state.expenses.length + " " + T("expenses")}</div></div>
+    <div class="tile"><div class="lbl">${T("Paid")}</div><div class="val num" style="color:var(--mehndi)">${lakh(t.paid)}</div><div class="sub">${t.amount ? Math.round(t.paid / t.amount * 100) + "% " + T("of booked") : T("Nothing booked yet")}</div></div>
+    <div class="tile"><div class="lbl">${T("Still to pay")}</div><div class="val num" style="color:var(--kumkum)">${lakh(t.due)}</div><div class="sub">${state.expenses.filter(x => statusOf(x).k === "overdue").length} ${T("overdue")}</div></div>
+  </div>`);
+
+  const rows = state.categories.map(c => ({c, ...totals(state.expenses.filter(x => x.category === c.id))}));
+  sec.insertAdjacentHTML("beforeend", `<div class="panel"><h2>${T("By category")} <small>${T("type a budget, it saves as you go")}</small></h2>
+    <div class="tbl-wrap"><table>
+    <thead><tr><th>${T("Category")}</th><th class="r">${T("Budget (₹)")}</th><th class="r">${T("Booked")}</th><th class="r">${T("Paid")}</th><th class="r">${T("To pay")}</th><th class="r">${T("Left / over")}</th><th style="min-width:110px">${T("Used")}</th></tr></thead>
+    <tbody>${rows.map(r => { const lf = r.c.budget - r.amount; const pct = r.c.budget ? r.amount / r.c.budget * 100 : 0; return `<tr>
+      <td><a href="#expenses" data-cat="${esc(r.c.id)}" style="color:inherit;font-weight:600">${esc(cname(r.c))}</a></td>
+      <td class="r"><input type="number" min="0" step="1000" inputmode="numeric" id="b_${esc(r.c.id)}" data-bud="${esc(r.c.id)}" value="${r.c.budget || ""}" placeholder="0" style="width:120px;text-align:right" aria-label="Budget for ${esc(cname(r.c))}"></td>
+      <td class="r num">${inr(r.amount)}</td><td class="r num">${inr(r.paid)}</td><td class="r num">${inr(r.due)}</td>
+      <td class="r num" style="color:${lf < 0 ? "var(--kumkum)" : "inherit"}">${r.c.budget ? (lf < 0 ? "−" + inr(-lf) : inr(lf)) : '<span class="muted">' + T("no budget") + '</span>'}</td>
+      <td>${r.c.budget ? `<div class="track"><i class="${pct > 100 ? "over" : ""}" style="width:${Math.min(100,pct)}%"></i></div><div class="muted num" style="font-size:13px">${Math.round(pct)}%</div>` : ""}</td></tr>`; }).join("")}</tbody>
+    <tfoot><tr><td>${T("Total")}</td><td class="r num">${inr(budget)}</td><td class="r num">${inr(t.amount)}</td><td class="r num">${inr(t.paid)}</td><td class="r num">${inr(t.due)}</td><td class="r num" style="color:${left < 0 ? "var(--kumkum)" : "inherit"}">${left < 0 ? "−" + inr(-left) : inr(left)}</td><td></td></tr></tfoot>
+    </table></div></div>`);
+  sec.querySelectorAll("[data-bud]").forEach(inp => inp.addEventListener("change", () => { cat(inp.dataset.bud).budget = Math.max(0, +inp.value || 0); save(); const y = scrollY; route(); scrollTo(0, y); }));
+  sec.querySelectorAll("[data-cat]").forEach(a => a.addEventListener("click", () => { ui.fk = a.dataset.cat; keepUi(); }));
+
+  const grid = document.createElement("div"); grid.className = "grid2"; sec.appendChild(grid);
+  const bySide = SIDES.map(s => ({s, ...totals(state.expenses.filter(x => x.side === s.id))}));
+  const upcoming = state.expenses.filter(x => statusOf(x).k !== "paid").sort((a,b) => (a.due || "9999").localeCompare(b.due || "9999")).slice(0, 6);
+  grid.insertAdjacentHTML("beforeend", `<div class="panel"><h2>${T("Who is paying")} <small>${T("by side")}</small></h2>
+      <div class="split">${bySide.map(r => t.amount ? `<i style="width:${r.amount / t.amount * 100}%;background:${r.s.c}" title="${T(r.s.en)}"></i>` : "").join("")}</div>
+      <dl class="kv">${bySide.map(r => `<dt><span style="color:${r.s.c}">●</span> ${T(r.s.en)}${lang==="gu"?"":` <span class="muted gu">${r.s.gu}</span>`}<div class="muted" style="font-size:14px">${T(r.s.fam)}</div></dt><dd class="num">${inr(r.amount)} <span class="muted" style="font-weight:400">· ${inr(r.due)} ${T("due")}</span></dd>`).join("")}</dl></div>
+    <div class="panel"><h2>${T("Next payments due")}</h2>
+      ${upcoming.length ? `<div class="tbl-wrap"><table><tbody>${upcoming.map(x => { const st = statusOf(x); return `<tr><td><b>${esc(x.vendor || cname(cat(x.category)))}</b><div class="muted" style="font-size:14px">${esc(cname(cat(x.category)))}${x.due ? " · " + T("due") + " " + fmtDate(x.due) : ""}</div></td><td class="r num">${inr(x.amount - x.paid)}<div><span class="pill ${st.k}">${T(st.t)}</span></div></td></tr>`; }).join("")}</tbody></table></div>` : `<div class="empty">${T("Nothing pending. Every booked expense is paid.")}</div>`}
+    </div>`);
+}
+
+function opts(list, sel, all){ return (all ? `<option value="">${T(all)}</option>` : "") + list.map(o => `<option value="${esc(o.id)}"${o.id === sel ? " selected" : ""}>${esc(o.budget !== undefined ? cname(o) : T(o.en))}</option>`).join(""); }
+
+function renderExpenses(sec){
+  sec.insertAdjacentHTML("beforeend", `
+  <div class="toolbar">
+    <button class="btn primary" id="addExp">${T("+ Add expense")}</button>
+    <input class="grow" id="q" type="search" placeholder="${T("Search vendor or details")}" value="${esc(ui.q)}" aria-label="Search">
+    <select id="fk" aria-label="Category" style="width:auto;max-width:100%">${opts(state.categories, ui.fk, "All categories")}</select>
+    <select id="fs" aria-label="Side" style="width:auto">${opts(SIDES, ui.fs, "Both sides")}</select>
+    <select id="fst" aria-label="Status" style="width:auto">${opts([{id:"paid",en:"Paid"},{id:"unpaid",en:"Not fully paid"},{id:"overdue",en:"Overdue"}], ui.fst, "Any status")}</select>
+  </div>
+  <div id="expTable"></div>`);
+  const draw = () => {
+    const q = ui.q.toLowerCase();
+    const list = state.expenses.filter(x =>
+      (!ui.fk || x.category === ui.fk) && (!ui.fs || x.side === ui.fs) &&
+      (!ui.fst || (ui.fst === "paid" ? statusOf(x).k === "paid" : ui.fst === "overdue" ? statusOf(x).k === "overdue" : statusOf(x).k !== "paid")) &&
+      (!q || (x.vendor + " " + x.desc + " " + x.notes).toLowerCase().includes(q))
+    ).sort((a,b) => (b.date||"").localeCompare(a.date||""));
+    const t = totals(list);
+    $("#expTable").innerHTML = list.length ? `<div class="tbl-wrap"><table>
+      <thead><tr><th>${T("Date")}</th><th>${T("Category")}</th><th>${esc(T("Vendor & details"))}</th><th>${T("Paid by")}</th><th class="r">${T("Amount")}</th><th class="r">${T("Paid")}</th><th class="r">${T("Balance")}</th><th>${T("Status")}</th><th></th></tr></thead>
+      <tbody>${list.map(x => { const st = statusOf(x); return `<tr>
+        <td class="num" style="white-space:nowrap">${fmtDate(x.date)}</td>
+        <td>${esc(cname(cat(x.category)))}</td>
+        <td class="desc"><b>${esc(x.vendor)}</b>${x.desc ? `<div class="muted">${esc(x.desc)}</div>` : ""}${x.notes ? `<div class="muted" style="font-size:14px">${esc(x.notes)}</div>` : ""}</td>
+        <td><span class="side">${T(side(x.side).en)}</span></td>
+        <td class="r num">${inr(x.amount)}</td><td class="r num">${inr(x.paid)}</td><td class="r num">${inr(Math.max(0, x.amount - x.paid))}</td>
+        <td><span class="pill ${st.k}">${T(st.t)}</span>${x.due && st.k !== "paid" ? `<div class="muted" style="font-size:13px;white-space:nowrap">${T("due")} ${fmtDate(x.due)}</div>` : ""}<div class="muted" style="font-size:13px">${esc(T(x.mode||""))}</div></td>
+        <td><div class="row-actions">${st.k !== "paid" ? `<button class="btn small" data-pay="${x.id}">${T("Mark paid")}</button>` : ""}<button class="btn small" data-edit="${x.id}">${T("Edit")}</button><button class="btn small danger" data-del="${x.id}">${T("Delete")}</button></div></td></tr>`; }).join("")}</tbody>
+      <tfoot><tr><td colspan="4">${list.length} ${lang === "gu" ? T("expenses") : "expense" + (list.length === 1 ? "" : "s")}</td><td class="r num">${inr(t.amount)}</td><td class="r num">${inr(t.paid)}</td><td class="r num">${inr(t.due)}</td><td colspan="2"></td></tr></tfoot>
+    </table></div>` : `<div class="panel empty">${state.expenses.length ? T("No expenses match these filters.") : T("No expenses yet. Add the first booking, for example the caterer's advance.")}</div>`;
+  };
+  draw();
+  ["q","fk","fs","fst"].forEach(id => $("#" + id).addEventListener("input", e => { ui[id] = e.target.value; keepUi(); draw(); }));
+  $("#addExp").onclick = () => expenseForm();
+  $("#expTable").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    if (b.dataset.edit) expenseForm(state.expenses.find(x => x.id === b.dataset.edit));
+    if (b.dataset.pay) { const x = state.expenses.find(x => x.id === b.dataset.pay); x.paid = x.amount; save(); draw(); toast(T("Marked as paid") + ": " + (x.vendor || "")); }
+    if (b.dataset.del) armDelete(b, () => { state.expenses = state.expenses.filter(x => x.id !== b.dataset.del); save(); draw(); toast(T("Expense deleted")); });
+  });
+}
+
+function armDelete(btn, fn){
+  if (btn.classList.contains("armed")) { fn(); return; }
+  const orig = btn.textContent;
+  btn.classList.add("armed"); btn.textContent = T("Confirm") + "?";
+  setTimeout(() => { if (btn.isConnected) { btn.classList.remove("armed"); btn.textContent = orig; } }, 3500);
+}
+
+function sheet(html, onReady){
+  const layer = $("#layer");
+  layer.innerHTML = `<div class="overlay" id="ov"><form class="sheet" id="sheetForm" novalidate>${html}</form></div>`;
+  const close = () => { layer.innerHTML = ""; document.removeEventListener("keydown", onKey); };
+  const onKey = e => { if (e.key === "Escape") close(); };
+  document.addEventListener("keydown", onKey);
+  $("#ov").addEventListener("mousedown", e => { if (e.target.id === "ov") close(); });
+  layer.querySelectorAll("[data-close]").forEach(b => b.onclick = close);
+  onReady($("#sheetForm"), close);
+  const first = layer.querySelector("input,select"); if (first) first.focus();
+}
+
+function expenseForm(x){
+  const isNew = !x;
+  x = x || {date:today(), category: ui.fk || "catering", vendor:"", desc:"", amount:"", paid:"", side: ui.fs || "groom", mode:"UPI", due:"", notes:""};
+  sheet(`<h2>${isNew ? T("Add expense") : T("Edit expense")}</h2>
+    <div class="form">
+      <label>${T("Category")}<select id="f_category">${opts(state.categories, x.category)}</select></label>
+      <label>${T("Vendor / paid to")}<input id="f_vendor" value="${esc(x.vendor)}" placeholder="${lang === "gu" ? "જેમ કે શ્રી અન્નપૂર્ણા કેટરર્સ" : "e.g. Shree Annapurna Caterers"}"></label>
+      <label class="wide">${T("What for")}<input id="f_desc" value="${esc(x.desc)}" placeholder="${lang === "gu" ? "જેમ કે 300 મહેમાન માટે ગુજરાતી થાળી, લાઇવ ઢોકળા કાઉન્ટર" : "e.g. Gujarati thali for 300 guests, live dhokla counter"}"></label>
+      <label>${T("Total amount (₹)")}<input id="f_amount" type="number" inputmode="numeric" min="0" step="1" value="${esc(x.amount)}" required></label>
+      <label>${T("Paid so far (₹)")}<input id="f_paid" type="number" inputmode="numeric" min="0" step="1" value="${esc(x.paid)}" placeholder="0"></label>
+      <div class="wide chips"><button type="button" class="chip" id="payFull">${T("Paid in full")}</button><button type="button" class="chip" id="payHalf">${T("50% advance")}</button><button type="button" class="chip" id="payNone">${T("Nothing paid yet")}</button></div>
+      <label>${T("Paid by")}<select id="f_side">${SIDES.map(s => `<option value="${s.id}"${s.id === x.side ? " selected" : ""}>${T(s.en)} · ${T(s.fam)}</option>`).join("")}</select></label>
+      <label>${T("Payment mode")}<select id="f_mode">${MODES.map(m => `<option value="${m}"${m === x.mode ? " selected" : ""}>${T(m)}</option>`).join("")}</select></label>
+      <label>${T("Date")}<input id="f_date" type="date" value="${esc(x.date)}"></label>
+      <label>${T("Balance due by")}<input id="f_due" type="date" value="${esc(x.due)}"></label>
+      <label class="wide">${T("Notes")}<textarea id="f_notes" placeholder="${lang === "gu" ? "રસીદ નંબર, સંપર્ક વ્યક્તિ, શું શામેલ છે" : "Receipt number, contact person, what is included"}">${esc(x.notes)}</textarea></label>
+    </div>
+    <p id="f_err" style="color:var(--kumkum);margin:0" hidden></p>
+    <div class="foot"><button type="button" class="btn" data-close>${T("Cancel")}</button><button class="btn primary" type="submit">${isNew ? T("Add expense") : T("Save changes")}</button></div>`,
+  (form, close) => {
+    const amt = () => +$("#f_amount").value || 0;
+    $("#payFull").onclick = () => $("#f_paid").value = amt();
+    $("#payHalf").onclick = () => $("#f_paid").value = Math.round(amt() / 2);
+    $("#payNone").onclick = () => $("#f_paid").value = 0;
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const rec = {};
+      ["category","vendor","date","desc","amount","paid","due","side","mode","notes"].forEach(k => rec[k] = $("#f_" + k).value.trim());
+      rec.amount = +rec.amount || 0; rec.paid = +rec.paid || 0;
+      const err = $("#f_err");
+      if (!rec.amount) { err.textContent = T("Enter the total amount for this expense."); err.hidden = false; $("#f_amount").focus(); return; }
+      if (!rec.vendor && !rec.desc) { err.textContent = T("Add a vendor name or what the expense is for, so you can find it later."); err.hidden = false; $("#f_vendor").focus(); return; }
+      if (rec.paid > rec.amount) { err.textContent = T("Paid is more than the total. Check both amounts.") + ` (${inr(rec.paid)} > ${inr(rec.amount)})`; err.hidden = false; return; }
+      if (isNew) state.expenses.push(Object.assign({id:uid()}, rec)); else Object.assign(x, rec);
+      save(); close(); route(); toast(isNew ? T("Expense added") : T("Expense saved"));
+    });
+  });
+}
+
+function csv(rows){ return "﻿" + rows.map(r => r.map(v => { v = String(v ?? ""); return /[",\n]/.test(v) ? '"' + v.replace(/"/g,'""') + '"' : v; }).join(",")).join("\r\n"); }
+function expensesCsv(){
+  return csv([["Date","Category","Vendor","Details","Paid by","Amount (INR)","Paid (INR)","Balance (INR)","Status","Due date","Payment mode","Notes"],
+    ...state.expenses.slice().sort((a,b)=>(a.date||"").localeCompare(b.date||"")).map(x => [x.date, cname(cat(x.category)), x.vendor, x.desc, side(x.side).en, x.amount, x.paid, Math.max(0,x.amount-x.paid), statusOf(x).t, x.due, x.mode, x.notes])]);
+}
+function categoryCsv(){
+  return csv([["Category","Budget (INR)","Booked (INR)","Paid (INR)","To pay (INR)","Left in budget (INR)"],
+    ...state.categories.map(c => { const t = totals(state.expenses.filter(x => x.category === c.id)); return [c.en, c.budget, t.amount, t.paid, t.due, c.budget - t.amount]; })]);
+}
+function deliver(name, text, mime){
+  if (!inFrame) {
+    try {
+      const url = URL.createObjectURL(new Blob([text], {type:mime}));
+      const a = document.createElement("a"); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000); toast(T("Downloaded") + ": " + name); return;
+    } catch(e) {}
+  }
+  sheet(`<h2>${esc(name)}</h2><p class="muted" style="margin:0">${T("Downloads are blocked in this preview. Copy the text below and paste it into a file named")} <b>${esc(name)}</b>, ${T("or open the GitHub Pages version to download directly.")}</p>
+    <textarea id="exportText" readonly style="min-height:240px;font-family:ui-monospace,monospace;font-size:12px">${esc(text)}</textarea>
+    <div class="foot"><button type="button" class="btn" data-close>${T("Close")}</button><button type="button" class="btn primary" id="copyExport">${T("Copy")}</button></div>`,
+  () => { $("#copyExport").onclick = () => { const ta = $("#exportText"); try { navigator.clipboard.writeText(ta.value).then(() => toast(T("Copied")), () => { ta.select(); toast("Press Ctrl+C or ⌘C to copy"); }); } catch(e) { ta.select(); toast("Press Ctrl+C or ⌘C to copy"); } }; });
+}
+
+function renderSetup(sec){
+  const s = state.settings, stamp = today();
+  sec.insertAdjacentHTML("beforeend", `
+  <div class="grid2">
+    <div class="panel"><h2>${T("Wedding details")}</h2>
+      <div class="form">
+        <label>${T("Groom's name")}<input id="s_groom" value="${esc(s.groom)}"></label>
+        <label>${T("Bride's name")}<input id="s_bride" value="${esc(s.bride)}"></label>
+        <label>${T("Lagna date")}<input id="s_date" type="date" value="${esc(s.date)}"></label>
+      </div>
+    </div>
+    <div class="panel"><h2>${T("Export")} <small>${T("opens in Excel or Google Sheets")}</small></h2>
+      <div class="toolbar">
+        <button class="btn" id="exExp">${T("Expenses (.csv)")}</button>
+        <button class="btn" id="exCat">${T("Category summary (.csv)")}</button>
+      </div>
+      <h2 style="margin-top:18px">${T("Backup")} <small>${T("to move to another phone or laptop")}</small></h2>
+      <div class="toolbar">
+        <button class="btn primary" id="exJson">${T("Save backup (.json)")}</button>
+        <label class="btn" for="imp" style="display:inline-block;color:var(--ink);font-size:17px">${T("Restore from backup")}<input type="file" id="imp" accept=".json,application/json" hidden></label>
+      </div>
+      <div id="impConfirm"></div>
+      <p class="muted" style="font-size:15px;margin:10px 0 0">${T("Entries are saved in this browser only. Save a backup every few days, and before clearing browser data.")}</p>
+    </div>
+  </div>
+  <div class="panel"><h2>${T("Categories")} <small>${state.categories.length}</small></h2>
+    <div class="tbl-wrap"><table><tbody>${state.categories.map(c => { const used = state.expenses.some(x => x.category === c.id); return `<tr><td><input id="cn_${esc(c.id)}" data-cname="${esc(c.id)}" value="${esc(cname(c))}" aria-label="Category name"></td><td class="r" style="width:1%">${used ? '<span class="muted" style="font-size:13px;white-space:nowrap">' + T("in use") + '</span>' : `<button class="btn small danger" data-delk="${esc(c.id)}">${T("Remove")}</button>`}</td></tr>`; }).join("")}</tbody></table></div>
+    <div class="toolbar" style="margin-top:10px"><input class="grow" id="newK" placeholder="${T("Add a category, e.g. Farsan & mithai boxes")}"><button class="btn" id="addK">${T("Add")}</button></div>
+  </div>`);
+  ["bride","groom","date"].forEach(k => $("#s_" + k).addEventListener("change", e => { state.settings[k] = e.target.value.trim(); save(); renderHeader(); toast(T("Saved")); }));
+  $("#exExp").onclick = () => deliver(`wedding-expenses-${stamp}.csv`, expensesCsv(), "text/csv");
+  $("#exCat").onclick = () => deliver(`category-summary-${stamp}.csv`, categoryCsv(), "text/csv");
+  $("#exJson").onclick = () => deliver(`lagna-hisaab-backup-${stamp}.json`, JSON.stringify(state, null, 1), "application/json");
+  $("#imp").addEventListener("change", e => {
+    const f = e.target.files[0]; if (!f) return;
+    const r = new FileReader();
+    r.onload = () => {
+      let p; try { p = JSON.parse(r.result); } catch(err) { toast(T("That file is not a Lagna Hisaab backup.")); return; }
+      if (!p || !Array.isArray(p.expenses)) { toast(T("That file is not a Lagna Hisaab backup.")); return; }
+      $("#impConfirm").innerHTML = `<div class="notice" style="margin-top:10px"><span>${T("Replace everything here with the backup?")} (${p.expenses.length})</span><span class="toolbar"><button class="btn small primary" id="impYes">${T("Replace")}</button><button class="btn small" id="impNo">${T("Cancel")}</button></span></div>`;
+      $("#impYes").onclick = () => { p.sample = false; state = normalize(p); save(); route(); toast(T("Backup restored")); };
+      $("#impNo").onclick = () => { $("#impConfirm").innerHTML = ""; e.target.value = ""; };
+    };
+    r.readAsText(f);
+  });
+  const slug = t => t.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"") + "-" + uid().slice(0,3);
+  $("#addK").onclick = () => { const v = $("#newK").value.trim(); if (!v) return; state.categories.splice(state.categories.length - 1, 0, {id:slug(v), en:v, gu:v, budget:0}); save(); route(); toast(T("Category added")); };
+  sec.querySelectorAll("[data-cname]").forEach(inp => inp.addEventListener("change", () => { const v = inp.value.trim(); if (v) { cat(inp.dataset.cname)[lang === "gu" ? "gu" : "en"] = v; save(); toast(T("Renamed")); } }));
+  sec.querySelectorAll("[data-delk]").forEach(b => b.onclick = () => armDelete(b, () => { state.categories = state.categories.filter(c => c.id !== b.dataset.delk); save(); route(); }));
+}
+
+route();
+})();
+</script>
+</body>
+</html>
