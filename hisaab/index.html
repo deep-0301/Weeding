@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Deep & Hinal wedding expense book in Gujarati and English: budget vs actual by category, groom and bride side.">
+<meta name="description" content="Deep & Hinal wedding: groom side expense book in Gujarati and English, budget vs actual by category.">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}img{max-width:100%}</style>
 <title>Deep & Hinal · Lagna Hisaab</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -254,17 +254,17 @@ function sampleState(){
   s.categories.forEach(c => c.budget = budgets[c.id] || 0);
   const E = (date,category,vendor,desc,amount,paid,side,mode,due) => ({id:uid(),date,category,vendor,desc,amount,paid,side,mode,due:due||"",notes:""});
   s.expenses = [
-    E("2026-10-04","catering","Shree Annapurna Caterers","Sagai: Gujarati thali for 150 guests",180000,180000,"bride","Bank transfer"),
+    E("2026-10-04","catering","Shree Annapurna Caterers","Sagai lunch for groom's family, 150 guests",180000,180000,"groom","Bank transfer"),
     E("2026-10-04","jewellery","Soni Jewellers","Engagement rings",95000,95000,"groom","Card"),
-    E("2026-11-02","stationery","Laxmi Card Press","500 kankotri with envelopes",42000,42000,"shared","UPI"),
-    E("2026-11-10","music","Rangtaali Orchestra","Garba singer + 6-piece orchestra, 4 hours",85000,25000,"bride","UPI","2027-01-20"),
-    E("2026-11-12","venue","Shubh Party Plot","Venue for pithi, garba and lagna days",350000,150000,"bride","Cheque","2027-01-15"),
-    E("2026-11-12","decor","Kesar Decorators","Mandap, stage and entrance flowers",220000,100000,"bride","Bank transfer","2027-01-22"),
-    E("2026-11-15","photo","Moments Studio","Candid photo + video, 3 days",175000,50000,"shared","UPI","2027-01-25"),
-    E("2026-11-18","clothes","Panetar House","Panetar and Gharchola",68000,68000,"bride","Card"),
+    E("2026-11-02","stationery","Laxmi Card Press","500 kankotri with envelopes",42000,42000,"groom","UPI"),
+    E("2026-11-10","music","Rangtaali Orchestra","Garba singer + 6-piece orchestra, 4 hours",85000,25000,"groom","UPI","2027-01-20"),
+    E("2026-11-12","venue","Shubh Party Plot","Venue for pithi and garba at our side",350000,150000,"groom","Cheque","2027-01-15"),
+    E("2026-11-12","decor","Kesar Decorators","Mandap, stage and entrance flowers",220000,100000,"groom","Bank transfer","2027-01-22"),
+    E("2026-11-15","photo","Moments Studio","Candid photo + video, 3 days",175000,50000,"groom","UPI","2027-01-25"),
+    E("2026-11-18","clothes","Panetar House","Gharchola and saree set for the bride",68000,68000,"groom","Card"),
     E("2026-11-18","clothes","Royal Menswear","Sherwani and safo",45000,45000,"groom","Card"),
-    E("2026-11-20","beauty","Henna & makeup artist","Pithi and mehndi artists",18000,5000,"shared","UPI","2027-01-20"),
-    E("2026-11-20","pandit","Shastri Maharaj","Ganesh sthapana dakshina and puja samagri",11000,0,"bride","Cash","2027-01-26"),
+    E("2026-11-20","beauty","Henna & makeup artist","Pithi and mehndi artists",18000,5000,"groom","UPI","2027-01-20"),
+    E("2026-11-20","pandit","Shastri Maharaj","Ganesh sthapana dakshina and puja samagri",11000,0,"groom","Cash","2027-01-26"),
     E("2026-11-21","transport","Krishna Travels","Ghodi, dhol and 2 buses for the jaan",35000,0,"groom","Cash","2027-01-28"),
     E("2026-11-21","catering","Shree Annapurna Caterers","Reception dinner for 400 guests",520000,0,"groom","Bank transfer","2027-02-05")
   ];
@@ -316,7 +316,7 @@ function toast(msg){
 function renderHeader(){
   const {bride, groom, date} = state.settings;
   $("#hdrTitle").innerHTML = `${esc(groom || "Groom")} &amp; ${esc(bride || "Bride")}` + (groom === "Deep" && bride === "Hinal" ? ` <span class="gu">દીપ &amp; હિનલ</span>` : "");
-  $("#hdrSub").textContent = "Lagna Hisaab · લગ્ન હિસાબ" + (date ? " · " + fmtDate(date) : "");
+  $("#hdrSub").textContent = (lang === "gu" ? "વરપક્ષ ખર્ચ · લગ્ન હિસાબ" : "Groom side expenses · Lagna Hisaab") + (date ? " · " + fmtDate(date) : "");
   const cd = $("#countdown");
   if (date) {
     const days = Math.round((new Date(date + "T00:00:00") - new Date(today() + "T00:00:00")) / 864e5);
@@ -374,13 +374,9 @@ function renderOverview(sec){
   sec.querySelectorAll("[data-bud]").forEach(inp => inp.addEventListener("change", () => { cat(inp.dataset.bud).budget = Math.max(0, +inp.value || 0); save(); const y = scrollY; route(); scrollTo(0, y); }));
   sec.querySelectorAll("[data-cat]").forEach(a => a.addEventListener("click", () => { ui.fk = a.dataset.cat; keepUi(); }));
 
-  const grid = document.createElement("div"); grid.className = "grid2"; sec.appendChild(grid);
-  const bySide = SIDES.map(s => ({s, ...totals(state.expenses.filter(x => x.side === s.id))}));
+  const grid = document.createElement("div"); sec.appendChild(grid);
   const upcoming = state.expenses.filter(x => statusOf(x).k !== "paid").sort((a,b) => (a.due || "9999").localeCompare(b.due || "9999")).slice(0, 6);
-  grid.insertAdjacentHTML("beforeend", `<div class="panel"><h2>${T("Who is paying")} <small>${T("by side")}</small></h2>
-      <div class="split">${bySide.map(r => t.amount ? `<i style="width:${r.amount / t.amount * 100}%;background:${r.s.c}" title="${T(r.s.en)}"></i>` : "").join("")}</div>
-      <dl class="kv">${bySide.map(r => `<dt><span style="color:${r.s.c}">●</span> ${T(r.s.en)}${lang==="gu"?"":` <span class="muted gu">${r.s.gu}</span>`}<div class="muted" style="font-size:14px">${T(r.s.fam)}</div></dt><dd class="num">${inr(r.amount)} <span class="muted" style="font-weight:400">· ${inr(r.due)} ${T("due")}</span></dd>`).join("")}</dl></div>
-    <div class="panel"><h2>${T("Next payments due")}</h2>
+  grid.insertAdjacentHTML("beforeend", `<div class="panel"><h2>${T("Next payments due")}</h2>
       ${upcoming.length ? `<div class="tbl-wrap"><table><tbody>${upcoming.map(x => { const st = statusOf(x); return `<tr><td><b>${esc(x.vendor || cname(cat(x.category)))}</b><div class="muted" style="font-size:14px">${esc(cname(cat(x.category)))}${x.due ? " · " + T("due") + " " + fmtDate(x.due) : ""}</div></td><td class="r num">${inr(x.amount - x.paid)}<div><span class="pill ${st.k}">${T(st.t)}</span></div></td></tr>`; }).join("")}</tbody></table></div>` : `<div class="empty">${T("Nothing pending. Every booked expense is paid.")}</div>`}
     </div>`);
 }
@@ -393,33 +389,31 @@ function renderExpenses(sec){
     <button class="btn primary" id="addExp">${T("+ Add expense")}</button>
     <input class="grow" id="q" type="search" placeholder="${T("Search vendor or details")}" value="${esc(ui.q)}" aria-label="Search">
     <select id="fk" aria-label="Category" style="width:auto;max-width:100%">${opts(state.categories, ui.fk, "All categories")}</select>
-    <select id="fs" aria-label="Side" style="width:auto">${opts(SIDES, ui.fs, "Both sides")}</select>
     <select id="fst" aria-label="Status" style="width:auto">${opts([{id:"paid",en:"Paid"},{id:"unpaid",en:"Not fully paid"},{id:"overdue",en:"Overdue"}], ui.fst, "Any status")}</select>
   </div>
   <div id="expTable"></div>`);
   const draw = () => {
     const q = ui.q.toLowerCase();
     const list = state.expenses.filter(x =>
-      (!ui.fk || x.category === ui.fk) && (!ui.fs || x.side === ui.fs) &&
+      (!ui.fk || x.category === ui.fk) &&
       (!ui.fst || (ui.fst === "paid" ? statusOf(x).k === "paid" : ui.fst === "overdue" ? statusOf(x).k === "overdue" : statusOf(x).k !== "paid")) &&
       (!q || (x.vendor + " " + x.desc + " " + x.notes).toLowerCase().includes(q))
     ).sort((a,b) => (b.date||"").localeCompare(a.date||""));
     const t = totals(list);
     $("#expTable").innerHTML = list.length ? `<div class="tbl-wrap"><table>
-      <thead><tr><th>${T("Date")}</th><th>${T("Category")}</th><th>${esc(T("Vendor & details"))}</th><th>${T("Paid by")}</th><th class="r">${T("Amount")}</th><th class="r">${T("Paid")}</th><th class="r">${T("Balance")}</th><th>${T("Status")}</th><th></th></tr></thead>
+      <thead><tr><th>${T("Date")}</th><th>${T("Category")}</th><th>${esc(T("Vendor & details"))}</th><th class="r">${T("Amount")}</th><th class="r">${T("Paid")}</th><th class="r">${T("Balance")}</th><th>${T("Status")}</th><th></th></tr></thead>
       <tbody>${list.map(x => { const st = statusOf(x); return `<tr>
         <td class="num" style="white-space:nowrap">${fmtDate(x.date)}</td>
         <td>${esc(cname(cat(x.category)))}</td>
         <td class="desc"><b>${esc(x.vendor)}</b>${x.desc ? `<div class="muted">${esc(x.desc)}</div>` : ""}${x.notes ? `<div class="muted" style="font-size:14px">${esc(x.notes)}</div>` : ""}</td>
-        <td><span class="side">${T(side(x.side).en)}</span></td>
         <td class="r num">${inr(x.amount)}</td><td class="r num">${inr(x.paid)}</td><td class="r num">${inr(Math.max(0, x.amount - x.paid))}</td>
         <td><span class="pill ${st.k}">${T(st.t)}</span>${x.due && st.k !== "paid" ? `<div class="muted" style="font-size:13px;white-space:nowrap">${T("due")} ${fmtDate(x.due)}</div>` : ""}<div class="muted" style="font-size:13px">${esc(T(x.mode||""))}</div></td>
         <td><div class="row-actions">${st.k !== "paid" ? `<button class="btn small" data-pay="${x.id}">${T("Mark paid")}</button>` : ""}<button class="btn small" data-edit="${x.id}">${T("Edit")}</button><button class="btn small danger" data-del="${x.id}">${T("Delete")}</button></div></td></tr>`; }).join("")}</tbody>
-      <tfoot><tr><td colspan="4">${list.length} ${lang === "gu" ? T("expenses") : "expense" + (list.length === 1 ? "" : "s")}</td><td class="r num">${inr(t.amount)}</td><td class="r num">${inr(t.paid)}</td><td class="r num">${inr(t.due)}</td><td colspan="2"></td></tr></tfoot>
+      <tfoot><tr><td colspan="3">${list.length} ${lang === "gu" ? T("expenses") : "expense" + (list.length === 1 ? "" : "s")}</td><td class="r num">${inr(t.amount)}</td><td class="r num">${inr(t.paid)}</td><td class="r num">${inr(t.due)}</td><td colspan="2"></td></tr></tfoot>
     </table></div>` : `<div class="panel empty">${state.expenses.length ? T("No expenses match these filters.") : T("No expenses yet. Add the first booking, for example the caterer's advance.")}</div>`;
   };
   draw();
-  ["q","fk","fs","fst"].forEach(id => $("#" + id).addEventListener("input", e => { ui[id] = e.target.value; keepUi(); draw(); }));
+  ["q","fk","fst"].forEach(id => $("#" + id).addEventListener("input", e => { ui[id] = e.target.value; keepUi(); draw(); }));
   $("#addExp").onclick = () => expenseForm();
   $("#expTable").addEventListener("click", e => {
     const b = e.target.closest("button"); if (!b) return;
@@ -450,7 +444,7 @@ function sheet(html, onReady){
 
 function expenseForm(x){
   const isNew = !x;
-  x = x || {date:today(), category: ui.fk || "catering", vendor:"", desc:"", amount:"", paid:"", side: ui.fs || "groom", mode:"UPI", due:"", notes:""};
+  x = x || {date:today(), category: ui.fk || "catering", vendor:"", desc:"", amount:"", paid:"", side:"groom", mode:"UPI", due:"", notes:""};
   sheet(`<h2>${isNew ? T("Add expense") : T("Edit expense")}</h2>
     <div class="form">
       <label>${T("Category")}<select id="f_category">${opts(state.categories, x.category)}</select></label>
@@ -459,7 +453,6 @@ function expenseForm(x){
       <label>${T("Total amount (₹)")}<input id="f_amount" type="number" inputmode="numeric" min="0" step="1" value="${esc(x.amount)}" required></label>
       <label>${T("Paid so far (₹)")}<input id="f_paid" type="number" inputmode="numeric" min="0" step="1" value="${esc(x.paid)}" placeholder="0"></label>
       <div class="wide chips"><button type="button" class="chip" id="payFull">${T("Paid in full")}</button><button type="button" class="chip" id="payHalf">${T("50% advance")}</button><button type="button" class="chip" id="payNone">${T("Nothing paid yet")}</button></div>
-      <label>${T("Paid by")}<select id="f_side">${SIDES.map(s => `<option value="${s.id}"${s.id === x.side ? " selected" : ""}>${T(s.en)} · ${T(s.fam)}</option>`).join("")}</select></label>
       <label>${T("Payment mode")}<select id="f_mode">${MODES.map(m => `<option value="${m}"${m === x.mode ? " selected" : ""}>${T(m)}</option>`).join("")}</select></label>
       <label>${T("Date")}<input id="f_date" type="date" value="${esc(x.date)}"></label>
       <label>${T("Balance due by")}<input id="f_due" type="date" value="${esc(x.due)}"></label>
@@ -475,7 +468,8 @@ function expenseForm(x){
     form.addEventListener("submit", e => {
       e.preventDefault();
       const rec = {};
-      ["category","vendor","date","desc","amount","paid","due","side","mode","notes"].forEach(k => rec[k] = $("#f_" + k).value.trim());
+      ["category","vendor","date","desc","amount","paid","due","mode","notes"].forEach(k => rec[k] = $("#f_" + k).value.trim());
+      rec.side = "groom";
       rec.amount = +rec.amount || 0; rec.paid = +rec.paid || 0;
       const err = $("#f_err");
       if (!rec.amount) { err.textContent = T("Enter the total amount for this expense."); err.hidden = false; $("#f_amount").focus(); return; }
@@ -489,8 +483,8 @@ function expenseForm(x){
 
 function csv(rows){ return "﻿" + rows.map(r => r.map(v => { v = String(v ?? ""); return /[",\n]/.test(v) ? '"' + v.replace(/"/g,'""') + '"' : v; }).join(",")).join("\r\n"); }
 function expensesCsv(){
-  return csv([["Date","Category","Vendor","Details","Paid by","Amount (INR)","Paid (INR)","Balance (INR)","Status","Due date","Payment mode","Notes"],
-    ...state.expenses.slice().sort((a,b)=>(a.date||"").localeCompare(b.date||"")).map(x => [x.date, cname(cat(x.category)), x.vendor, x.desc, side(x.side).en, x.amount, x.paid, Math.max(0,x.amount-x.paid), statusOf(x).t, x.due, x.mode, x.notes])]);
+  return csv([["Date","Category","Vendor","Details","Amount (INR)","Paid (INR)","Balance (INR)","Status","Due date","Payment mode","Notes"],
+    ...state.expenses.slice().sort((a,b)=>(a.date||"").localeCompare(b.date||"")).map(x => [x.date, cname(cat(x.category)), x.vendor, x.desc, x.amount, x.paid, Math.max(0,x.amount-x.paid), statusOf(x).t, x.due, x.mode, x.notes])]);
 }
 function categoryCsv(){
   return csv([["Category","Budget (INR)","Booked (INR)","Paid (INR)","To pay (INR)","Left in budget (INR)"],
