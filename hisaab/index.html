@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Deep & Hinal wedding: groom side expense book in Gujarati and English, budget vs actual by category.">
+<meta name="theme-color" content="#7A1420">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="description" content="Deep & Hinal wedding: groom side expense book in Gujarati and English, totals by category.">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}img{max-width:100%}</style>
 <title>Deep & Hinal · Lagna Hisaab</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -135,6 +137,59 @@ label{display:grid;gap:4px;font-size:13px;font-weight:600;color:var(--muted)}
 .ceremony-cell span{font-size:12px;color:var(--muted)}
 .tag{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--haldi)}
 @media (max-width:560px){.band h1{font-size:25px}.tile .val{font-size:22px}.countdown{text-align:left}.hdr-right{align-items:flex-start;flex-direction:row-reverse;justify-content:space-between;width:100%}}
+
+/* mobile-first: cards, bottom nav, floating add button, bottom sheet */
+.sumbar{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:baseline;justify-content:space-between;font-size:15px;color:var(--muted)}
+.sumbar b{color:var(--ink)}
+.xlist{display:grid;gap:10px;grid-template-columns:minmax(0,1fr)}
+.xcard{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:6px}
+.xcard .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.xcard .who{min-width:0}
+.xcard .who b{display:block;font-size:18px;overflow-wrap:anywhere;line-height:1.25}
+.xcard .who span{font-size:14px;color:var(--muted)}
+.xcard .amt{text-align:right;flex:none}
+.xcard .amt b{font-size:21px;display:block;line-height:1.1}
+.xcard .desc{font-size:15px;color:var(--muted);overflow-wrap:anywhere}
+.xcard .meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-size:14px;color:var(--muted)}
+.xcard .acts{display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap;border-top:1px dashed var(--line);padding-top:8px}
+.xcard .acts .btn{padding:7px 12px}
+.catlist{display:grid;gap:0}
+.catrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:11px 2px;border-bottom:1px dashed var(--line);color:inherit;text-decoration:none}
+.catrow:last-child{border-bottom:0}
+.catrow .nm{font-weight:700;overflow-wrap:anywhere}
+.catrow .tt{font-weight:700;text-align:right}
+.catrow .track{grid-column:1/-1;margin-top:2px}
+.catrow .sm{grid-column:1/-1;font-size:14px;color:var(--muted)}
+.cattotal{display:flex;justify-content:space-between;font-weight:700;padding-top:10px;border-top:2px solid var(--line);margin-top:4px}
+.fab{position:fixed;right:max(16px,calc(env(safe-area-inset-right,0px) + 12px));bottom:calc(env(safe-area-inset-bottom,0px) + 20px);z-index:8;
+  min-height:56px;padding:0 22px;border-radius:999px;border:0;background:var(--kumkum);color:var(--kumkum-ink);font:inherit;font-weight:700;font-size:18px;
+  box-shadow:0 6px 18px rgba(61,9,16,.35);cursor:pointer;display:flex;align-items:center;gap:8px}
+.fab span{font-size:28px;line-height:1;margin-top:-3px}
+main{padding-bottom:110px}
+.filters{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.filters .q{grid-column:1/-1}
+@media (min-width:760px){
+  .xlist{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .filters{grid-template-columns:2fr 1fr 1fr}.filters .q{grid-column:auto}
+}
+@media (max-width:719px){
+  nav.tabs{position:fixed;top:auto;bottom:0;left:0;right:0;border-bottom:0;border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:0 -4px 14px rgba(61,9,16,.08)}
+  nav.tabs .wrap{justify-content:space-around;gap:0}
+  nav.tabs a{flex:1;text-align:center;padding:14px 6px 12px;border-bottom:0;border-top:3px solid transparent;font-size:13px}
+  nav.tabs a[aria-current="page"]{border-top-color:var(--kumkum)}
+  .fab{bottom:calc(env(safe-area-inset-bottom,0px) + 72px)}
+  main{padding-bottom:160px;padding-top:14px}
+  header.band{padding-bottom:14px;padding-top:calc(env(safe-area-inset-top,0px) + 14px)}
+  .tiles{grid-template-columns:1fr 1fr;gap:10px}
+  .tiles .tile:first-child{grid-column:1/-1}
+  .tile{padding:12px 14px}
+  .overlay{align-items:flex-end;padding:0}
+  .sheet{border-radius:18px 18px 0 0;max-width:none;padding:16px max(16px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 16px) max(16px,env(safe-area-inset-left,0px));max-height:92vh;overflow-y:auto}
+  .sheet .foot{position:sticky;bottom:calc(-1 * (env(safe-area-inset-bottom,0px) + 16px));background:var(--surface);padding-block:10px;margin-bottom:calc(-1 * (env(safe-area-inset-bottom,0px) + 16px))}
+  .sheet .foot .btn{flex:1;padding:12px}
+}
+.amtin{font-size:28px;font-weight:700;padding:10px 12px}
+.chip{padding:7px 12px}
 @media (prefers-reduced-motion:no-preference){.track i{transition:width .4s ease}}
 </style>
 </head>
@@ -178,7 +233,7 @@ let lang = "gu";
 try { lang = localStorage.getItem(LANG_KEY) || "gu"; } catch(e) {}
 const GU = {
 "Overview":"સારાંશ","Expenses":"ખર્ચ","Chandlo":"ચાંદલો","Setup & Export":"સેટઅપ અને ડાઉનલોડ",
-"Total budget":"કુલ બજેટ","Booked so far":"અત્યાર સુધી નક્કી","Paid":"ચૂકવેલ","Still to pay":"બાકી ચૂકવણી","Chandlo received":"મળેલ ચાંદલો",
+"Total budget":"કુલ બજેટ","Total expense":"કુલ ખર્ચ","of total":"કુલમાંથી","Nothing added yet":"હજુ કંઈ ઉમેર્યું નથી","tap a category to see its expenses":"પ્રકાર પર ટેપ કરી તેના ખર્ચ જુઓ","Entries":"નોંધ","Share":"હિસ્સો","No expenses yet.":"હજુ કોઈ ખર્ચ નથી.","Booked so far":"અત્યાર સુધી નક્કી","Paid":"ચૂકવેલ","Still to pay":"બાકી ચૂકવણી","Chandlo received":"મળેલ ચાંદલો",
 "set per category below":"નીચે દરેક પ્રકાર મુજબ","Type budgets in the table below":"નીચેના કોઠામાં બજેટ લખો","left in budget":"બજેટમાં બાકી","over budget":"બજેટ કરતાં વધુ",
 "expenses":"ખર્ચ","of booked":"નક્કી કરેલમાંથી","Nothing booked yet":"હજુ કંઈ નક્કી નથી","overdue":"મુદત વીતી","see the list":"યાદી જુઓ",
 "By category":"પ્રકાર મુજબ","type a budget, it saves as you go":"બજેટ લખો, આપોઆપ સેવ થશે","Category":"પ્રકાર","Budget (₹)":"બજેટ (₹)","Booked":"નક્કી",
@@ -250,8 +305,6 @@ function freshState(){
 }
 function sampleState(){
   const s = freshState(); s.sample = true;
-  const budgets = {venue:400000,catering:800000,decor:250000,pandit:30000,music:150000,photo:200000,clothes:200000,jewellery:400000,beauty:40000,stationery:50000,gifts:150000,transport:100000,stay:80000,other:50000};
-  s.categories.forEach(c => c.budget = budgets[c.id] || 0);
   const E = (date,category,vendor,desc,amount,paid,side,mode,due) => ({id:uid(),date,category,vendor,desc,amount,paid,side,mode,due:due||"",notes:""});
   s.expenses = [
     E("2026-10-04","catering","Shree Annapurna Caterers","Sagai lunch for groom's family, 150 guests",180000,180000,"groom","Bank transfer"),
@@ -349,31 +402,24 @@ document.addEventListener("click", e => { if (e.target.id === "langBtn") { lang 
 
 function renderOverview(sec){
   const t = totals();
-  const budget = sum(state.categories, c => c.budget);
-  const left = budget - t.amount;
   sec.insertAdjacentHTML("beforeend", `
   <div class="tiles">
-    <div class="tile"><div class="lbl">${T("Total budget")}</div><div class="val num">${lakh(budget)}</div><div class="sub">${budget ? T("set per category below") : T("Type budgets in the table below")}</div></div>
-    <div class="tile"><div class="lbl">${T("Booked so far")}</div><div class="val num">${lakh(t.amount)}</div><div class="sub">${budget ? (left >= 0 ? lakh(left) + " " + T("left in budget") : lakh(-left) + " " + T("over budget")) : state.expenses.length + " " + T("expenses")}</div></div>
-    <div class="tile"><div class="lbl">${T("Paid")}</div><div class="val num" style="color:var(--mehndi)">${lakh(t.paid)}</div><div class="sub">${t.amount ? Math.round(t.paid / t.amount * 100) + "% " + T("of booked") : T("Nothing booked yet")}</div></div>
+    <div class="tile"><div class="lbl">${T("Total expense")}</div><div class="val num">${lakh(t.amount)}</div><div class="sub">${state.expenses.length} ${T("expenses")}</div></div>
+    <div class="tile"><div class="lbl">${T("Paid")}</div><div class="val num" style="color:var(--mehndi)">${lakh(t.paid)}</div><div class="sub">${t.amount ? Math.round(t.paid / t.amount * 100) + "% " + T("of total") : T("Nothing added yet")}</div></div>
     <div class="tile"><div class="lbl">${T("Still to pay")}</div><div class="val num" style="color:var(--kumkum)">${lakh(t.due)}</div><div class="sub">${state.expenses.filter(x => statusOf(x).k === "overdue").length} ${T("overdue")}</div></div>
   </div>`);
 
-  const rows = state.categories.map(c => ({c, ...totals(state.expenses.filter(x => x.category === c.id))}));
-  sec.insertAdjacentHTML("beforeend", `<div class="panel"><h2>${T("By category")} <small>${T("type a budget, it saves as you go")}</small></h2>
-    <div class="tbl-wrap"><table>
-    <thead><tr><th>${T("Category")}</th><th class="r">${T("Budget (₹)")}</th><th class="r">${T("Booked")}</th><th class="r">${T("Paid")}</th><th class="r">${T("To pay")}</th><th class="r">${T("Left / over")}</th><th style="min-width:110px">${T("Used")}</th></tr></thead>
-    <tbody>${rows.map(r => { const lf = r.c.budget - r.amount; const pct = r.c.budget ? r.amount / r.c.budget * 100 : 0; return `<tr>
-      <td><a href="#expenses" data-cat="${esc(r.c.id)}" style="color:inherit;font-weight:600">${esc(cname(r.c))}</a></td>
-      <td class="r"><input type="number" min="0" step="1000" inputmode="numeric" id="b_${esc(r.c.id)}" data-bud="${esc(r.c.id)}" value="${r.c.budget || ""}" placeholder="0" style="width:120px;text-align:right" aria-label="Budget for ${esc(cname(r.c))}"></td>
-      <td class="r num">${inr(r.amount)}</td><td class="r num">${inr(r.paid)}</td><td class="r num">${inr(r.due)}</td>
-      <td class="r num" style="color:${lf < 0 ? "var(--kumkum)" : "inherit"}">${r.c.budget ? (lf < 0 ? "−" + inr(-lf) : inr(lf)) : '<span class="muted">' + T("no budget") + '</span>'}</td>
-      <td>${r.c.budget ? `<div class="track"><i class="${pct > 100 ? "over" : ""}" style="width:${Math.min(100,pct)}%"></i></div><div class="muted num" style="font-size:13px">${Math.round(pct)}%</div>` : ""}</td></tr>`; }).join("")}</tbody>
-    <tfoot><tr><td>${T("Total")}</td><td class="r num">${inr(budget)}</td><td class="r num">${inr(t.amount)}</td><td class="r num">${inr(t.paid)}</td><td class="r num">${inr(t.due)}</td><td class="r num" style="color:${left < 0 ? "var(--kumkum)" : "inherit"}">${left < 0 ? "−" + inr(-left) : inr(left)}</td><td></td></tr></tfoot>
-    </table></div></div>`);
-  sec.querySelectorAll("[data-bud]").forEach(inp => inp.addEventListener("change", () => { cat(inp.dataset.bud).budget = Math.max(0, +inp.value || 0); save(); const y = scrollY; route(); scrollTo(0, y); }));
+  const rows = state.categories.map(c => { const l = state.expenses.filter(x => x.category === c.id); return {c, n:l.length, ...totals(l)}; }).filter(r => r.n).sort((a,b) => b.amount - a.amount);
+  sec.insertAdjacentHTML("beforeend", `<div class="panel"><h2>${T("By category")} <small>${T("tap a category to see its expenses")}</small></h2>
+    ${rows.length ? `<div class="catlist">${rows.map(r => { const pct = t.amount ? r.amount / t.amount * 100 : 0; return `<a class="catrow" href="#expenses" data-cat="${esc(r.c.id)}">
+      <span class="nm">${esc(cname(r.c))}</span><span class="tt num">${inr(r.amount)}</span>
+      <div class="track"><i style="width:${pct}%"></i></div>
+      <span class="sm num">${r.n} ${T("entries")} · ${T("Paid")} ${inr(r.paid)}${r.due ? ` · <span style="color:var(--kumkum)">${T("To pay")} ${inr(r.due)}</span>` : ""} · ${Math.round(pct)}%</span></a>`; }).join("")}</div>
+      <div class="cattotal num"><span>${T("Total")}</span><span>${inr(t.amount)}</span></div>`
+    : `<div class="empty">${T("No expenses yet.")}</div>`}</div>`);
   sec.querySelectorAll("[data-cat]").forEach(a => a.addEventListener("click", () => { ui.fk = a.dataset.cat; keepUi(); }));
 
+  addFab(sec);
   const grid = document.createElement("div"); sec.appendChild(grid);
   const upcoming = state.expenses.filter(x => statusOf(x).k !== "paid").sort((a,b) => (a.due || "9999").localeCompare(b.due || "9999")).slice(0, 6);
   grid.insertAdjacentHTML("beforeend", `<div class="panel"><h2>${T("Next payments due")}</h2>
@@ -381,15 +427,16 @@ function renderOverview(sec){
     </div>`);
 }
 
+function addFab(sec){ sec.insertAdjacentHTML("beforeend", `<button class="fab" id="fab" type="button" aria-label="${T("Add expense")}"><span>+</span>${T("Add expense")}</button>`); $("#fab").onclick = () => expenseForm(); }
+
 function opts(list, sel, all){ return (all ? `<option value="">${T(all)}</option>` : "") + list.map(o => `<option value="${esc(o.id)}"${o.id === sel ? " selected" : ""}>${esc(o.budget !== undefined ? cname(o) : T(o.en))}</option>`).join(""); }
 
 function renderExpenses(sec){
   sec.insertAdjacentHTML("beforeend", `
-  <div class="toolbar">
-    <button class="btn primary" id="addExp">${T("+ Add expense")}</button>
-    <input class="grow" id="q" type="search" placeholder="${T("Search vendor or details")}" value="${esc(ui.q)}" aria-label="Search">
-    <select id="fk" aria-label="Category" style="width:auto;max-width:100%">${opts(state.categories, ui.fk, "All categories")}</select>
-    <select id="fst" aria-label="Status" style="width:auto">${opts([{id:"paid",en:"Paid"},{id:"unpaid",en:"Not fully paid"},{id:"overdue",en:"Overdue"}], ui.fst, "Any status")}</select>
+  <div class="filters">
+    <input class="q" id="q" type="search" placeholder="${T("Search vendor or details")}" value="${esc(ui.q)}" aria-label="Search">
+    <select id="fk" aria-label="Category">${opts(state.categories, ui.fk, "All categories")}</select>
+    <select id="fst" aria-label="Status">${opts([{id:"paid",en:"Paid"},{id:"unpaid",en:"Not fully paid"},{id:"overdue",en:"Overdue"}], ui.fst, "Any status")}</select>
   </div>
   <div id="expTable"></div>`);
   const draw = () => {
@@ -400,21 +447,18 @@ function renderExpenses(sec){
       (!q || (x.vendor + " " + x.desc + " " + x.notes).toLowerCase().includes(q))
     ).sort((a,b) => (b.date||"").localeCompare(a.date||""));
     const t = totals(list);
-    $("#expTable").innerHTML = list.length ? `<div class="tbl-wrap"><table>
-      <thead><tr><th>${T("Date")}</th><th>${T("Category")}</th><th>${esc(T("Vendor & details"))}</th><th class="r">${T("Amount")}</th><th class="r">${T("Paid")}</th><th class="r">${T("Balance")}</th><th>${T("Status")}</th><th></th></tr></thead>
-      <tbody>${list.map(x => { const st = statusOf(x); return `<tr>
-        <td class="num" style="white-space:nowrap">${fmtDate(x.date)}</td>
-        <td>${esc(cname(cat(x.category)))}</td>
-        <td class="desc"><b>${esc(x.vendor)}</b>${x.desc ? `<div class="muted">${esc(x.desc)}</div>` : ""}${x.notes ? `<div class="muted" style="font-size:14px">${esc(x.notes)}</div>` : ""}</td>
-        <td class="r num">${inr(x.amount)}</td><td class="r num">${inr(x.paid)}</td><td class="r num">${inr(Math.max(0, x.amount - x.paid))}</td>
-        <td><span class="pill ${st.k}">${T(st.t)}</span>${x.due && st.k !== "paid" ? `<div class="muted" style="font-size:13px;white-space:nowrap">${T("due")} ${fmtDate(x.due)}</div>` : ""}<div class="muted" style="font-size:13px">${esc(T(x.mode||""))}</div></td>
-        <td><div class="row-actions">${st.k !== "paid" ? `<button class="btn small" data-pay="${x.id}">${T("Mark paid")}</button>` : ""}<button class="btn small" data-edit="${x.id}">${T("Edit")}</button><button class="btn small danger" data-del="${x.id}">${T("Delete")}</button></div></td></tr>`; }).join("")}</tbody>
-      <tfoot><tr><td colspan="3">${list.length} ${lang === "gu" ? T("expenses") : "expense" + (list.length === 1 ? "" : "s")}</td><td class="r num">${inr(t.amount)}</td><td class="r num">${inr(t.paid)}</td><td class="r num">${inr(t.due)}</td><td colspan="2"></td></tr></tfoot>
-    </table></div>` : `<div class="panel empty">${state.expenses.length ? T("No expenses match these filters.") : T("No expenses yet. Add the first booking, for example the caterer's advance.")}</div>`;
+    $("#expTable").innerHTML = list.length ? `<div class="sumbar num" style="margin-bottom:10px"><span>${list.length} ${lang === "gu" ? T("expenses") : "expense" + (list.length === 1 ? "" : "s")}</span><span>${T("Total")} <b>${inr(t.amount)}</b> · ${T("To pay")} <b style="color:var(--kumkum)">${inr(t.due)}</b></span></div>
+      <div class="xlist">${list.map(x => { const st = statusOf(x); const bal = Math.max(0, x.amount - x.paid); return `<article class="xcard">
+        <div class="top"><div class="who"><b>${esc(x.vendor || x.desc)}</b><span>${esc(cname(cat(x.category)))} · ${fmtDate(x.date)}</span></div>
+          <div class="amt num"><b>${inr(x.amount)}</b>${bal ? `<span class="muted" style="font-size:14px">${T("Balance")} ${inr(bal)}</span>` : ""}</div></div>
+        ${x.vendor && x.desc ? `<div class="desc">${esc(x.desc)}</div>` : ""}${x.notes ? `<div class="desc" style="font-size:14px">${esc(x.notes)}</div>` : ""}
+        <div class="meta"><span class="pill ${st.k}">${T(st.t)}</span>${x.paid ? `<span class="num">${T("Paid")} ${inr(x.paid)}</span>` : ""}${x.due && st.k !== "paid" ? `<span>${T("due")} ${fmtDate(x.due)}</span>` : ""}${x.mode ? `<span>${esc(T(x.mode))}</span>` : ""}</div>
+        <div class="acts">${st.k !== "paid" ? `<button class="btn small" data-pay="${x.id}">${T("Mark paid")}</button>` : ""}<button class="btn small" data-edit="${x.id}">${T("Edit")}</button><button class="btn small danger" data-del="${x.id}">${T("Delete")}</button></div>
+      </article>`; }).join("")}</div>` : `<div class="panel empty">${state.expenses.length ? T("No expenses match these filters.") : T("No expenses yet. Add the first booking, for example the caterer's advance.")}</div>`;
   };
   draw();
   ["q","fk","fst"].forEach(id => $("#" + id).addEventListener("input", e => { ui[id] = e.target.value; keepUi(); draw(); }));
-  $("#addExp").onclick = () => expenseForm();
+  addFab(sec);
   $("#expTable").addEventListener("click", e => {
     const b = e.target.closest("button"); if (!b) return;
     if (b.dataset.edit) expenseForm(state.expenses.find(x => x.id === b.dataset.edit));
@@ -447,10 +491,10 @@ function expenseForm(x){
   x = x || {date:today(), category: ui.fk || "catering", vendor:"", desc:"", amount:"", paid:"", side:"groom", mode:"UPI", due:"", notes:""};
   sheet(`<h2>${isNew ? T("Add expense") : T("Edit expense")}</h2>
     <div class="form">
+      <label class="wide">${T("Total amount (₹)")}<input id="f_amount" class="amtin num" type="number" inputmode="numeric" min="0" step="1" value="${esc(x.amount)}" placeholder="0" required></label>
       <label>${T("Category")}<select id="f_category">${opts(state.categories, x.category)}</select></label>
       <label>${T("Vendor / paid to")}<input id="f_vendor" value="${esc(x.vendor)}" placeholder="${lang === "gu" ? "જેમ કે શ્રી અન્નપૂર્ણા કેટરર્સ" : "e.g. Shree Annapurna Caterers"}"></label>
       <label class="wide">${T("What for")}<input id="f_desc" value="${esc(x.desc)}" placeholder="${lang === "gu" ? "જેમ કે 300 મહેમાન માટે ગુજરાતી થાળી, લાઇવ ઢોકળા કાઉન્ટર" : "e.g. Gujarati thali for 300 guests, live dhokla counter"}"></label>
-      <label>${T("Total amount (₹)")}<input id="f_amount" type="number" inputmode="numeric" min="0" step="1" value="${esc(x.amount)}" required></label>
       <label>${T("Paid so far (₹)")}<input id="f_paid" type="number" inputmode="numeric" min="0" step="1" value="${esc(x.paid)}" placeholder="0"></label>
       <div class="wide chips"><button type="button" class="chip" id="payFull">${T("Paid in full")}</button><button type="button" class="chip" id="payHalf">${T("50% advance")}</button><button type="button" class="chip" id="payNone">${T("Nothing paid yet")}</button></div>
       <label>${T("Payment mode")}<select id="f_mode">${MODES.map(m => `<option value="${m}"${m === x.mode ? " selected" : ""}>${T(m)}</option>`).join("")}</select></label>
@@ -487,8 +531,8 @@ function expensesCsv(){
     ...state.expenses.slice().sort((a,b)=>(a.date||"").localeCompare(b.date||"")).map(x => [x.date, cname(cat(x.category)), x.vendor, x.desc, x.amount, x.paid, Math.max(0,x.amount-x.paid), statusOf(x).t, x.due, x.mode, x.notes])]);
 }
 function categoryCsv(){
-  return csv([["Category","Budget (INR)","Booked (INR)","Paid (INR)","To pay (INR)","Left in budget (INR)"],
-    ...state.categories.map(c => { const t = totals(state.expenses.filter(x => x.category === c.id)); return [c.en, c.budget, t.amount, t.paid, t.due, c.budget - t.amount]; })]);
+  return csv([["Category","Entries","Total (INR)","Paid (INR)","To pay (INR)"],
+    ...state.categories.map(c => { const t = totals(state.expenses.filter(x => x.category === c.id)); return [cname(c), state.expenses.filter(x => x.category === c.id).length, t.amount, t.paid, t.due]; })]);
 }
 function deliver(name, text, mime){
   if (!inFrame) {
