@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#7A1420">
-<meta name="description" content="Deep & Hinal wedding: groom side expense book in Gujarati and English, totals by category, with history of who added or deleted entries.">
+<meta name="description" content="Deep & Hinal wedding: groom side expense book in Gujarati and English, shared by the family, with history of who added or deleted entries.">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}img{max-width:100%}</style>
 <title>Deep & Hinal · Lagna Hisaab</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -47,6 +47,7 @@ header.band{background-color:var(--band);background-image:radial-gradient(var(--
 .band .gu{font-family:var(--guj);font-weight:500;color:var(--gold-l);font-size:18px;margin-left:8px}
 .band p{margin:4px 0 0;color:var(--gold-l);font-size:17px}
 .countdown{font-family:var(--display);text-align:right;font-size:13px;color:var(--gold-l);letter-spacing:.06em}
+.cloudbadge{font-size:14px;color:var(--gold-l);margin-top:4px}
 .hdr-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
 .langbtn{font-family:var(--guj),var(--body);font-size:15px;font-weight:600;color:var(--gold-l);background:transparent;border:1px solid var(--gold);border-radius:999px;padding:4px 14px;cursor:pointer}
 html[lang="gu"] .tile .lbl,html[lang="gu"] th,html[lang="gu"] nav.tabs a,html[lang="gu"] .countdown{font-family:var(--guj);font-size:13px;letter-spacing:.01em;text-transform:none}
@@ -201,6 +202,7 @@ main{padding-bottom:110px}
       <div class="invoc" lang="gu">|| શ્રી ગણેશાય નમઃ ||</div>
       <h1 id="hdrTitle">Deep &amp; Hinal <span class="gu">દીપ &amp; હિનલ</span></h1>
       <p id="hdrSub">Lagna Hisaab · લગ્ન હિસાબ</p>
+      <div id="cloudBadge" class="cloudbadge" hidden></div>
     </div>
     <div class="hdr-right"><button class="langbtn" id="langBtn" type="button">English</button><div class="countdown" id="countdown"></div></div>
   </div>
@@ -234,7 +236,7 @@ let lang = "gu";
 try { lang = localStorage.getItem(LANG_KEY) || "gu"; } catch(e) {}
 const GU = {
 "Overview":"સારાંશ","Expenses":"ખર્ચ","Chandlo":"ચાંદલો","Setup & Export":"સેટઅપ અને ડાઉનલોડ","Setup":"સેટઅપ",
-"Total budget":"કુલ બજેટ","History":"ઇતિહાસ","Who is using this phone?":"આ ફોન કોણ વાપરે છે?","Your name is saved on this phone and shown next to every entry you add, change or delete.":"તમારું નામ આ ફોનમાં સેવ થશે અને તમે ઉમેરો, બદલો કે કાઢો તે દરેક નોંધ સાથે દેખાશે.","Your name":"તમારું નામ","Continue":"આગળ વધો","Enter your name.":"તમારું નામ લખો.","added":"ઉમેર્યું","edited":"બદલ્યું","deleted":"કાઢી નાખ્યું","marked paid":"ચૂકવેલ કર્યું","by":"દ્વારા","Everyone":"બધા","No history yet. Every add, change and delete will show here with the name of who did it.":"હજુ કોઈ ઇતિહાસ નથી. દરેક ઉમેરો, ફેરફાર અને કાઢવાનું અહીં કરનારના નામ સાથે દેખાશે.","You are":"તમે છો","Change name":"નામ બદલો","History (.csv)":"ઇતિહાસ (.csv)","Added by":"ઉમેરનાર","was":"પહેલાં","Total expense":"કુલ ખર્ચ","of total":"કુલમાંથી","Nothing added yet":"હજુ કંઈ ઉમેર્યું નથી","tap a category to see its expenses":"પ્રકાર પર ટેપ કરી તેના ખર્ચ જુઓ","Entries":"નોંધ","Share":"હિસ્સો","No expenses yet.":"હજુ કોઈ ખર્ચ નથી.","Booked so far":"અત્યાર સુધી નક્કી","Paid":"ચૂકવેલ","Still to pay":"બાકી ચૂકવણી","Chandlo received":"મળેલ ચાંદલો",
+"Total budget":"કુલ બજેટ","Shared family book":"પરિવારનો સહિયારો હિસાબ","Enter the family code to open the shared book.":"સહિયારો હિસાબ ખોલવા પરિવાર કોડ લખો.","Family code":"પરિવાર કોડ","Open book":"હિસાબ ખોલો","Start a new family book":"નવો પરિવાર હિસાબ શરૂ કરો","That code is too short. Check it and try again.":"કોડ બહુ ટૂંકો છે. તપાસીને ફરી લખો.","Only Deep needs to start the book once. Everyone else types the code Deep sends.":"હિસાબ ફક્ત દીપે એક જ વાર શરૂ કરવાનો છે. બાકી બધા દીપે મોકલેલો કોડ લખે.","Live":"ચાલુ","Offline, will sync":"ઓફલાઇન, પછી સિંક થશે","Connecting…":"જોડાય છે…","Sync error":"સિંકમાં ભૂલ","Share this code with family on WhatsApp. Anyone with it can see and add entries.":"આ કોડ પરિવારને WhatsApp પર મોકલો. કોડ હોય તે બધા જોઈ અને ઉમેરી શકે.","Send on WhatsApp":"WhatsApp પર મોકલો","Copy code":"કોડ કૉપિ","Leave this book on this phone":"આ ફોન પરથી હિસાબ છોડો","Upload this phone's earlier entries":"આ ફોનની જૂની નોંધો ઉપલોડ કરો","Uploaded":"ઉપલોડ થયું","Everyone sees the same entries and history.":"બધાને એક જ નોંધો અને ઇતિહાસ દેખાય છે.","History":"ઇતિહાસ","Who is using this phone?":"આ ફોન કોણ વાપરે છે?","Your name is saved on this phone and shown next to every entry you add, change or delete.":"તમારું નામ આ ફોનમાં સેવ થશે અને તમે ઉમેરો, બદલો કે કાઢો તે દરેક નોંધ સાથે દેખાશે.","Your name":"તમારું નામ","Continue":"આગળ વધો","Enter your name.":"તમારું નામ લખો.","added":"ઉમેર્યું","edited":"બદલ્યું","deleted":"કાઢી નાખ્યું","marked paid":"ચૂકવેલ કર્યું","by":"દ્વારા","Everyone":"બધા","No history yet. Every add, change and delete will show here with the name of who did it.":"હજુ કોઈ ઇતિહાસ નથી. દરેક ઉમેરો, ફેરફાર અને કાઢવાનું અહીં કરનારના નામ સાથે દેખાશે.","You are":"તમે છો","Change name":"નામ બદલો","History (.csv)":"ઇતિહાસ (.csv)","Added by":"ઉમેરનાર","was":"પહેલાં","Total expense":"કુલ ખર્ચ","of total":"કુલમાંથી","Nothing added yet":"હજુ કંઈ ઉમેર્યું નથી","tap a category to see its expenses":"પ્રકાર પર ટેપ કરી તેના ખર્ચ જુઓ","Entries":"નોંધ","Share":"હિસ્સો","No expenses yet.":"હજુ કોઈ ખર્ચ નથી.","Booked so far":"અત્યાર સુધી નક્કી","Paid":"ચૂકવેલ","Still to pay":"બાકી ચૂકવણી","Chandlo received":"મળેલ ચાંદલો",
 "set per category below":"નીચે દરેક પ્રકાર મુજબ","Type budgets in the table below":"નીચેના કોઠામાં બજેટ લખો","left in budget":"બજેટમાં બાકી","over budget":"બજેટ કરતાં વધુ",
 "expenses":"ખર્ચ","of booked":"નક્કી કરેલમાંથી","Nothing booked yet":"હજુ કંઈ નક્કી નથી","overdue":"મુદત વીતી","see the list":"યાદી જુઓ",
 "By category":"પ્રકાર મુજબ","type a budget, it saves as you go":"બજેટ લખો, આપોઆપ સેવ થશે","Category":"પ્રકાર","Budget (₹)":"બજેટ (₹)","Booked":"નક્કી",
@@ -352,6 +354,102 @@ function save(){
 }
 state = load();
 
+/* ---------- shared family book (Firebase Firestore) ---------- */
+const FIREBASE_CONFIG = null; // paste the Firebase web config object here to turn on the shared book
+const CODE_KEY = KEY + ".family", STASH_KEY = KEY + ".beforeShared";
+let familyCode = ""; try { familyCode = localStorage.getItem(CODE_KEY) || ""; } catch(e) {}
+let db = null, cloudStatus = "off";
+const cloudWanted = () => !!FIREBASE_CONFIG;
+const book = () => db.collection("books").doc(familyCode);
+const plain = o => JSON.parse(JSON.stringify(o));
+function loadScript(src){ return new Promise((res, rej) => { const el = document.createElement("script"); el.src = src; el.onload = res; el.onerror = rej; document.head.appendChild(el); }); }
+function setCloud(st){ cloudStatus = st; const b = $("#cloudBadge"); if (b) renderCloudBadge(); }
+function renderCloudBadge(){
+  const b = $("#cloudBadge"); if (!b) return;
+  if (!cloudWanted() || !familyCode) { b.hidden = true; return; }
+  const map = {live:["var(--mehndi)","Live"], offline:["var(--gold)","Offline, will sync"], connecting:["var(--gold)","Connecting…"], error:["var(--kumkum)","Sync error"]};
+  const [c, t] = map[cloudStatus] || map.connecting;
+  b.hidden = false; b.innerHTML = `<span style="color:${c}">●</span> ${T(t)}`;
+}
+function onCloudErr(e){ console.error(e); setCloud("error"); }
+let rerenderPending = false;
+function afterRemote(){
+  save();
+  if ($("#layer").innerHTML) { rerenderPending = true; return; }
+  const y = scrollY; route(); scrollTo(0, y);
+}
+function cw(fn){ if (!db) return; try { fn(book()).catch(onCloudErr); } catch(e) { onCloudErr(e); } }
+const cloudPutExpense = x => cw(b => b.collection("expenses").doc(x.id).set(plain(x)));
+const cloudDelExpense = id => cw(b => b.collection("expenses").doc(id).delete());
+const cloudAddHistory = h => cw(b => b.collection("history").doc(h.id).set(plain(h)));
+const cloudPutMeta = () => cw(b => b.collection("meta").doc("book").set(plain({categories:state.categories, settings:state.settings})));
+async function uploadAll(expenses, history){
+  if (!db) return;
+  const all = [...expenses.map(x => ["expenses", x]), ...history.map(h => ["history", h])];
+  for (let i = 0; i < all.length; i += 400) {
+    const batch = db.batch();
+    all.slice(i, i + 400).forEach(([c, d]) => batch.set(book().collection(c).doc(d.id), plain(d)));
+    await batch.commit();
+  }
+}
+async function startCloud(){
+  if (!cloudWanted() || !familyCode || db) return;
+  setCloud("connecting");
+  try {
+    if (!window.firebase) {
+      await loadScript("https://cdn.jsdelivr.net/npm/firebase@10.12.2/firebase-app-compat.js");
+      await loadScript("https://cdn.jsdelivr.net/npm/firebase@10.12.2/firebase-firestore-compat.js");
+    }
+    if (!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
+    db = firebase.firestore();
+    try { await db.enablePersistence({synchronizeTabs:true}); } catch(e) {}
+    const keep = state.settings; state = freshState(); state.settings = keep;
+    const meta = d => { setCloud(d.metadata.fromCache ? "offline" : "live"); };
+    book().collection("expenses").onSnapshot({includeMetadataChanges:true}, q => { state.expenses = q.docs.map(d => d.data()); meta(q); afterRemote(); }, onCloudErr);
+    book().collection("history").onSnapshot(q => { state.history = q.docs.map(d => d.data()).sort((a,b) => (a.at||"").localeCompare(b.at||"")); afterRemote(); }, onCloudErr);
+    book().collection("meta").doc("book").onSnapshot(d => {
+      if (d.exists) { const m = d.data(); if (Array.isArray(m.categories) && m.categories.length) state.categories = m.categories; if (m.settings) state.settings = Object.assign({}, state.settings, m.settings); }
+      else if (!d.metadata.fromCache) cloudPutMeta();
+      afterRemote();
+    }, onCloudErr);
+    window.addEventListener("online", () => setCloud("live")); window.addEventListener("offline", () => setCloud("offline"));
+  } catch(e) { onCloudErr(e); }
+}
+function newFamilyCode(){
+  const A = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; const r = new Uint32Array(16); crypto.getRandomValues(r);
+  const ch = [...r].map(n => A[n % A.length]).join("");
+  return "LAGNA-" + ch.slice(0,4) + "-" + ch.slice(4,8) + "-" + ch.slice(8,12) + "-" + ch.slice(12,16);
+}
+function renderJoin(sec){
+  sec.insertAdjacentHTML("beforeend", `<div class="panel" style="max-width:520px;margin:0 auto;display:grid;gap:14px">
+    <h2>${T("Shared family book")}</h2>
+    <p style="margin:0">${T("Enter the family code to open the shared book.")}</p>
+    <label>${T("Family code")}<input id="j_code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="LAGNA-XXXX-XXXX-XXXX-XXXX" style="font-size:18px;letter-spacing:.04em"></label>
+    <p id="j_err" style="color:var(--kumkum);margin:0" hidden></p>
+    <button class="btn primary" id="j_go" style="padding:12px">${T("Open book")}</button>
+    <hr style="border:0;border-top:1px dashed var(--line);width:100%">
+    <p class="muted" style="margin:0;font-size:15px">${T("Only Deep needs to start the book once. Everyone else types the code Deep sends.")}</p>
+    <button class="btn" id="j_new">${T("Start a new family book")}</button>
+  </div>`);
+  const join = code => { code = code.trim().toUpperCase().replace(/\s+/g, ""); if (code.length < 20) { $("#j_err").textContent = T("That code is too short. Check it and try again."); $("#j_err").hidden = false; return; }
+    // keep this phone's own earlier entries aside, so they can be uploaded once from Setup
+    try { if (!state.sample && state.expenses.length) localStorage.setItem(STASH_KEY, JSON.stringify({expenses:state.expenses, history:state.history||[]})); } catch(e) {}
+    familyCode = code; try { localStorage.setItem(CODE_KEY, code); } catch(e) {} startCloud(); location.hash = "setup"; route(); };
+  $("#j_go").onclick = () => join($("#j_code").value);
+  $("#j_new").onclick = () => join(newFamilyCode());
+}
+function sharedPanel(){
+  if (!cloudWanted() || !familyCode) return "";
+  let stash = null; try { stash = JSON.parse(localStorage.getItem(STASH_KEY) || "null"); } catch(e) {}
+  const msg = encodeURIComponent((lang === "gu" ? "લગ્ન હિસાબ ખોલો: " : "Open our wedding expense book: ") + location.origin + location.pathname + "\n" + T("Family code") + ": " + familyCode);
+  return `<div class="panel" style="display:grid;gap:10px"><h2>${T("Shared family book")} <small id="cloudBadge2"></small></h2>
+    <p class="muted" style="margin:0;font-size:15px">${T("Everyone sees the same entries and history.")} ${T("Share this code with family on WhatsApp. Anyone with it can see and add entries.")}</p>
+    <div class="num" style="font-size:20px;font-weight:700;letter-spacing:.04em;overflow-wrap:anywhere;user-select:all">${esc(familyCode)}</div>
+    <div class="toolbar"><a class="btn primary" href="https://wa.me/?text=${msg}" target="_blank" rel="noopener" style="text-decoration:none">${T("Send on WhatsApp")}</a><button class="btn" id="copyCode">${T("Copy code")}</button></div>
+    ${stash && stash.expenses && stash.expenses.length ? `<button class="btn" id="upStash">${T("Upload this phone's earlier entries")} (${stash.expenses.length})</button>` : ""}
+    <button class="btn small danger" id="leaveBook" style="justify-self:start">${T("Leave this book on this phone")}</button></div>`;
+}
+
 const cat = id => state.categories.find(c => c.id === id) || {id, en:"(removed category)", budget:0};
 const side = id => SIDES.find(s => s.id === id) || SIDES[2];
 function statusOf(x){
@@ -389,7 +487,8 @@ function withName(fn){
 }
 function logH(action, x, extra){
   state.history = state.history || [];
-  state.history.push({id:uid(), at:new Date().toISOString(), who, action, expenseId:x.id, vendor:x.vendor || x.desc || "", category:x.category, amount:+x.amount||0, extra:extra||""});
+  const h = {id:uid(), at:new Date().toISOString(), who, action, expenseId:x.id, vendor:x.vendor || x.desc || "", category:x.category, amount:+x.amount||0, extra:extra||""};
+  state.history.push(h); cloudAddHistory(h);
 }
 const fmtWhen = iso => { const d = new Date(iso); return d.toLocaleDateString(lang === "gu" ? "gu-IN" : "en-IN", {day:"numeric", month:"short"}) + ", " + d.toLocaleTimeString(lang === "gu" ? "gu-IN" : "en-IN", {hour:"numeric", minute:"2-digit"}); };
 
@@ -420,7 +519,9 @@ function route(){
   $("#main").innerHTML = "";
   const sec = document.createElement("section"); sec.className = "view"; $("#main").appendChild(sec);
   if (state.sample) sec.insertAdjacentHTML("beforeend", `<div class="notice"><span><b>${T("These are example entries")}</b> ${T("so you can see how the book works. Clear them when you are ready to add your own.")}</span><span class="toolbar"><button class="btn small primary" id="clearSample">${T("Clear examples and start")}</button><button class="btn small" id="keepSample">${T("Keep examples")}</button></span></div>`);
+  if (cloudWanted() && !familyCode) { renderJoin(sec); return; }
   VIEWS[v](sec);
+  renderCloudBadge();
   const cs = $("#clearSample"); if (cs) cs.onclick = () => { const s = freshState(); s.settings = state.settings; state = s; save(); route(); toast(T("Examples cleared. Add your first expense.")); };
   const ks = $("#keepSample"); if (ks) ks.onclick = () => { state.sample = false; save(); route(); };
 }
@@ -489,8 +590,8 @@ function renderExpenses(sec){
   $("#expTable").addEventListener("click", e => {
     const b = e.target.closest("button"); if (!b) return;
     if (b.dataset.edit) withName(() => expenseForm(state.expenses.find(x => x.id === b.dataset.edit)));
-    if (b.dataset.pay) withName(() => { const x = state.expenses.find(x => x.id === b.dataset.pay); const was = x.paid; x.paid = x.amount; logH("marked paid", x, inr(was) + " → " + inr(x.amount)); save(); draw(); toast(T("Marked as paid") + ": " + (x.vendor || "")); });
-    if (b.dataset.del) armDelete(b, () => withName(() => { const x = state.expenses.find(x => x.id === b.dataset.del); logH("deleted", x); state.expenses = state.expenses.filter(y => y.id !== x.id); save(); draw(); toast(T("Expense deleted")); }));
+    if (b.dataset.pay) withName(() => { const x = state.expenses.find(x => x.id === b.dataset.pay); const was = x.paid; x.paid = x.amount; logH("marked paid", x, inr(was) + " → " + inr(x.amount)); cloudPutExpense(x); save(); draw(); toast(T("Marked as paid") + ": " + (x.vendor || "")); });
+    if (b.dataset.del) armDelete(b, () => withName(() => { const x = state.expenses.find(x => x.id === b.dataset.del); logH("deleted", x); cloudDelExpense(x.id); state.expenses = state.expenses.filter(y => y.id !== x.id); save(); draw(); toast(T("Expense deleted")); }));
   });
 }
 
@@ -504,7 +605,7 @@ function armDelete(btn, fn){
 function sheet(html, onReady){
   const layer = $("#layer");
   layer.innerHTML = `<div class="overlay" id="ov"><form class="sheet" id="sheetForm" novalidate>${html}</form></div>`;
-  const close = () => { layer.innerHTML = ""; document.removeEventListener("keydown", onKey); };
+  const close = () => { layer.innerHTML = ""; document.removeEventListener("keydown", onKey); if (rerenderPending) { rerenderPending = false; setTimeout(() => { const y = scrollY; route(); scrollTo(0, y); }, 0); } };
   const onKey = e => { if (e.key === "Escape") close(); };
   document.addEventListener("keydown", onKey);
   $("#ov").addEventListener("mousedown", e => { if (e.target.id === "ov") close(); });
@@ -546,8 +647,8 @@ function expenseForm(x){
       if (!rec.amount) { err.textContent = T("Enter the total amount for this expense."); err.hidden = false; $("#f_amount").focus(); return; }
       if (!rec.vendor && !rec.desc) { err.textContent = T("Add a vendor name or what the expense is for, so you can find it later."); err.hidden = false; $("#f_vendor").focus(); return; }
       if (rec.paid > rec.amount) { err.textContent = T("Paid is more than the total. Check both amounts.") + ` (${inr(rec.paid)} > ${inr(rec.amount)})`; err.hidden = false; return; }
-      if (isNew) { const nx = Object.assign({id:uid(), by:who, at:new Date().toISOString()}, rec); state.expenses.push(nx); logH("added", nx); }
-      else { const ch = ["amount","paid","vendor","desc","category","due","mode","date","notes"].filter(k => String(x[k] ?? "") !== String(rec[k] ?? "")).map(k => k === "amount" || k === "paid" ? `${k}: ${inr(x[k])} → ${inr(rec[k])}` : k === "category" ? `${k}: ${cname(cat(x.category))} → ${cname(cat(rec.category))}` : `${k}: ${x[k] || "–"} → ${rec[k] || "–"}`).join("; "); Object.assign(x, rec); logH("edited", x, ch); }
+      if (isNew) { const nx = Object.assign({id:uid(), by:who, at:new Date().toISOString()}, rec); state.expenses.push(nx); cloudPutExpense(nx); logH("added", nx); }
+      else { const ch = ["amount","paid","vendor","desc","category","due","mode","date","notes"].filter(k => String(x[k] ?? "") !== String(rec[k] ?? "")).map(k => k === "amount" || k === "paid" ? `${k}: ${inr(x[k])} → ${inr(rec[k])}` : k === "category" ? `${k}: ${cname(cat(x.category))} → ${cname(cat(rec.category))}` : `${k}: ${x[k] || "–"} → ${rec[k] || "–"}`).join("; "); Object.assign(x, rec); cloudPutExpense(x); logH("edited", x, ch); }
       save(); close(); route(); toast(isNew ? T("Expense added") : T("Expense saved"));
     });
   });
@@ -602,6 +703,12 @@ function historyCsv(){
 
 function renderSetup(sec){
   const s = state.settings, stamp = today();
+  sec.insertAdjacentHTML("beforeend", sharedPanel());
+  if ($("#cloudBadge2")) { const map = {live:"Live", offline:"Offline, will sync", connecting:"Connecting…", error:"Sync error"}; $("#cloudBadge2").textContent = "● " + T(map[cloudStatus] || "Connecting…"); }
+  const cc = $("#copyCode"); if (cc) cc.onclick = () => { try { navigator.clipboard.writeText(familyCode).then(() => toast(T("Copied")), () => {}); } catch(e) {} };
+  const us = $("#upStash"); if (us) us.onclick = () => { let st = null; try { st = JSON.parse(localStorage.getItem(STASH_KEY)); } catch(e) {} if (!st) return; us.disabled = true;
+    uploadAll(st.expenses || [], st.history || []).then(() => { try { localStorage.removeItem(STASH_KEY); } catch(e) {} toast(T("Uploaded")); route(); }, e => { us.disabled = false; onCloudErr(e); }); };
+  const lb = $("#leaveBook"); if (lb) lb.onclick = () => armDelete(lb, () => { try { localStorage.removeItem(CODE_KEY); } catch(e) {} location.reload(); });
   sec.insertAdjacentHTML("beforeend", `
   <div class="grid2">
     <div class="panel"><h2>${T("Wedding details")}</h2>
@@ -630,7 +737,7 @@ function renderSetup(sec){
     <div class="tbl-wrap"><table><tbody>${state.categories.map(c => { const used = state.expenses.some(x => x.category === c.id); return `<tr><td><input id="cn_${esc(c.id)}" data-cname="${esc(c.id)}" value="${esc(cname(c))}" aria-label="Category name"></td><td class="r" style="width:1%">${used ? '<span class="muted" style="font-size:13px;white-space:nowrap">' + T("in use") + '</span>' : `<button class="btn small danger" data-delk="${esc(c.id)}">${T("Remove")}</button>`}</td></tr>`; }).join("")}</tbody></table></div>
     <div class="toolbar" style="margin-top:10px"><input class="grow" id="newK" placeholder="${T("Add a category, e.g. Farsan & mithai boxes")}"><button class="btn" id="addK">${T("Add")}</button></div>
   </div>`);
-  ["bride","groom","date"].forEach(k => $("#s_" + k).addEventListener("change", e => { state.settings[k] = e.target.value.trim(); save(); renderHeader(); toast(T("Saved")); }));
+  ["bride","groom","date"].forEach(k => $("#s_" + k).addEventListener("change", e => { state.settings[k] = e.target.value.trim(); cloudPutMeta(); save(); renderHeader(); toast(T("Saved")); }));
   $("#exExp").onclick = () => deliver(`wedding-expenses-${stamp}.csv`, expensesCsv(), "text/csv");
   $("#exHist").onclick = () => deliver(`history-${stamp}.csv`, historyCsv(), "text/csv");
   $("#exCat").onclick = () => deliver(`category-summary-${stamp}.csv`, categoryCsv(), "text/csv");
@@ -642,18 +749,19 @@ function renderSetup(sec){
       let p; try { p = JSON.parse(r.result); } catch(err) { toast(T("That file is not a Lagna Hisaab backup.")); return; }
       if (!p || !Array.isArray(p.expenses)) { toast(T("That file is not a Lagna Hisaab backup.")); return; }
       $("#impConfirm").innerHTML = `<div class="notice" style="margin-top:10px"><span>${T("Replace everything here with the backup?")} (${p.expenses.length})</span><span class="toolbar"><button class="btn small primary" id="impYes">${T("Replace")}</button><button class="btn small" id="impNo">${T("Cancel")}</button></span></div>`;
-      $("#impYes").onclick = () => { p.sample = false; state = normalize(p); save(); route(); toast(T("Backup restored")); };
+      $("#impYes").onclick = () => { p.sample = false; const n = normalize(p); if (db) { uploadAll(n.expenses, n.history).then(() => toast(T("Backup restored")), onCloudErr); state.categories = n.categories; cloudPutMeta(); } else { state = n; save(); route(); toast(T("Backup restored")); } };
       $("#impNo").onclick = () => { $("#impConfirm").innerHTML = ""; e.target.value = ""; };
     };
     r.readAsText(f);
   });
   const slug = t => t.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"") + "-" + uid().slice(0,3);
-  $("#addK").onclick = () => { const v = $("#newK").value.trim(); if (!v) return; state.categories.splice(state.categories.length - 1, 0, {id:slug(v), en:v, gu:v, budget:0}); save(); route(); toast(T("Category added")); };
-  sec.querySelectorAll("[data-cname]").forEach(inp => inp.addEventListener("change", () => { const v = inp.value.trim(); if (v) { cat(inp.dataset.cname)[lang === "gu" ? "gu" : "en"] = v; save(); toast(T("Renamed")); } }));
-  sec.querySelectorAll("[data-delk]").forEach(b => b.onclick = () => armDelete(b, () => { state.categories = state.categories.filter(c => c.id !== b.dataset.delk); save(); route(); }));
+  $("#addK").onclick = () => { const v = $("#newK").value.trim(); if (!v) return; state.categories.splice(state.categories.length - 1, 0, {id:slug(v), en:v, gu:v, budget:0}); cloudPutMeta(); save(); route(); toast(T("Category added")); };
+  sec.querySelectorAll("[data-cname]").forEach(inp => inp.addEventListener("change", () => { const v = inp.value.trim(); if (v) { cat(inp.dataset.cname)[lang === "gu" ? "gu" : "en"] = v; cloudPutMeta(); save(); toast(T("Renamed")); } }));
+  sec.querySelectorAll("[data-delk]").forEach(b => b.onclick = () => armDelete(b, () => { state.categories = state.categories.filter(c => c.id !== b.dataset.delk); cloudPutMeta(); save(); route(); }));
 }
 
 route();
+startCloud();
 })();
 </script>
 </body>
