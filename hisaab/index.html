@@ -362,7 +362,7 @@ function save(){
 state = load();
 
 /* ---------- shared family book (Firebase Firestore) ---------- */
-const FIREBASE_CONFIG = null; // paste the Firebase web config object here to turn on the shared book
+const FIREBASE_CONFIG = {apiKey:"AIzaSyCu9Oi40eo9Sq4I2vtDxTffJd99SJeB0tQ",authDomain:"aprilfool-ca679.firebaseapp.com",projectId:"aprilfool-ca679",storageBucket:"aprilfool-ca679.firebasestorage.app",messagingSenderId:"1002356996558",appId:"1:1002356996558:web:a9e3484f9125c02636139f"}; // paste the Firebase web config object here to turn on the shared book
 const CODE_KEY = KEY + ".family", STASH_KEY = KEY + ".beforeShared";
 let familyCode = ""; try { familyCode = localStorage.getItem(CODE_KEY) || ""; } catch(e) {}
 let db = null, cloudStatus = "off";
