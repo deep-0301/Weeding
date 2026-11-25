@@ -189,6 +189,13 @@ main{padding-bottom:110px}
   .sheet .foot{position:sticky;bottom:calc(-1 * (env(safe-area-inset-bottom,0px) + 16px));background:var(--surface);padding-block:10px;margin-bottom:calc(-1 * (env(safe-area-inset-bottom,0px) + 16px))}
   .sheet .foot .btn{flex:1;padding:12px}
 }
+.flbl{font-size:13px;font-weight:600;color:var(--muted)}
+.catpick{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.cpk{font:inherit;font-size:14px;font-weight:600;line-height:1.25;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--sunk);color:var(--ink);cursor:pointer;min-height:44px;text-align:left}
+.cpk[aria-pressed="true"]{background:var(--kumkum);border-color:var(--kumkum);color:var(--kumkum-ink)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.seg button{font:inherit;font-size:15px;font-weight:700;min-height:48px;border-radius:10px;border:1px solid var(--line);background:var(--sunk);color:var(--ink);cursor:pointer;padding:6px}
+.seg button[aria-pressed="true"]{background:var(--mehndi);border-color:var(--mehndi);color:var(--kumkum-ink)}
 .amtin{font-size:28px;font-weight:700;padding:10px 12px}
 .chip{padding:7px 12px}
 @media (prefers-reduced-motion:no-preference){.track i{transition:width .4s ease}}
@@ -236,7 +243,7 @@ let lang = "gu";
 try { lang = localStorage.getItem(LANG_KEY) || "gu"; } catch(e) {}
 const GU = {
 "Overview":"સારાંશ","Expenses":"ખર્ચ","Chandlo":"ચાંદલો","Setup & Export":"સેટઅપ અને ડાઉનલોડ","Setup":"સેટઅપ",
-"Total budget":"કુલ બજેટ","Shared family book":"પરિવારનો સહિયારો હિસાબ","Enter the family code to open the shared book.":"સહિયારો હિસાબ ખોલવા પરિવાર કોડ લખો.","Family code":"પરિવાર કોડ","Open book":"હિસાબ ખોલો","Start a new family book":"નવો પરિવાર હિસાબ શરૂ કરો","That code is too short. Check it and try again.":"કોડ બહુ ટૂંકો છે. તપાસીને ફરી લખો.","Only Deep needs to start the book once. Everyone else types the code Deep sends.":"હિસાબ ફક્ત દીપે એક જ વાર શરૂ કરવાનો છે. બાકી બધા દીપે મોકલેલો કોડ લખે.","Live":"ચાલુ","Offline, will sync":"ઓફલાઇન, પછી સિંક થશે","Connecting…":"જોડાય છે…","Sync error":"સિંકમાં ભૂલ","Share this code with family on WhatsApp. Anyone with it can see and add entries.":"આ કોડ પરિવારને WhatsApp પર મોકલો. કોડ હોય તે બધા જોઈ અને ઉમેરી શકે.","Send on WhatsApp":"WhatsApp પર મોકલો","Copy code":"કોડ કૉપિ","Leave this book on this phone":"આ ફોન પરથી હિસાબ છોડો","Upload this phone's earlier entries":"આ ફોનની જૂની નોંધો ઉપલોડ કરો","Uploaded":"ઉપલોડ થયું","Everyone sees the same entries and history.":"બધાને એક જ નોંધો અને ઇતિહાસ દેખાય છે.","History":"ઇતિહાસ","Who is using this phone?":"આ ફોન કોણ વાપરે છે?","Your name is saved on this phone and shown next to every entry you add, change or delete.":"તમારું નામ આ ફોનમાં સેવ થશે અને તમે ઉમેરો, બદલો કે કાઢો તે દરેક નોંધ સાથે દેખાશે.","Your name":"તમારું નામ","Continue":"આગળ વધો","Enter your name.":"તમારું નામ લખો.","added":"ઉમેર્યું","edited":"બદલ્યું","deleted":"કાઢી નાખ્યું","marked paid":"ચૂકવેલ કર્યું","by":"દ્વારા","Everyone":"બધા","No history yet. Every add, change and delete will show here with the name of who did it.":"હજુ કોઈ ઇતિહાસ નથી. દરેક ઉમેરો, ફેરફાર અને કાઢવાનું અહીં કરનારના નામ સાથે દેખાશે.","You are":"તમે છો","Change name":"નામ બદલો","History (.csv)":"ઇતિહાસ (.csv)","Added by":"ઉમેરનાર","was":"પહેલાં","Total expense":"કુલ ખર્ચ","of total":"કુલમાંથી","Nothing added yet":"હજુ કંઈ ઉમેર્યું નથી","tap a category to see its expenses":"પ્રકાર પર ટેપ કરી તેના ખર્ચ જુઓ","Entries":"નોંધ","Share":"હિસ્સો","No expenses yet.":"હજુ કોઈ ખર્ચ નથી.","Booked so far":"અત્યાર સુધી નક્કી","Paid":"ચૂકવેલ","Still to pay":"બાકી ચૂકવણી","Chandlo received":"મળેલ ચાંદલો",
+"Total budget":"કુલ બજેટ","Paid to":"કોને ચૂકવ્યા","Payment":"ચૂકવણી","Part paid":"થોડા ચૂકવ્યા","Not paid yet":"હજુ નથી ચૂકવ્યા","Save":"સેવ કરો","Enter the amount.":"રકમ લખો.","Pick a category.":"પ્રકાર પસંદ કરો.","Shared family book":"પરિવારનો સહિયારો હિસાબ","Enter the family code to open the shared book.":"સહિયારો હિસાબ ખોલવા પરિવાર કોડ લખો.","Family code":"પરિવાર કોડ","Open book":"હિસાબ ખોલો","Start a new family book":"નવો પરિવાર હિસાબ શરૂ કરો","That code is too short. Check it and try again.":"કોડ બહુ ટૂંકો છે. તપાસીને ફરી લખો.","Only Deep needs to start the book once. Everyone else types the code Deep sends.":"હિસાબ ફક્ત દીપે એક જ વાર શરૂ કરવાનો છે. બાકી બધા દીપે મોકલેલો કોડ લખે.","Live":"ચાલુ","Offline, will sync":"ઓફલાઇન, પછી સિંક થશે","Connecting…":"જોડાય છે…","Sync error":"સિંકમાં ભૂલ","Share this code with family on WhatsApp. Anyone with it can see and add entries.":"આ કોડ પરિવારને WhatsApp પર મોકલો. કોડ હોય તે બધા જોઈ અને ઉમેરી શકે.","Send on WhatsApp":"WhatsApp પર મોકલો","Copy code":"કોડ કૉપિ","Leave this book on this phone":"આ ફોન પરથી હિસાબ છોડો","Upload this phone's earlier entries":"આ ફોનની જૂની નોંધો ઉપલોડ કરો","Uploaded":"ઉપલોડ થયું","Everyone sees the same entries and history.":"બધાને એક જ નોંધો અને ઇતિહાસ દેખાય છે.","History":"ઇતિહાસ","Who is using this phone?":"આ ફોન કોણ વાપરે છે?","Your name is saved on this phone and shown next to every entry you add, change or delete.":"તમારું નામ આ ફોનમાં સેવ થશે અને તમે ઉમેરો, બદલો કે કાઢો તે દરેક નોંધ સાથે દેખાશે.","Your name":"તમારું નામ","Continue":"આગળ વધો","Enter your name.":"તમારું નામ લખો.","added":"ઉમેર્યું","edited":"બદલ્યું","deleted":"કાઢી નાખ્યું","marked paid":"ચૂકવેલ કર્યું","by":"દ્વારા","Everyone":"બધા","No history yet. Every add, change and delete will show here with the name of who did it.":"હજુ કોઈ ઇતિહાસ નથી. દરેક ઉમેરો, ફેરફાર અને કાઢવાનું અહીં કરનારના નામ સાથે દેખાશે.","You are":"તમે છો","Change name":"નામ બદલો","History (.csv)":"ઇતિહાસ (.csv)","Added by":"ઉમેરનાર","was":"પહેલાં","Total expense":"કુલ ખર્ચ","of total":"કુલમાંથી","Nothing added yet":"હજુ કંઈ ઉમેર્યું નથી","tap a category to see its expenses":"પ્રકાર પર ટેપ કરી તેના ખર્ચ જુઓ","Entries":"નોંધ","Share":"હિસ્સો","No expenses yet.":"હજુ કોઈ ખર્ચ નથી.","Booked so far":"અત્યાર સુધી નક્કી","Paid":"ચૂકવેલ","Still to pay":"બાકી ચૂકવણી","Chandlo received":"મળેલ ચાંદલો",
 "set per category below":"નીચે દરેક પ્રકાર મુજબ","Type budgets in the table below":"નીચેના કોઠામાં બજેટ લખો","left in budget":"બજેટમાં બાકી","over budget":"બજેટ કરતાં વધુ",
 "expenses":"ખર્ચ","of booked":"નક્કી કરેલમાંથી","Nothing booked yet":"હજુ કંઈ નક્કી નથી","overdue":"મુદત વીતી","see the list":"યાદી જુઓ",
 "By category":"પ્રકાર મુજબ","type a budget, it saves as you go":"બજેટ લખો, આપોઆપ સેવ થશે","Category":"પ્રકાર","Budget (₹)":"બજેટ (₹)","Booked":"નક્કી",
@@ -577,7 +584,7 @@ function renderExpenses(sec){
     const t = totals(list);
     $("#expTable").innerHTML = list.length ? `<div class="sumbar num" style="margin-bottom:10px"><span>${list.length} ${lang === "gu" ? T("expenses") : "expense" + (list.length === 1 ? "" : "s")}</span><span>${T("Total")} <b>${inr(t.amount)}</b> · ${T("To pay")} <b style="color:var(--kumkum)">${inr(t.due)}</b></span></div>
       <div class="xlist">${list.map(x => { const st = statusOf(x); const bal = Math.max(0, x.amount - x.paid); return `<article class="xcard">
-        <div class="top"><div class="who"><b>${esc(x.vendor || x.desc)}</b><span>${esc(cname(cat(x.category)))} · ${fmtDate(x.date)}</span></div>
+        <div class="top"><div class="who"><b>${esc(x.vendor || x.desc || cname(cat(x.category)))}</b><span>${esc(cname(cat(x.category)))} · ${fmtDate(x.date)}</span></div>
           <div class="amt num"><b>${inr(x.amount)}</b>${bal ? `<span class="muted" style="font-size:14px">${T("Balance")} ${inr(bal)}</span>` : ""}</div></div>
         ${x.vendor && x.desc ? `<div class="desc">${esc(x.desc)}</div>` : ""}${x.notes ? `<div class="desc" style="font-size:14px">${esc(x.notes)}</div>` : ""}
         <div class="meta"><span class="pill ${st.k}">${T(st.t)}</span>${x.paid ? `<span class="num">${T("Paid")} ${inr(x.paid)}</span>` : ""}${x.due && st.k !== "paid" ? `<span>${T("due")} ${fmtDate(x.due)}</span>` : ""}${x.mode ? `<span>${esc(T(x.mode))}</span>` : ""}${x.by ? `<span>· ${T("Added by")} ${esc(x.by)}</span>` : ""}</div>
@@ -616,39 +623,33 @@ function sheet(html, onReady){
 
 function expenseForm(x){
   const isNew = !x;
-  x = x || {date:today(), category: ui.fk || "catering", vendor:"", desc:"", amount:"", paid:"", side:"groom", mode:"UPI", due:"", notes:""};
+  x = x || {date:today(), category: ui.fk || "", vendor:"", desc:"", amount:"", paid:"", side:"groom", mode:"", due:"", notes:""};
+  let pay = isNew ? "full" : (x.paid >= x.amount && x.amount ? "full" : x.paid > 0 ? "part" : "none");
   sheet(`<h2>${isNew ? T("Add expense") : T("Edit expense")}</h2>
-    <div class="form">
-      <label class="wide">${T("Total amount (₹)")}<input id="f_amount" class="amtin num" type="number" inputmode="numeric" min="0" step="1" value="${esc(x.amount)}" placeholder="0" required></label>
-      <label>${T("Category")}<select id="f_category">${opts(state.categories, x.category)}</select></label>
-      <label>${T("Vendor / paid to")}<input id="f_vendor" value="${esc(x.vendor)}" placeholder="${lang === "gu" ? "જેમ કે શ્રી અન્નપૂર્ણા કેટરર્સ" : "e.g. Shree Annapurna Caterers"}"></label>
-      <label class="wide">${T("What for")}<input id="f_desc" value="${esc(x.desc)}" placeholder="${lang === "gu" ? "જેમ કે 300 મહેમાન માટે ગુજરાતી થાળી, લાઇવ ઢોકળા કાઉન્ટર" : "e.g. Gujarati thali for 300 guests, live dhokla counter"}"></label>
-      <label>${T("Paid so far (₹)")}<input id="f_paid" type="number" inputmode="numeric" min="0" step="1" value="${esc(x.paid)}" placeholder="0"></label>
-      <div class="wide chips"><button type="button" class="chip" id="payFull">${T("Paid in full")}</button><button type="button" class="chip" id="payHalf">${T("50% advance")}</button><button type="button" class="chip" id="payNone">${T("Nothing paid yet")}</button></div>
-      <label>${T("Payment mode")}<select id="f_mode">${MODES.map(m => `<option value="${m}"${m === x.mode ? " selected" : ""}>${T(m)}</option>`).join("")}</select></label>
-      <label>${T("Date")}<input id="f_date" type="date" value="${esc(x.date)}"></label>
-      <label>${T("Balance due by")}<input id="f_due" type="date" value="${esc(x.due)}"></label>
-      <label class="wide">${T("Notes")}<textarea id="f_notes" placeholder="${lang === "gu" ? "રસીદ નંબર, સંપર્ક વ્યક્તિ, શું શામેલ છે" : "Receipt number, contact person, what is included"}">${esc(x.notes)}</textarea></label>
-    </div>
+    <label>${T("Amount (₹)")}<input id="f_amount" class="amtin num" type="number" inputmode="numeric" min="0" step="1" value="${esc(x.amount)}" placeholder="0" required></label>
+    <div style="display:grid;gap:6px"><span class="flbl">${T("Category")}</span>
+      <div class="catpick" id="f_cats">${state.categories.map(c => `<button type="button" class="cpk" data-c="${esc(c.id)}" aria-pressed="${c.id === x.category}">${esc(cname(c))}</button>`).join("")}</div></div>
+    <label>${T("Paid to")}<input id="f_vendor" value="${esc(x.vendor)}" placeholder="${lang === "gu" ? "જેમ કે ઢોલવાળા, કેટરર" : "e.g. dhol, caterer"}" autocomplete="off"></label>
+    <div style="display:grid;gap:6px"><span class="flbl">${T("Payment")}</span>
+      <div class="seg" id="f_pay">${[["full","Paid in full"],["part","Part paid"],["none","Not paid yet"]].map(([k,l]) => `<button type="button" data-p="${k}" aria-pressed="${k === pay}">${T(l)}</button>`).join("")}</div>
+      <label id="f_partwrap" ${pay === "part" ? "" : "hidden"}>${T("Paid so far (₹)")}<input id="f_paid" type="number" inputmode="numeric" min="0" step="1" value="${pay === "part" ? esc(x.paid) : ""}" placeholder="0"></label></div>
     <p id="f_err" style="color:var(--kumkum);margin:0" hidden></p>
-    <div class="foot"><button type="button" class="btn" data-close>${T("Cancel")}</button><button class="btn primary" type="submit">${isNew ? T("Add expense") : T("Save changes")}</button></div>`,
+    <div class="foot"><button type="button" class="btn" data-close>${T("Cancel")}</button><button class="btn primary" type="submit">${isNew ? T("Save") : T("Save changes")}</button></div>`,
   (form, close) => {
-    const amt = () => +$("#f_amount").value || 0;
-    $("#payFull").onclick = () => $("#f_paid").value = amt();
-    $("#payHalf").onclick = () => $("#f_paid").value = Math.round(amt() / 2);
-    $("#payNone").onclick = () => $("#f_paid").value = 0;
+    let catSel = x.category;
+    form.querySelectorAll(".cpk").forEach(b => b.onclick = () => { catSel = b.dataset.c; form.querySelectorAll(".cpk").forEach(o => o.setAttribute("aria-pressed", o === b)); });
+    form.querySelectorAll("#f_pay button").forEach(b => b.onclick = () => { pay = b.dataset.p; form.querySelectorAll("#f_pay button").forEach(o => o.setAttribute("aria-pressed", o === b)); $("#f_partwrap").hidden = pay !== "part"; if (pay === "part") $("#f_paid").focus(); });
     form.addEventListener("submit", e => {
       e.preventDefault();
-      const rec = {};
-      ["category","vendor","date","desc","amount","paid","due","mode","notes"].forEach(k => rec[k] = $("#f_" + k).value.trim());
-      rec.side = "groom";
-      rec.amount = +rec.amount || 0; rec.paid = +rec.paid || 0;
-      const err = $("#f_err");
-      if (!rec.amount) { err.textContent = T("Enter the total amount for this expense."); err.hidden = false; $("#f_amount").focus(); return; }
-      if (!rec.vendor && !rec.desc) { err.textContent = T("Add a vendor name or what the expense is for, so you can find it later."); err.hidden = false; $("#f_vendor").focus(); return; }
-      if (rec.paid > rec.amount) { err.textContent = T("Paid is more than the total. Check both amounts.") + ` (${inr(rec.paid)} > ${inr(rec.amount)})`; err.hidden = false; return; }
-      if (isNew) { const nx = Object.assign({id:uid(), by:who, at:new Date().toISOString()}, rec); state.expenses.push(nx); cloudPutExpense(nx); logH("added", nx); }
-      else { const ch = ["amount","paid","vendor","desc","category","due","mode","date","notes"].filter(k => String(x[k] ?? "") !== String(rec[k] ?? "")).map(k => k === "amount" || k === "paid" ? `${k}: ${inr(x[k])} → ${inr(rec[k])}` : k === "category" ? `${k}: ${cname(cat(x.category))} → ${cname(cat(rec.category))}` : `${k}: ${x[k] || "–"} → ${rec[k] || "–"}`).join("; "); Object.assign(x, rec); cloudPutExpense(x); logH("edited", x, ch); }
+      const err = $("#f_err"), fail = (m, el) => { err.textContent = m; err.hidden = false; if (el) el.focus(); };
+      const amount = +$("#f_amount").value || 0;
+      if (!amount) return fail(T("Enter the amount."), $("#f_amount"));
+      if (!catSel) return fail(T("Pick a category."));
+      const paid = pay === "full" ? amount : pay === "none" ? 0 : (+$("#f_paid").value || 0);
+      if (paid > amount) return fail(T("Paid is more than the total. Check both amounts.") + ` (${inr(paid)} > ${inr(amount)})`, $("#f_paid"));
+      const rec = {amount, paid, category:catSel, vendor:$("#f_vendor").value.trim(), side:"groom"};
+      if (isNew) { const nx = Object.assign({id:uid(), by:who, at:new Date().toISOString(), date:today(), desc:"", mode:"", due:"", notes:""}, rec); state.expenses.push(nx); cloudPutExpense(nx); logH("added", nx); }
+      else { const ch = ["amount","paid","vendor","category"].filter(k => String(x[k] ?? "") !== String(rec[k] ?? "")).map(k => k === "amount" || k === "paid" ? `${T(k === "amount" ? "Amount" : "Paid")}: ${inr(x[k])} → ${inr(rec[k])}` : k === "category" ? `${T("Category")}: ${cname(cat(x.category))} → ${cname(cat(rec.category))}` : `${T("Paid to")}: ${x[k] || "–"} → ${rec[k] || "–"}`).join("; "); Object.assign(x, rec); cloudPutExpense(x); logH("edited", x, ch); }
       save(); close(); route(); toast(isNew ? T("Expense added") : T("Expense saved"));
     });
   });
