@@ -452,8 +452,8 @@ html[lang=gu] .ri-head .h-sec{font-size:clamp(25px,6.4vw,42px)}
 .ri-fr{position:absolute;inset:0;border-radius:999px 999px 14px 14px;padding:6px;
   background:linear-gradient(155deg,#fff0c4 0%,#e1b25a 26%,#a8752a 52%,#f5d996 74%,#b98330 100%);
   box-shadow:0 34px 60px -26px rgba(110,40,40,.55),0 0 0 1px rgba(156,107,35,.6)}
-.ri-fr::after{content:"";position:absolute;inset:11px;border-radius:999px 999px 9px 9px;border:1px solid rgba(255,244,214,.85);pointer-events:none}
-.ri-fr img{width:100%;height:100%;object-fit:cover;border-radius:999px 999px 9px 9px;background:#ead0c4}
+.ri-fr::after{content:"";position:absolute;z-index:3;inset:11px;border-radius:999px 999px 9px 9px;border:1px solid rgba(255,244,214,.85);pointer-events:none}
+.ri-fr img{width:100%;height:100%;object-fit:cover;background:#ead0c4}
 .ri-card .tag{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%) translateZ(18px);white-space:nowrap;padding:5px 14px;border-radius:999px;
   background:linear-gradient(180deg,#fbe7ad,#e1b25a 50%,#b98330);color:#3d0910;font:700 12px/1.2 var(--f-display);letter-spacing:.12em;text-transform:uppercase;box-shadow:0 8px 18px -8px rgba(80,30,10,.6)}
 html[lang=gu] .ri-card .tag{font:700 14px/1.3 var(--f-guj);letter-spacing:0;text-transform:none}
@@ -467,6 +467,18 @@ html[lang=gu] .ri-s{font-size:clamp(15px,4vw,18px)}
 .ri-bar{position:absolute;left:22%;right:22%;bottom:max(16px,env(safe-area-inset-bottom));height:2px;background:rgba(217,168,78,.25);z-index:3}
 .ri-bar i{position:absolute;inset:0;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--gold-d),var(--gold))}
 @media (max-height:640px){.ri-head .h-sec{display:none}}
+/* living photos: slow 3D drift inside each frame, a gold light sweep across the frame, warm diya glows rising behind the ring */
+.ri-in{position:absolute;inset:6px;overflow:hidden;border-radius:999px 999px 9px 9px;transform:translateZ(0)}
+.ri-in img{display:block}
+.ri-fr img{animation:kb 14s ease-in-out infinite alternate;transform-origin:50% 50%}
+.ri-card:nth-child(2n) .ri-fr img{animation-duration:17s;animation-direction:alternate-reverse}
+@keyframes kb{0%{transform:scale(1.06) translate3d(-2%,1%,0)}100%{transform:scale(1.2) translate3d(2%,-2%,0)}}
+.ri-fr::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;
+  background:linear-gradient(115deg,transparent 35%,rgba(255,246,214,.55) 48%,rgba(255,233,170,.25) 52%,transparent 65%) -150% 0/250% 100% no-repeat;animation:sweep 5.5s ease-in-out infinite}
+.ri-card:nth-child(3n) .ri-fr::before{animation-delay:1.8s}.ri-card:nth-child(3n+1) .ri-fr::before{animation-delay:3.4s}
+@keyframes sweep{0%,55%{background-position:-150% 0}100%{background-position:150% 0}}
+.ri-glow{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+@media (prefers-reduced-motion:reduce){.ri-fr img,.ri-fr::before{animation:none}}
 .wm-credit{background:var(--night);text-align:center;padding:0 20px calc(18px + env(safe-area-inset-bottom));font-size:11.5px;line-height:1.5;color:rgba(90,22,32,.55)}
 .wm-credit a{color:inherit}
 @media (prefers-reduced-motion:reduce){#envelope{height:auto}.en-stick{position:relative;height:100svh}#rituals{height:auto}}
@@ -541,6 +553,7 @@ html[lang=gu] .ri-s{font-size:clamp(15px,4vw,18px)}
 <!-- ============ FROM THE MANDIR TO THE CHORI: a 3D ring of gold-framed photographs that turns as you scroll ============ -->
 <section id="rituals" aria-label="Wedding rituals and our photos">
   <div class="ri-stick">
+    <canvas class="ri-glow" id="riGlow" aria-hidden="true"></canvas>
     <div class="ri-head"><span class="eyebrow" data-t="riEy"></span><h2 class="h-sec" data-t="riH"></h2></div>
     <div class="ri-stage"><div class="ri-ring" id="riRing"></div></div>
     <div class="ri-cap" id="riCap"><p class="ri-n" id="riN"></p><h3 id="riT"></h3><p class="ri-s" id="riS"></p></div>
@@ -654,7 +667,7 @@ html[lang=gu] .ri-s{font-size:clamp(15px,4vw,18px)}
   </div>
 </section>
 <footer data-t="footer"></footer>
-<p class="wm-credit">Ritual photos from Wikimedia Commons: “Indian Wedding Mandap” by Wikilover90 (CC BY-SA 4.0), “Kanyadaan Ceremony in a Gujarati, Hindu Wedding Ceremony” by Gagan Shridhrani (CC BY-SA 4.0), “Saptapadi ritual before Agni Yajna” by Symphoney Symphoney (CC BY 2.0), “सप्तपदी” by आर्या जोशी (CC BY-SA 4.0), “Hindu wedding ceremony fire” (public domain).</p>
+<p class="wm-credit">Ritual photos from Wikimedia Commons: “Lord Ganesh Idol in Shiridi” by Saishna96, “Raw turmeric paste for haldi ceremony” by Debapriya Manna, “Indian Wedding Mandap” by Wikilover90, “Kanyadaan Ceremony in a Gujarati, Hindu Wedding Ceremony” by Gagan Shridhrani, “सप्तपदी” by आर्या जोशी, “Rows of diyas” by Sneha G Gupta (all CC BY-SA 4.0), “Saptapadi ritual before Agni Yajna” by Symphoney Symphoney (CC BY 2.0), “Navratri Kalash Puja” by Ashish Suryavanshi858 (CC0).</p>
 
 <script>
 /* =====================================================================
@@ -1439,20 +1452,19 @@ addEventListener('load', () => { sizeGallery(); onScroll(); });
   // photos marked wm: are from Wikimedia Commons (credited in the footer); everything else is Deep & Hinal's own
   const RING = [
     { src: 'real/hd/f191.webp', pos: '50% 40%', tag: { en: 'Mandir', gu: 'મંદિર' }, t: { en: 'Blessings at the Mandir', gu: 'મંદિરના આશીર્વાદ' }, s: { en: 'Shree Swaminarayan Mandir, Kalupur', gu: 'શ્રી સ્વામિનારાયણ મંદિર, કાલુપુર' } },
-    { src: 'real/photos/DSC01798-s.webp', tag: { en: 'Us', gu: 'અમે' }, t: { en: 'Two hearts, one journey', gu: 'બે હૃદય, એક સફર' }, s: { en: 'Deep & Hinal', gu: 'દીપ અને હિનલ' } },
-    { src: 'https://upload.wikimedia.org/wikipedia/commons/6/68/Hindu_wedding_ceremony_fire.jpg', wm: 1, tag: { en: 'Puja', gu: 'પૂજા' }, t: { en: 'Ganesh Sthapana', gu: 'ગણેશ સ્થાપના' }, s: { en: 'Every auspicious beginning starts with Shree Ganesh', gu: 'દરેક શુભ કાર્યની શરૂઆત શ્રી ગણેશથી' } },
+    { src: WM + '3/3f/Lord_Ganesh_Idol_in_Shiridi.jpg/960px-Lord_Ganesh_Idol_in_Shiridi.jpg', wm: 1, pos: '50% 35%', tag: { en: 'Ganesh', gu: 'ગણેશ' }, t: { en: 'Ganesh Sthapana', gu: 'ગણેશ સ્થાપના' }, s: { en: 'Every auspicious beginning starts with Shree Ganesh', gu: 'દરેક શુભ કાર્યની શરૂઆત શ્રી ગણેશથી' } },
+    { src: WM + 'f/f4/Navratri_Kalash_Puja.jpg/960px-Navratri_Kalash_Puja.jpg', wm: 1, pos: '50% 40%', tag: { en: 'Kalash', gu: 'કળશ' }, t: { en: 'Mangal Kalash', gu: 'મંગળ કળશ' }, s: { en: 'Filled with prosperity and good wishes', gu: 'સુખ, સમૃદ્ધિ અને શુભેચ્છાઓથી ભરેલો' } },
+    { src: WM + '5/54/Raw_turmeric_paste_for_haldi_ceremony_in_Indian_wedding.jpg/960px-Raw_turmeric_paste_for_haldi_ceremony_in_Indian_wedding.jpg', wm: 1, pos: '42% 60%', tag: { en: 'Pithi', gu: 'પીઠી' }, t: { en: 'Pithi', gu: 'પીઠી' }, s: { en: 'The golden glow before the wedding', gu: 'લગ્ન પહેલાંની સોનેરી ચમક' } },
     { src: WM + '3/33/Indian_Wedding_Mandap.jpg/960px-Indian_Wedding_Mandap.jpg', wm: 1, pos: '50% 30%', tag: { en: 'Chori', gu: 'ચોરી' }, t: { en: 'The Chori', gu: 'લગ્નની ચોરી' }, s: { en: 'Where the bond of seven lifetimes is tied', gu: 'જ્યાં સાત જન્મનું બંધન બંધાશે' } },
-    { src: 'real/photos/DSC01870-s.webp', tag: { en: 'Us', gu: 'અમે' }, t: { en: 'Together, always', gu: 'સાથે ને સાથે' }, s: { en: 'Every moment, a little more', gu: 'દરેક પળ, થોડા વધુ નજીક' } },
-    { src: WM + '6/62/Kanyadaan_Ceremony_in_a_Gujarati%2C_Hindu_Wedding_Ceremony.jpg/960px-Kanyadaan_Ceremony_in_a_Gujarati%2C_Hindu_Wedding_Ceremony.jpg', wm: 1, pos: '45% 50%', tag: { en: 'Kanyadaan', gu: 'કન્યાદાન' }, t: { en: 'Kanyadaan', gu: 'કન્યાદાન' }, s: { en: "A parent's most precious blessing", gu: 'માતા-પિતાનું સૌથી મોટું દાન' } },
-    { src: 'real/photos/DSC01690-s.webp', tag: { en: 'Hast Melap', gu: 'હસ્તમેળાપ' }, t: { en: 'Hast Melap', gu: 'હસ્તમેળાપ' }, s: { en: 'Two hands, one life', gu: 'બે હાથ, એક જીવન' } },
+    { src: WM + '6/62/Kanyadaan_Ceremony_in_a_Gujarati%2C_Hindu_Wedding_Ceremony.jpg/960px-Kanyadaan_Ceremony_in_a_Gujarati%2C_Hindu_Wedding_Ceremony.jpg', wm: 1, pos: '45% 50%', tag: { en: 'Kanyadaan', gu: 'કન્યાદાન' }, t: { en: 'Kanyadaan and Hast Melap', gu: 'કન્યાદાન અને હસ્તમેળાપ' }, s: { en: "A parent's most precious blessing", gu: 'માતા-પિતાનું સૌથી મોટું દાન' } },
     { src: WM + '6/69/%28A%29_Hindu_wedding%2C_Saptapadi_ritual_before_Agni_Yajna.jpg/960px-%28A%29_Hindu_wedding%2C_Saptapadi_ritual_before_Agni_Yajna.jpg', wm: 1, pos: '50% 50%', tag: { en: 'Phera', gu: 'ફેરા' }, t: { en: 'Mangal Phera', gu: 'મંગળ ફેરા' }, s: { en: 'With the sacred fire as witness', gu: 'અગ્નિદેવની સાક્ષીએ' } },
     { src: WM + 'd/d4/%E0%A4%B8%E0%A4%AA%E0%A5%8D%E0%A4%A4%E0%A4%AA%E0%A4%A6%E0%A5%80.jpg/960px-%E0%A4%B8%E0%A4%AA%E0%A5%8D%E0%A4%A4%E0%A4%AA%E0%A4%A6%E0%A5%80.jpg', wm: 1, pos: '50% 62%', tag: { en: 'Saptapadi', gu: 'સપ્તપદી' }, t: { en: 'Saptapadi', gu: 'સપ્તપદી' }, s: { en: 'Seven steps, seven promises', gu: 'સાત પગલાં, સાત વચન' } },
-    { src: 'real/photos/DSC00342-s.webp', tag: { en: 'Us', gu: 'અમે' }, t: { en: 'A new beginning', gu: 'નવી શરૂઆત' }, s: { en: 'With your blessings', gu: 'આપના આશીર્વાદ સાથે' } }
+    { src: WM + 'e/e7/Rows_of_diyas.jpg/960px-Rows_of_diyas.jpg', wm: 1, pos: '50% 50%', tag: { en: 'Diya', gu: 'દીવા' }, t: { en: 'Light of your blessings', gu: 'આપના આશીર્વાદનો પ્રકાશ' }, s: { en: 'Your presence will make it complete', gu: 'આપની હાજરીથી જ પ્રસંગ પૂર્ણ થશે' } }
   ];
-  const N = RING.length, STEP = 360 / N, FALLBACK = 'real/photos/DSC01840-s.webp';
+  const N = RING.length, STEP = 360 / N, FALLBACK = 'real/hd/f144.webp';
   const ring = document.getElementById('riRing'), sec = document.getElementById('rituals');
   sec.style.setProperty('--rn', N);
-  ring.innerHTML = RING.map((r, i) => `<div class="ri-card" data-i="${i}"><div class="ri-fr"><img src="${r.src}" alt="" loading="lazy" decoding="async"${r.wm ? ' referrerpolicy="no-referrer"' : ''} style="object-position:${r.pos || '50% 40%'}"></div><span class="tag"></span></div>`).join('');
+  ring.innerHTML = RING.map((r, i) => `<div class="ri-card" data-i="${i}"><div class="ri-fr"><span class="ri-in"><img src="${r.src}" alt="" loading="lazy" decoding="async"${r.wm ? ' referrerpolicy="no-referrer"' : ''} style="object-position:${r.pos || '50% 40%'}"></span></div><span class="tag"></span></div>`).join('');
   const cards = [...ring.children];
   cards.forEach(c => { const im = c.querySelector('img'); im.addEventListener('error', () => { if (!im.dataset.fb) { im.dataset.fb = 1; im.src = FALLBACK; } }); });
   const capEl = document.getElementById('riCap'), cN = document.getElementById('riN'), cT = document.getElementById('riT'), cS = document.getElementById('riS'), bar = document.getElementById('riBar');
@@ -1464,6 +1476,20 @@ addEventListener('load', () => { sizeGallery(); onScroll(); });
   function layout(){ const w = ring.offsetWidth || 240; radius = Math.round(w / 2 / Math.tan(Math.PI / N) * 1.32);
     cards.forEach((c, i) => { c.style.transform = `rotateY(${i * STEP}deg) translateZ(${radius}px)`; }); }
 
+
+  // warm diya glows drifting up behind the ring (only while the section is on screen)
+  const gcv = document.getElementById('riGlow'), gx = gcv.getContext('2d'), GL = [];
+  function gsize(){ const d = Math.min(devicePixelRatio || 1, 1.5); gcv.width = gcv.offsetWidth * d; gcv.height = gcv.offsetHeight * d; gx.setTransform(d, 0, 0, d, 0, 0); }
+  for (let i = 0; i < (PHONE ? 26 : 44); i++) GL.push({ x: Math.random(), y: Math.random(), r: 1.5 + Math.random() * 4.5, v: .015 + Math.random() * .04, ph: Math.random() * 6 });
+  let gOn = false, gLast = performance.now();
+  function glow(now){ if (!gOn) return; const dt = Math.min(.05, (now - gLast) / 1000); gLast = now; const w = gcv.offsetWidth, h = gcv.offsetHeight; gx.clearRect(0, 0, w, h);
+    for (const p of GL) { p.y -= p.v * dt; if (p.y < -.05) { p.y = 1.05; p.x = Math.random(); }
+      const x = (p.x + Math.sin(now / 2400 + p.ph) * .015) * w, y = p.y * h, a = .35 + .3 * Math.sin(now / 700 + p.ph);
+      const g = gx.createRadialGradient(x, y, 0, x, y, p.r * 3); g.addColorStop(0, `rgba(255,214,140,${a.toFixed(2)})`); g.addColorStop(.4, `rgba(240,170,80,${(a * .4).toFixed(2)})`); g.addColorStop(1, 'rgba(240,160,70,0)');
+      gx.fillStyle = g; gx.beginPath(); gx.arc(x, y, p.r * 3, 0, 6.283); gx.fill(); }
+    requestAnimationFrame(glow); }
+  if (!REDUCE && 'IntersectionObserver' in window) new IntersectionObserver(es => { const v = es[0].isIntersecting; if (v && !gOn) { gOn = true; gsize(); gLast = performance.now(); requestAnimationFrame(glow); } else if (!v) gOn = false; }).observe(sec);
+  addEventListener('resize', () => { if (gOn) gsize(); });
   // envelope
   const envSec = document.getElementById('envelope'), env = document.getElementById('env'), flap = document.getElementById('envFlap'), seal = document.getElementById('envSeal'),
     card = document.getElementById('invCard'), top = document.getElementById('enTop'), stage = document.getElementById('enStage');
