@@ -387,6 +387,89 @@ body.w3d footer{background:transparent}
   .tl-where,.tl-info{font-size:15.5px}}
 
 @media (prefers-reduced-motion:reduce){.rv,.ph.rv{transition:none;opacity:1;transform:none;clip-path:none}.btn-gold::after,.scrollcue i{animation:none}}
+
+/* ============ envelope opening (reel-style) ============ */
+#envelope{position:relative;height:430vh}
+.en-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;perspective:1100px;perspective-origin:50% 42%}
+.en-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 45% at 50% 46%,rgba(255,250,244,.95),rgba(255,240,232,.35) 60%,rgba(245,230,220,0))}
+.en-top{position:absolute;left:0;right:0;top:max(74px,calc(env(safe-area-inset-top) + 66px));text-align:center;padding:0 20px;z-index:5;will-change:opacity,transform}
+.en-top .eyebrow{color:#9a6a22}
+.en-hint{margin-top:4px;color:#7a4a3a;font-size:16px}
+.en-stage{position:absolute;left:50%;top:57%;width:var(--ew);height:var(--eh);margin:calc(var(--eh) / -2) 0 0 calc(var(--ew) / -2);transform-style:preserve-3d;
+  --ew:min(84vw,400px);--eh:calc(var(--ew) * 1.42)}
+@media (orientation:landscape) and (max-height:700px){.en-stage{--ew:min(46vh,330px)}}
+.env,.inv-card{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+.env-back,.env-pocket,.env-flap .ff,.env-flap .fl{position:absolute;border-radius:10px}
+.paper{background-color:#f3d9d2}
+.env-back{inset:0;background:linear-gradient(180deg,#edc9c1,#f3d6cf);box-shadow:0 50px 90px -30px rgba(120,50,50,.45),0 0 0 1px rgba(196,140,110,.35)}
+.env-pocket{inset:0;transform:translateZ(3px);border-radius:0 0 10px 10px;clip-path:polygon(0 0,50% 54%,100% 0,100% 100%,0 100%);
+  background:linear-gradient(162deg,#f8e3dd 0%,#f4d7d0 45%,#efcbc3 100%);
+  box-shadow:inset 0 -30px 60px -40px rgba(140,70,60,.35)}
+.env-pocket::before{content:"";position:absolute;inset:0;background:
+  linear-gradient(28deg,transparent 49.6%,rgba(170,110,95,.25) 50%,transparent 50.6%) left bottom/50% 100% no-repeat,
+  linear-gradient(-28deg,transparent 49.6%,rgba(170,110,95,.25) 50%,transparent 50.6%) right bottom/50% 100% no-repeat}
+.env-pocket::after{content:"";position:absolute;inset:0;opacity:.35;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .85 0 0 0 0 .7 0 0 0 0 .66 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+.env-flap{position:absolute;left:0;right:0;top:0;height:56%;transform-origin:50% 0;transform-style:preserve-3d;will-change:transform}
+.env-flap .ff,.env-flap .fl{inset:0;border-radius:10px 10px 0 0;clip-path:polygon(0 0,100% 0,50% 100%);-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.env-flap .ff{background:linear-gradient(180deg,#f7e0da,#f1d0c8 80%,#e9c0b7);box-shadow:inset 0 -20px 30px -24px rgba(120,60,50,.4)}
+.env-flap .fl{transform:rotateX(180deg);background:
+  radial-gradient(circle at 50% 50%,rgba(217,168,78,.5) 0 2px,transparent 3px) 0 0/22px 22px,
+  radial-gradient(circle at 50% 50%,rgba(217,168,78,.35) 0 1.5px,transparent 2.5px) 11px 11px/22px 22px,
+  linear-gradient(180deg,#e7b9ae,#f2d3c9)}
+.env-seal{position:absolute;left:50%;top:56%;width:clamp(74px,22vw,96px);aspect-ratio:1;margin:calc(clamp(74px,22vw,96px) / -2) 0 0 calc(clamp(74px,22vw,96px) / -2);border-radius:47% 53% 50% 50% / 52% 48% 52% 48%;
+  background:radial-gradient(circle at 34% 30%,#fff2c8 0%,#e8bf6a 28%,#c08a34 58%,#8d5c1c 100%);
+  box-shadow:0 6px 14px rgba(90,50,20,.45),inset 0 0 0 5px rgba(255,236,190,.35),inset 0 0 0 9px rgba(140,90,30,.35),inset 0 -6px 12px rgba(90,50,10,.5);
+  display:grid;place-items:center;transform:translateZ(5px);will-change:transform,opacity}
+.env-seal .mono{font:700 clamp(18px,5.4vw,24px)/1 var(--f-display);letter-spacing:.06em;color:#7a4a12;text-shadow:0 1px 0 rgba(255,240,200,.75),0 -1px 0 rgba(80,40,0,.4)}
+html[lang=gu] .env-seal .mono{font:700 clamp(19px,5.6vw,25px)/1 var(--f-guj);letter-spacing:0}
+.inv-card{inset:3% 4%;border-radius:12px;background:linear-gradient(180deg,#fffaf2,#fbf0de);text-align:center;color:var(--ink);
+  box-shadow:0 30px 70px -26px rgba(110,40,40,.5),0 0 0 1px rgba(217,168,78,.8),inset 0 0 0 6px #fffaf2,inset 0 0 0 7px rgba(217,168,78,.65);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6% 7%;gap:2px}
+.ic-greet{font:700 clamp(13px,3.6vw,16px)/1.4 var(--f-guj);color:var(--gold-d)}
+.ic-arch{width:66%;aspect-ratio:3/4;margin:8px 0 6px;border-radius:999px 999px 10px 10px;overflow:hidden;padding:4px;
+  background:linear-gradient(160deg,#fbe7ad,#d9a84e 40%,#9c6b23 70%,#f5d996);box-shadow:0 14px 30px -14px rgba(110,40,40,.55)}
+.ic-arch img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.ic-shubh{font:700 clamp(13px,3.6vw,16px)/1.4 var(--f-guj);color:var(--kumkum)}
+.ic-names{font:600 clamp(28px,8.4vw,40px)/1.15 var(--f-display)}
+html[lang=gu] .ic-names{font:700 clamp(27px,8vw,38px)/1.3 var(--f-guj)}
+.ic-names .gold{background-image:linear-gradient(100deg,#8a5a1a 0%,#c9963f 30%,#8f5f1c 55%,#c08a34 80%,#7a4a12 100%)}
+.ic-amp{font-size:.6em;color:var(--gold-d)}
+.ic-line{font-size:clamp(15px,4vw,18px);line-height:1.45;color:var(--ink-2);max-width:92%}
+html[lang=gu] .ic-line{font-size:clamp(14px,3.8vw,17px)}
+
+/* ============ ritual ring ============ */
+#rituals{position:relative;height:calc(var(--rn,9) * 62vh + 100vh)}
+.ri-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;perspective:1100px;perspective-origin:50% 44%}
+.ri-head{position:absolute;left:0;right:0;top:max(70px,calc(env(safe-area-inset-top) + 62px));text-align:center;padding:0 16px;z-index:3}
+.ri-head .eyebrow{color:#9a6a22}
+.ri-head .h-sec{color:#5a1620;font-size:clamp(26px,6.6vw,46px)}
+html[lang=gu] .ri-head .h-sec{font-size:clamp(25px,6.4vw,42px)}
+.ri-stage{position:absolute;left:50%;top:51%;width:var(--cw);height:calc(var(--cw) * 1.42);margin:calc(var(--cw) * -.71) 0 0 calc(var(--cw) / -2);transform-style:preserve-3d;
+  --cw:min(56vw,300px,30vh)}
+@media (min-width:900px){.ri-stage{--cw:min(24vw,300px,34vh)}}
+.ri-ring{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+.ri-card{position:absolute;inset:0;transform-style:preserve-3d;-webkit-backface-visibility:hidden;backface-visibility:hidden;will-change:opacity}
+.ri-fr{position:absolute;inset:0;border-radius:999px 999px 14px 14px;padding:6px;
+  background:linear-gradient(155deg,#fff0c4 0%,#e1b25a 26%,#a8752a 52%,#f5d996 74%,#b98330 100%);
+  box-shadow:0 34px 60px -26px rgba(110,40,40,.55),0 0 0 1px rgba(156,107,35,.6)}
+.ri-fr::after{content:"";position:absolute;inset:11px;border-radius:999px 999px 9px 9px;border:1px solid rgba(255,244,214,.85);pointer-events:none}
+.ri-fr img{width:100%;height:100%;object-fit:cover;border-radius:999px 999px 9px 9px;background:#ead0c4}
+.ri-card .tag{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%) translateZ(18px);white-space:nowrap;padding:5px 14px;border-radius:999px;
+  background:linear-gradient(180deg,#fbe7ad,#e1b25a 50%,#b98330);color:#3d0910;font:700 12px/1.2 var(--f-display);letter-spacing:.12em;text-transform:uppercase;box-shadow:0 8px 18px -8px rgba(80,30,10,.6)}
+html[lang=gu] .ri-card .tag{font:700 14px/1.3 var(--f-guj);letter-spacing:0;text-transform:none}
+.ri-cap{position:absolute;left:0;right:0;bottom:max(34px,calc(env(safe-area-inset-bottom) + 26px));text-align:center;padding:0 18px;z-index:3;transition:opacity .35s,transform .35s}
+.ri-cap.sw{opacity:0;transform:translateY(10px)}
+.ri-n{font:600 12px/1 var(--f-display);letter-spacing:.3em;color:#9a6a22}
+.ri-cap h3{margin-top:6px;font:600 clamp(24px,6.4vw,36px)/1.2 var(--f-display);color:#5a1620}
+html[lang=gu] .ri-cap h3{font:700 clamp(23px,6.2vw,34px)/1.35 var(--f-guj)}
+.ri-s{margin-top:2px;color:#6a3c2a;font-size:clamp(16px,4.2vw,20px);text-wrap:balance}
+html[lang=gu] .ri-s{font-size:clamp(15px,4vw,18px)}
+.ri-bar{position:absolute;left:22%;right:22%;bottom:max(16px,env(safe-area-inset-bottom));height:2px;background:rgba(217,168,78,.25);z-index:3}
+.ri-bar i{position:absolute;inset:0;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--gold-d),var(--gold))}
+@media (max-height:640px){.ri-head .h-sec{display:none}}
+.wm-credit{background:var(--night);text-align:center;padding:0 20px calc(18px + env(safe-area-inset-bottom));font-size:11.5px;line-height:1.5;color:rgba(90,22,32,.55)}
+.wm-credit a{color:inherit}
+@media (prefers-reduced-motion:reduce){#envelope{height:auto}.en-stick{position:relative;height:100svh}#rituals{height:auto}}
 </style>
 </head>
 <body class="entered">
@@ -429,6 +512,39 @@ body.w3d footer{background:transparent}
 
     <div class="lb lb-t" aria-hidden="true"></div><div class="lb lb-b" aria-hidden="true"></div>
     <div class="wbar" id="wbar"></div>
+  </div>
+</section>
+
+<!-- ============ THE INVITATION OPENS: a blush envelope, a gold wax seal, the card rises out ============ -->
+<section id="envelope" aria-label="The invitation opens">
+  <div class="en-stick">
+    <div class="en-glow" aria-hidden="true"></div>
+    <div class="en-top" id="enTop"><span class="eyebrow" data-t="enEy"></span><p class="en-hint" data-t="enHint"></p></div>
+    <div class="en-stage" id="enStage">
+      <div class="env" id="env" aria-hidden="true">
+        <div class="env-back"></div>
+        <div class="env-pocket"></div>
+        <div class="env-flap" id="envFlap"><div class="ff"></div><div class="fl"></div></div>
+        <div class="env-seal" id="envSeal"><span class="mono" data-t="seal"></span></div>
+      </div>
+      <div class="inv-card" id="invCard">
+        <p class="ic-greet">|| શ્રી ગણેશાય નમઃ ||</p>
+        <div class="ic-arch"><img src="real/photos/COUPLE-purple-s.webp" alt="Deep and Hinal" decoding="async"></div>
+        <p class="ic-shubh">|| શુભ લગ્ન ||</p>
+        <p class="ic-names"><span class="gold" data-f="groom"></span> <span class="ic-amp">&amp;</span> <span class="gold" data-f="bride"></span></p>
+        <p class="ic-line" data-t="icLine"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FROM THE MANDIR TO THE CHORI: a 3D ring of gold-framed photographs that turns as you scroll ============ -->
+<section id="rituals" aria-label="Wedding rituals and our photos">
+  <div class="ri-stick">
+    <div class="ri-head"><span class="eyebrow" data-t="riEy"></span><h2 class="h-sec" data-t="riH"></h2></div>
+    <div class="ri-stage"><div class="ri-ring" id="riRing"></div></div>
+    <div class="ri-cap" id="riCap"><p class="ri-n" id="riN"></p><h3 id="riT"></h3><p class="ri-s" id="riS"></p></div>
+    <div class="ri-bar"><i id="riBar"></i></div>
   </div>
 </section>
 
@@ -538,6 +654,7 @@ body.w3d footer{background:transparent}
   </div>
 </section>
 <footer data-t="footer"></footer>
+<p class="wm-credit">Ritual photos from Wikimedia Commons: “Indian Wedding Mandap” by Wikilover90 (CC BY-SA 4.0), “Kanyadaan Ceremony in a Gujarati, Hindu Wedding Ceremony” by Gagan Shridhrani (CC BY-SA 4.0), “Saptapadi ritual before Agni Yajna” by Symphoney Symphoney (CC BY 2.0), “सप्तपदी” by आर्या जोशी (CC BY-SA 4.0), “Hindu wedding ceremony fire” (public domain).</p>
 
 <script>
 /* =====================================================================
@@ -650,6 +767,13 @@ const T = {
     calTitle: "દીપ અને હિનલના શુભ લગ્ન", langLabel: "Switch to English", mute: "સંગીત બંધ કરો", play: "સંગીત વગાડો"
   }
 };
+
+Object.assign(T.en, { enEy: "A special invitation, just for you", enHint: "Scroll to open it", seal: "D · H",
+  icLine: "Together with our families, we request the pleasure of your presence and blessings",
+  riEy: "Sacred rituals", riH: "From the Mandir to the Chori" });
+Object.assign(T.gu, { enEy: "આપના માટે એક ખાસ આમંત્રણ", enHint: "ખોલવા માટે સ્ક્રોલ કરો", seal: "દી · હિ",
+  icLine: "સહપરિવાર પધારી નવદંપતીને આશીર્વાદ આપવા આપને ભાવભર્યું નિમંત્રણ",
+  riEy: "લગ્નની પવિત્ર વિધિઓ", riH: "મંદિરથી ચોરી સુધી" });
 
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1307,6 +1431,81 @@ addEventListener('load', () => { sizeGallery(); onScroll(); });
   }
 })();
 
+</script>
+<script>
+/* ================= REEL-STYLE 3D SCENES: the envelope opens, then a ring of gold-framed photos (temple, chori, pheras and the two of you) turns as you scroll ================= */
+(function(){
+  const WM = 'https://thumb.wikimedia.org/wikipedia/commons/thumb/';
+  // photos marked wm: are from Wikimedia Commons (credited in the footer); everything else is Deep & Hinal's own
+  const RING = [
+    { src: 'real/hd/f191.webp', pos: '50% 40%', tag: { en: 'Mandir', gu: 'મંદિર' }, t: { en: 'Blessings at the Mandir', gu: 'મંદિરના આશીર્વાદ' }, s: { en: 'Shree Swaminarayan Mandir, Kalupur', gu: 'શ્રી સ્વામિનારાયણ મંદિર, કાલુપુર' } },
+    { src: 'real/photos/DSC01798-s.webp', tag: { en: 'Us', gu: 'અમે' }, t: { en: 'Two hearts, one journey', gu: 'બે હૃદય, એક સફર' }, s: { en: 'Deep & Hinal', gu: 'દીપ અને હિનલ' } },
+    { src: 'https://upload.wikimedia.org/wikipedia/commons/6/68/Hindu_wedding_ceremony_fire.jpg', wm: 1, tag: { en: 'Puja', gu: 'પૂજા' }, t: { en: 'Ganesh Sthapana', gu: 'ગણેશ સ્થાપના' }, s: { en: 'Every auspicious beginning starts with Shree Ganesh', gu: 'દરેક શુભ કાર્યની શરૂઆત શ્રી ગણેશથી' } },
+    { src: WM + '3/33/Indian_Wedding_Mandap.jpg/960px-Indian_Wedding_Mandap.jpg', wm: 1, pos: '50% 30%', tag: { en: 'Chori', gu: 'ચોરી' }, t: { en: 'The Chori', gu: 'લગ્નની ચોરી' }, s: { en: 'Where the bond of seven lifetimes is tied', gu: 'જ્યાં સાત જન્મનું બંધન બંધાશે' } },
+    { src: 'real/photos/DSC01870-s.webp', tag: { en: 'Us', gu: 'અમે' }, t: { en: 'Together, always', gu: 'સાથે ને સાથે' }, s: { en: 'Every moment, a little more', gu: 'દરેક પળ, થોડા વધુ નજીક' } },
+    { src: WM + '6/62/Kanyadaan_Ceremony_in_a_Gujarati%2C_Hindu_Wedding_Ceremony.jpg/960px-Kanyadaan_Ceremony_in_a_Gujarati%2C_Hindu_Wedding_Ceremony.jpg', wm: 1, pos: '45% 50%', tag: { en: 'Kanyadaan', gu: 'કન્યાદાન' }, t: { en: 'Kanyadaan', gu: 'કન્યાદાન' }, s: { en: "A parent's most precious blessing", gu: 'માતા-પિતાનું સૌથી મોટું દાન' } },
+    { src: 'real/photos/DSC01690-s.webp', tag: { en: 'Hast Melap', gu: 'હસ્તમેળાપ' }, t: { en: 'Hast Melap', gu: 'હસ્તમેળાપ' }, s: { en: 'Two hands, one life', gu: 'બે હાથ, એક જીવન' } },
+    { src: WM + '6/69/%28A%29_Hindu_wedding%2C_Saptapadi_ritual_before_Agni_Yajna.jpg/960px-%28A%29_Hindu_wedding%2C_Saptapadi_ritual_before_Agni_Yajna.jpg', wm: 1, pos: '50% 50%', tag: { en: 'Phera', gu: 'ફેરા' }, t: { en: 'Mangal Phera', gu: 'મંગળ ફેરા' }, s: { en: 'With the sacred fire as witness', gu: 'અગ્નિદેવની સાક્ષીએ' } },
+    { src: WM + 'd/d4/%E0%A4%B8%E0%A4%AA%E0%A5%8D%E0%A4%A4%E0%A4%AA%E0%A4%A6%E0%A5%80.jpg/960px-%E0%A4%B8%E0%A4%AA%E0%A5%8D%E0%A4%A4%E0%A4%AA%E0%A4%A6%E0%A5%80.jpg', wm: 1, pos: '50% 62%', tag: { en: 'Saptapadi', gu: 'સપ્તપદી' }, t: { en: 'Saptapadi', gu: 'સપ્તપદી' }, s: { en: 'Seven steps, seven promises', gu: 'સાત પગલાં, સાત વચન' } },
+    { src: 'real/photos/DSC00342-s.webp', tag: { en: 'Us', gu: 'અમે' }, t: { en: 'A new beginning', gu: 'નવી શરૂઆત' }, s: { en: 'With your blessings', gu: 'આપના આશીર્વાદ સાથે' } }
+  ];
+  const N = RING.length, STEP = 360 / N, FALLBACK = 'real/photos/DSC01840-s.webp';
+  const ring = document.getElementById('riRing'), sec = document.getElementById('rituals');
+  sec.style.setProperty('--rn', N);
+  ring.innerHTML = RING.map((r, i) => `<div class="ri-card" data-i="${i}"><div class="ri-fr"><img src="${r.src}" alt="" loading="lazy" decoding="async"${r.wm ? ' referrerpolicy="no-referrer"' : ''} style="object-position:${r.pos || '50% 40%'}"></div><span class="tag"></span></div>`).join('');
+  const cards = [...ring.children];
+  cards.forEach(c => { const im = c.querySelector('img'); im.addEventListener('error', () => { if (!im.dataset.fb) { im.dataset.fb = 1; im.src = FALLBACK; } }); });
+  const capEl = document.getElementById('riCap'), cN = document.getElementById('riN'), cT = document.getElementById('riT'), cS = document.getElementById('riS'), bar = document.getElementById('riBar');
+  let shown = -1, radius = 300;
+  function labels(){ cards.forEach((c, i) => { c.querySelector('.tag').textContent = L(RING[i].tag); c.querySelector('img').alt = L(RING[i].t); }); }
+  function caption(i, force){ if (i === shown && !force) return; const first = shown < 0; shown = i;
+    const put = () => { cN.textContent = num(String(i + 1).padStart(2, '0')) + ' / ' + num(String(N).padStart(2, '0')); cT.textContent = L(RING[i].t); cS.textContent = L(RING[i].s); capEl.classList.remove('sw'); };
+    if (first || force) put(); else { capEl.classList.add('sw'); setTimeout(put, 180); } }
+  function layout(){ const w = ring.offsetWidth || 240; radius = Math.round(w / 2 / Math.tan(Math.PI / N) * 1.32);
+    cards.forEach((c, i) => { c.style.transform = `rotateY(${i * STEP}deg) translateZ(${radius}px)`; }); }
+
+  // envelope
+  const envSec = document.getElementById('envelope'), env = document.getElementById('env'), flap = document.getElementById('envFlap'), seal = document.getElementById('envSeal'),
+    card = document.getElementById('invCard'), top = document.getElementById('enTop'), stage = document.getElementById('enStage');
+  const cl = x => Math.min(1, Math.max(0, x)), sm = x => { x = cl(x); return x * x * (3 - 2 * x); };
+  const prog = el => { const r = el.getBoundingClientRect(), span = el.offsetHeight - innerHeight; return { p: cl(-r.top / Math.max(1, span)), on: r.bottom > -50 && r.top < innerHeight + 50 }; };
+  const t0 = performance.now();
+  function envFrame(){
+    const { p, on } = prog(envSec); if (!on) return;
+    const P = REDUCE ? 1 : p, vh = innerHeight, eh = stage.offsetHeight, bob = REDUCE ? 0 : Math.sin((performance.now() - t0) / 900) * 4;
+    const e1 = sm(P / .12), s = sm((P - .12) / .1), f = sm((P - .22) / .16), c = sm((P - .38) / .2), o = sm((P - .6) / .22);
+    top.style.opacity = (1 - sm((P - .06) / .1)).toFixed(3); top.style.transform = `translateY(${(-20 * sm((P - .06) / .1)).toFixed(1)}px)`;
+    const ex = 14 * (1 - e1) + 8 - 8 * f, ez = -520 * (1 - e1), ey = o * vh * 1.15 + bob * (1 - o);
+    env.style.transform = `translateY(${ey.toFixed(1)}px) translateZ(${ez.toFixed(0)}px) rotateX(${(ex + o * 28).toFixed(2)}deg)`;
+    seal.style.transform = `translateZ(${(5 + s * 220).toFixed(0)}px) translateY(${(-s * 60).toFixed(1)}px) rotate(${(-40 * s).toFixed(1)}deg) scale(${(1 + s * .5).toFixed(3)})`;
+    seal.style.opacity = (1 - s).toFixed(3);
+    const fa = f * 178; flap.style.transform = `translateZ(${fa > 90 ? -6 : 4}px) rotateX(${fa.toFixed(1)}deg)`;
+    const fit = Math.min(1.14, (vh * .84) / (eh * .94)), lift = -c * eh * .5;
+    card.style.transform = `translateY(${(ey * (1 - o) + o * (vh * -.02)).toFixed(1)}px) translateZ(${(ez * (1 - o) + o * 40).toFixed(0)}px) rotateX(${(ex * (1 - o)).toFixed(2)}deg) translateY(${(lift * (1 - o)).toFixed(1)}px) translateZ(1px) scale(${(1 + o * (fit - 1)).toFixed(3)})`;
+    card.style.opacity = P < .2 ? '0' : '1';
+  }
+  function ringFrame(){
+    const { p, on } = prog(sec); if (!on) return;
+    const x = (REDUCE ? 0 : p) * (N - 1), i = Math.min(N - 1, Math.floor(x)), fr = x - i;
+    const k = i + sm((fr - .3) / .45);       // hold on each photo, then turn to the next: reel rhythm
+    const tilt = REDUCE ? 0 : Math.sin((performance.now() - t0) / 1600) * 1.5;
+    ring.style.transform = `translateZ(${-radius}px) rotateX(${(-4 + tilt).toFixed(2)}deg) rotateY(${(-k * STEP).toFixed(2)}deg)`;
+    cards.forEach((cd, j) => { let a = ((j - k) * STEP) % 360; if (a > 180) a -= 360; if (a < -180) a += 360;
+      const v = Math.cos(a * Math.PI / 180); cd.style.opacity = (v < -.05 ? 0 : .25 + .75 * Math.max(0, v) ** 2).toFixed(3);
+      cd.style.visibility = v < -.05 ? 'hidden' : 'visible'; cd.style.filter = Math.abs(a) > 20 ? 'saturate(.8) brightness(.96)' : 'none'; });
+    caption(Math.round(k));
+    bar.style.transform = `scaleX(${p.toFixed(4)})`;
+  }
+  let q = 0;
+  const run = () => { q = 0; envFrame(); ringFrame(); };
+  addEventListener('scroll', () => { if (!q) q = requestAnimationFrame(run); }, { passive: true });
+  addEventListener('resize', () => { layout(); run(); });
+  // a gentle idle float while either scene is on screen
+  (function idle(){ if (!REDUCE && !document.hidden && !q) run(); setTimeout(() => requestAnimationFrame(idle), 60); })();
+  document.getElementById('langBtn').addEventListener('click', () => { labels(); caption(Math.max(0, shown), true); });
+  labels(); layout(); caption(0, true); run();
+  addEventListener('load', () => { layout(); run(); if (window.W3D) window.W3D.relayout(); });
+})();
 </script>
 </body>
 </html>
