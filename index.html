@@ -437,48 +437,27 @@ html[lang=gu] .ic-names{font:700 clamp(27px,8vw,38px)/1.3 var(--f-guj)}
 .ic-line{font-size:clamp(15px,4vw,18px);line-height:1.45;color:var(--ink-2);max-width:92%}
 html[lang=gu] .ic-line{font-size:clamp(14px,3.8vw,17px)}
 
-/* ============ ritual ring ============ */
-#rituals{position:relative;height:calc(var(--rn,9) * 62vh + 100vh)}
-.ri-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;perspective:1100px;perspective-origin:50% 44%}
-.ri-head{position:absolute;left:0;right:0;top:max(70px,calc(env(safe-area-inset-top) + 62px));text-align:center;padding:0 16px;z-index:3}
+/* ============ 3D wedding chori ============ */
+#rituals{position:relative;height:calc(var(--rn,6) * 75vh + 100vh)}
+.ri-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:radial-gradient(120% 80% at 50% 30%,#fff7f0 0%,#f6e4da 55%,#efd5c8 100%)}
+.ri-gl{position:absolute;inset:0}
+.ri-cv{display:block;width:100%;height:100%}
+#rituals.no3d .ri-gl{background:url(real/hd/f191.webp) center/cover;opacity:.9}
+.ri-head{position:absolute;left:0;right:0;top:max(70px,calc(env(safe-area-inset-top) + 62px));text-align:center;padding:0 16px;z-index:3;text-shadow:0 1px 12px rgba(255,247,240,.95)}
 .ri-head .eyebrow{color:#9a6a22}
 .ri-head .h-sec{color:#5a1620;font-size:clamp(26px,6.6vw,46px)}
 html[lang=gu] .ri-head .h-sec{font-size:clamp(25px,6.4vw,42px)}
-.ri-stage{position:absolute;left:50%;top:51%;width:var(--cw);height:calc(var(--cw) * 1.42);margin:calc(var(--cw) * -.71) 0 0 calc(var(--cw) / -2);transform-style:preserve-3d;
-  --cw:min(56vw,300px,30vh)}
-@media (min-width:900px){.ri-stage{--cw:min(24vw,300px,34vh)}}
-.ri-ring{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
-.ri-card{position:absolute;inset:0;transform-style:preserve-3d;-webkit-backface-visibility:hidden;backface-visibility:hidden;will-change:opacity}
-.ri-fr{position:absolute;inset:0;border-radius:999px 999px 14px 14px;padding:6px;
-  background:linear-gradient(155deg,#fff0c4 0%,#e1b25a 26%,#a8752a 52%,#f5d996 74%,#b98330 100%);
-  box-shadow:0 34px 60px -26px rgba(110,40,40,.55),0 0 0 1px rgba(156,107,35,.6)}
-.ri-fr::after{content:"";position:absolute;z-index:3;inset:11px;border-radius:999px 999px 9px 9px;border:1px solid rgba(255,244,214,.85);pointer-events:none}
-.ri-fr img{width:100%;height:100%;object-fit:cover;background:#ead0c4}
-.ri-card .tag{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%) translateZ(18px);white-space:nowrap;padding:5px 14px;border-radius:999px;
-  background:linear-gradient(180deg,#fbe7ad,#e1b25a 50%,#b98330);color:#3d0910;font:700 12px/1.2 var(--f-display);letter-spacing:.12em;text-transform:uppercase;box-shadow:0 8px 18px -8px rgba(80,30,10,.6)}
-html[lang=gu] .ri-card .tag{font:700 14px/1.3 var(--f-guj);letter-spacing:0;text-transform:none}
-.ri-cap{position:absolute;left:0;right:0;bottom:max(34px,calc(env(safe-area-inset-bottom) + 26px));text-align:center;padding:0 18px;z-index:3;transition:opacity .35s,transform .35s}
+.ri-cap{position:absolute;left:12px;right:12px;bottom:max(34px,calc(env(safe-area-inset-bottom) + 26px));margin:0 auto;max-width:520px;text-align:center;padding:14px 16px 12px;z-index:3;border-radius:16px;
+  background:rgba(255,249,243,.78);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 18px 40px -24px rgba(110,40,40,.45),0 0 0 1px rgba(217,168,78,.55);transition:opacity .35s,transform .35s}
 .ri-cap.sw{opacity:0;transform:translateY(10px)}
 .ri-n{font:600 12px/1 var(--f-display);letter-spacing:.3em;color:#9a6a22}
-.ri-cap h3{margin-top:6px;font:600 clamp(24px,6.4vw,36px)/1.2 var(--f-display);color:#5a1620}
-html[lang=gu] .ri-cap h3{font:700 clamp(23px,6.2vw,34px)/1.35 var(--f-guj)}
+.ri-cap h3{margin-top:6px;font:600 clamp(22px,6vw,34px)/1.2 var(--f-display);color:#5a1620}
+html[lang=gu] .ri-cap h3{font:700 clamp(21px,5.8vw,32px)/1.35 var(--f-guj)}
 .ri-s{margin-top:2px;color:#6a3c2a;font-size:clamp(16px,4.2vw,20px);text-wrap:balance}
 html[lang=gu] .ri-s{font-size:clamp(15px,4vw,18px)}
 .ri-bar{position:absolute;left:22%;right:22%;bottom:max(16px,env(safe-area-inset-bottom));height:2px;background:rgba(217,168,78,.25);z-index:3}
 .ri-bar i{position:absolute;inset:0;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--gold-d),var(--gold))}
 @media (max-height:640px){.ri-head .h-sec{display:none}}
-/* living photos: slow 3D drift inside each frame, a gold light sweep across the frame, warm diya glows rising behind the ring */
-.ri-in{position:absolute;inset:6px;overflow:hidden;border-radius:999px 999px 9px 9px;transform:translateZ(0)}
-.ri-in img{display:block}
-.ri-fr img{animation:kb 14s ease-in-out infinite alternate;transform-origin:50% 50%}
-.ri-card:nth-child(2n) .ri-fr img{animation-duration:17s;animation-direction:alternate-reverse}
-@keyframes kb{0%{transform:scale(1.06) translate3d(-2%,1%,0)}100%{transform:scale(1.2) translate3d(2%,-2%,0)}}
-.ri-fr::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;
-  background:linear-gradient(115deg,transparent 35%,rgba(255,246,214,.55) 48%,rgba(255,233,170,.25) 52%,transparent 65%) -150% 0/250% 100% no-repeat;animation:sweep 5.5s ease-in-out infinite}
-.ri-card:nth-child(3n) .ri-fr::before{animation-delay:1.8s}.ri-card:nth-child(3n+1) .ri-fr::before{animation-delay:3.4s}
-@keyframes sweep{0%,55%{background-position:-150% 0}100%{background-position:150% 0}}
-.ri-glow{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
-@media (prefers-reduced-motion:reduce){.ri-fr img,.ri-fr::before{animation:none}}
 .wm-credit{background:var(--night);text-align:center;padding:0 20px calc(18px + env(safe-area-inset-bottom));font-size:11.5px;line-height:1.5;color:rgba(90,22,32,.55)}
 .wm-credit a{color:inherit}
 @media (prefers-reduced-motion:reduce){#envelope{height:auto}.en-stick{position:relative;height:100svh}#rituals{height:auto}}
@@ -551,11 +530,10 @@ html[lang=gu] .ri-s{font-size:clamp(15px,4vw,18px)}
 </section>
 
 <!-- ============ FROM THE MANDIR TO THE CHORI: a 3D ring of gold-framed photographs that turns as you scroll ============ -->
-<section id="rituals" aria-label="Wedding rituals and our photos">
+<section id="rituals" aria-label="The wedding chori in 3D">
   <div class="ri-stick">
-    <canvas class="ri-glow" id="riGlow" aria-hidden="true"></canvas>
+    <div class="ri-gl" id="riGL" aria-hidden="true"></div>
     <div class="ri-head"><span class="eyebrow" data-t="riEy"></span><h2 class="h-sec" data-t="riH"></h2></div>
-    <div class="ri-stage"><div class="ri-ring" id="riRing"></div></div>
     <div class="ri-cap" id="riCap"><p class="ri-n" id="riN"></p><h3 id="riT"></h3><p class="ri-s" id="riS"></p></div>
     <div class="ri-bar"><i id="riBar"></i></div>
   </div>
@@ -581,12 +559,6 @@ html[lang=gu] .ri-s{font-size:clamp(15px,4vw,18px)}
       </div>
     </div>
   </div>
-</section>
-
-<!-- ============ STORY ============ -->
-<section class="chap" data-ch="0" aria-label="Photos">
-  <div class="chap-head"><span class="eyebrow" data-chn="0"></span><h2 class="h-sec" data-chname="0"></h2></div>
-  <div class="chap-grid" data-grid="0"></div>
 </section>
 
 <!-- ============ GALLERY ============ -->
@@ -667,7 +639,6 @@ html[lang=gu] .ri-s{font-size:clamp(15px,4vw,18px)}
   </div>
 </section>
 <footer data-t="footer"></footer>
-<p class="wm-credit">Ritual photos from Wikimedia Commons: “Lord Ganesh Idol in Shiridi” by Saishna96, “Raw turmeric paste for haldi ceremony” by Debapriya Manna, “Indian Wedding Mandap” by Wikilover90, “Kanyadaan Ceremony in a Gujarati, Hindu Wedding Ceremony” by Gagan Shridhrani, “सप्तपदी” by आर्या जोशी, “Rows of diyas” by Sneha G Gupta (all CC BY-SA 4.0), “Saptapadi ritual before Agni Yajna” by Symphoney Symphoney (CC BY 2.0), “Navratri Kalash Puja” by Ashish Suryavanshi858 (CC0).</p>
 
 <script>
 /* =====================================================================
@@ -1426,7 +1397,7 @@ addEventListener('load', () => { sizeGallery(); onScroll(); });
         for (const g of photos) { const u = g.userData, dz = u.home.z - camZ;
           if (!u.loaded && dz > -55 && dz < 10) { u.loaded = true; loader.load(`real/photos/${u.n}-s.webp`, tt => { tex(tt); u.ph.material.dispose(); u.ph.material = new THREE.MeshBasicMaterial({ map: tt }); }); }
           g.scale.setScalar(Math.min(1, .86 * fitW / (u.w + .2), .66 * fitH / (u.h + .2)));
-          if (u.fixed) { g.visible = dz > -22; g.position.y = u.home.y + (REDUCE ? 0 : Math.sin(t * .5) * .05); continue; }
+          if (u.fixed) { g.visible = false; g.position.y = u.home.y + (REDUCE ? 0 : Math.sin(t * .5) * .05); continue; }
           g.visible = camZ < u.cz0 - .4;
           // ahead: waits near the centre; as you reach it, it sweeps aside and turns away
           const d = -dz, a = PHONE ? smooth(Math.min(1, Math.max(0, (4.2 - d) / 3.4))) : smooth(Math.min(1, Math.max(0, (5.2 - d) / 4.2)));
@@ -1446,50 +1417,8 @@ addEventListener('load', () => { sizeGallery(); onScroll(); });
 
 </script>
 <script>
-/* ================= REEL-STYLE 3D SCENES: the envelope opens, then a ring of gold-framed photos (temple, chori, pheras and the two of you) turns as you scroll ================= */
+/* ================= REEL-STYLE 3D SCENES: the envelope opens, then a 3D wedding chori (temple, kalash, mandap, sacred fire, saptapadi diyas) that the camera walks through as you scroll ================= */
 (function(){
-  const WM = 'https://thumb.wikimedia.org/wikipedia/commons/thumb/';
-  // photos marked wm: are from Wikimedia Commons (credited in the footer); everything else is Deep & Hinal's own
-  const RING = [
-    { src: 'real/hd/f191.webp', pos: '50% 40%', tag: { en: 'Mandir', gu: 'મંદિર' }, t: { en: 'Blessings at the Mandir', gu: 'મંદિરના આશીર્વાદ' }, s: { en: 'Shree Swaminarayan Mandir, Kalupur', gu: 'શ્રી સ્વામિનારાયણ મંદિર, કાલુપુર' } },
-    { src: WM + '3/3f/Lord_Ganesh_Idol_in_Shiridi.jpg/960px-Lord_Ganesh_Idol_in_Shiridi.jpg', wm: 1, pos: '50% 35%', tag: { en: 'Ganesh', gu: 'ગણેશ' }, t: { en: 'Ganesh Sthapana', gu: 'ગણેશ સ્થાપના' }, s: { en: 'Every auspicious beginning starts with Shree Ganesh', gu: 'દરેક શુભ કાર્યની શરૂઆત શ્રી ગણેશથી' } },
-    { src: WM + 'f/f4/Navratri_Kalash_Puja.jpg/960px-Navratri_Kalash_Puja.jpg', wm: 1, pos: '50% 40%', tag: { en: 'Kalash', gu: 'કળશ' }, t: { en: 'Mangal Kalash', gu: 'મંગળ કળશ' }, s: { en: 'Filled with prosperity and good wishes', gu: 'સુખ, સમૃદ્ધિ અને શુભેચ્છાઓથી ભરેલો' } },
-    { src: WM + '5/54/Raw_turmeric_paste_for_haldi_ceremony_in_Indian_wedding.jpg/960px-Raw_turmeric_paste_for_haldi_ceremony_in_Indian_wedding.jpg', wm: 1, pos: '42% 60%', tag: { en: 'Pithi', gu: 'પીઠી' }, t: { en: 'Pithi', gu: 'પીઠી' }, s: { en: 'The golden glow before the wedding', gu: 'લગ્ન પહેલાંની સોનેરી ચમક' } },
-    { src: WM + '3/33/Indian_Wedding_Mandap.jpg/960px-Indian_Wedding_Mandap.jpg', wm: 1, pos: '50% 30%', tag: { en: 'Chori', gu: 'ચોરી' }, t: { en: 'The Chori', gu: 'લગ્નની ચોરી' }, s: { en: 'Where the bond of seven lifetimes is tied', gu: 'જ્યાં સાત જન્મનું બંધન બંધાશે' } },
-    { src: WM + '6/62/Kanyadaan_Ceremony_in_a_Gujarati%2C_Hindu_Wedding_Ceremony.jpg/960px-Kanyadaan_Ceremony_in_a_Gujarati%2C_Hindu_Wedding_Ceremony.jpg', wm: 1, pos: '45% 50%', tag: { en: 'Kanyadaan', gu: 'કન્યાદાન' }, t: { en: 'Kanyadaan and Hast Melap', gu: 'કન્યાદાન અને હસ્તમેળાપ' }, s: { en: "A parent's most precious blessing", gu: 'માતા-પિતાનું સૌથી મોટું દાન' } },
-    { src: WM + '6/69/%28A%29_Hindu_wedding%2C_Saptapadi_ritual_before_Agni_Yajna.jpg/960px-%28A%29_Hindu_wedding%2C_Saptapadi_ritual_before_Agni_Yajna.jpg', wm: 1, pos: '50% 50%', tag: { en: 'Phera', gu: 'ફેરા' }, t: { en: 'Mangal Phera', gu: 'મંગળ ફેરા' }, s: { en: 'With the sacred fire as witness', gu: 'અગ્નિદેવની સાક્ષીએ' } },
-    { src: WM + 'd/d4/%E0%A4%B8%E0%A4%AA%E0%A5%8D%E0%A4%A4%E0%A4%AA%E0%A4%A6%E0%A5%80.jpg/960px-%E0%A4%B8%E0%A4%AA%E0%A5%8D%E0%A4%A4%E0%A4%AA%E0%A4%A6%E0%A5%80.jpg', wm: 1, pos: '50% 62%', tag: { en: 'Saptapadi', gu: 'સપ્તપદી' }, t: { en: 'Saptapadi', gu: 'સપ્તપદી' }, s: { en: 'Seven steps, seven promises', gu: 'સાત પગલાં, સાત વચન' } },
-    { src: WM + 'e/e7/Rows_of_diyas.jpg/960px-Rows_of_diyas.jpg', wm: 1, pos: '50% 50%', tag: { en: 'Diya', gu: 'દીવા' }, t: { en: 'Light of your blessings', gu: 'આપના આશીર્વાદનો પ્રકાશ' }, s: { en: 'Your presence will make it complete', gu: 'આપની હાજરીથી જ પ્રસંગ પૂર્ણ થશે' } }
-  ];
-  const N = RING.length, STEP = 360 / N, FALLBACK = 'real/hd/f144.webp';
-  const ring = document.getElementById('riRing'), sec = document.getElementById('rituals');
-  sec.style.setProperty('--rn', N);
-  ring.innerHTML = RING.map((r, i) => `<div class="ri-card" data-i="${i}"><div class="ri-fr"><span class="ri-in"><img src="${r.src}" alt="" loading="lazy" decoding="async"${r.wm ? ' referrerpolicy="no-referrer"' : ''} style="object-position:${r.pos || '50% 40%'}"></span></div><span class="tag"></span></div>`).join('');
-  const cards = [...ring.children];
-  cards.forEach(c => { const im = c.querySelector('img'); im.addEventListener('error', () => { if (!im.dataset.fb) { im.dataset.fb = 1; im.src = FALLBACK; } }); });
-  const capEl = document.getElementById('riCap'), cN = document.getElementById('riN'), cT = document.getElementById('riT'), cS = document.getElementById('riS'), bar = document.getElementById('riBar');
-  let shown = -1, radius = 300;
-  function labels(){ cards.forEach((c, i) => { c.querySelector('.tag').textContent = L(RING[i].tag); c.querySelector('img').alt = L(RING[i].t); }); }
-  function caption(i, force){ if (i === shown && !force) return; const first = shown < 0; shown = i;
-    const put = () => { cN.textContent = num(String(i + 1).padStart(2, '0')) + ' / ' + num(String(N).padStart(2, '0')); cT.textContent = L(RING[i].t); cS.textContent = L(RING[i].s); capEl.classList.remove('sw'); };
-    if (first || force) put(); else { capEl.classList.add('sw'); setTimeout(put, 180); } }
-  function layout(){ const w = ring.offsetWidth || 240; radius = Math.round(w / 2 / Math.tan(Math.PI / N) * 1.32);
-    cards.forEach((c, i) => { c.style.transform = `rotateY(${i * STEP}deg) translateZ(${radius}px)`; }); }
-
-
-  // warm diya glows drifting up behind the ring (only while the section is on screen)
-  const gcv = document.getElementById('riGlow'), gx = gcv.getContext('2d'), GL = [];
-  function gsize(){ const d = Math.min(devicePixelRatio || 1, 1.5); gcv.width = gcv.offsetWidth * d; gcv.height = gcv.offsetHeight * d; gx.setTransform(d, 0, 0, d, 0, 0); }
-  for (let i = 0; i < (PHONE ? 26 : 44); i++) GL.push({ x: Math.random(), y: Math.random(), r: 1.5 + Math.random() * 4.5, v: .015 + Math.random() * .04, ph: Math.random() * 6 });
-  let gOn = false, gLast = performance.now();
-  function glow(now){ if (!gOn) return; const dt = Math.min(.05, (now - gLast) / 1000); gLast = now; const w = gcv.offsetWidth, h = gcv.offsetHeight; gx.clearRect(0, 0, w, h);
-    for (const p of GL) { p.y -= p.v * dt; if (p.y < -.05) { p.y = 1.05; p.x = Math.random(); }
-      const x = (p.x + Math.sin(now / 2400 + p.ph) * .015) * w, y = p.y * h, a = .35 + .3 * Math.sin(now / 700 + p.ph);
-      const g = gx.createRadialGradient(x, y, 0, x, y, p.r * 3); g.addColorStop(0, `rgba(255,214,140,${a.toFixed(2)})`); g.addColorStop(.4, `rgba(240,170,80,${(a * .4).toFixed(2)})`); g.addColorStop(1, 'rgba(240,160,70,0)');
-      gx.fillStyle = g; gx.beginPath(); gx.arc(x, y, p.r * 3, 0, 6.283); gx.fill(); }
-    requestAnimationFrame(glow); }
-  if (!REDUCE && 'IntersectionObserver' in window) new IntersectionObserver(es => { const v = es[0].isIntersecting; if (v && !gOn) { gOn = true; gsize(); gLast = performance.now(); requestAnimationFrame(glow); } else if (!v) gOn = false; }).observe(sec);
-  addEventListener('resize', () => { if (gOn) gsize(); });
   // envelope
   const envSec = document.getElementById('envelope'), env = document.getElementById('env'), flap = document.getElementById('envFlap'), seal = document.getElementById('envSeal'),
     card = document.getElementById('invCard'), top = document.getElementById('enTop'), stage = document.getElementById('enStage');
@@ -1510,27 +1439,208 @@ addEventListener('load', () => { sizeGallery(); onScroll(); });
     card.style.transform = `translateY(${(ey * (1 - o) + o * (vh * -.02)).toFixed(1)}px) translateZ(${(ez * (1 - o) + o * 40).toFixed(0)}px) rotateX(${(ex * (1 - o)).toFixed(2)}deg) translateY(${(lift * (1 - o)).toFixed(1)}px) translateZ(1px) scale(${(1 + o * (fit - 1)).toFixed(3)})`;
     card.style.opacity = P < .2 ? '0' : '1';
   }
-  function ringFrame(){
-    const { p, on } = prog(sec); if (!on) return;
-    const x = (REDUCE ? 0 : p) * (N - 1), i = Math.min(N - 1, Math.floor(x)), fr = x - i;
-    const k = i + sm((fr - .3) / .45);       // hold on each photo, then turn to the next: reel rhythm
-    const tilt = REDUCE ? 0 : Math.sin((performance.now() - t0) / 1600) * 1.5;
-    ring.style.transform = `translateZ(${-radius}px) rotateX(${(-4 + tilt).toFixed(2)}deg) rotateY(${(-k * STEP).toFixed(2)}deg)`;
-    cards.forEach((cd, j) => { let a = ((j - k) * STEP) % 360; if (a > 180) a -= 360; if (a < -180) a += 360;
-      const v = Math.cos(a * Math.PI / 180); cd.style.opacity = (v < -.05 ? 0 : .25 + .75 * Math.max(0, v) ** 2).toFixed(3);
-      cd.style.visibility = v < -.05 ? 'hidden' : 'visible'; cd.style.filter = Math.abs(a) > 20 ? 'saturate(.8) brightness(.96)' : 'none'; });
-    caption(Math.round(k));
-    bar.style.transform = `scaleX(${p.toFixed(4)})`;
+  /* ---------- the wedding chori in 3D: a scroll-driven camera visits the temple, the mangal kalash, the chori, the sacred fire and the seven diyas ---------- */
+  const STOPS = [
+    { t: { en: 'Blessings of the Mandir', gu: 'મંદિરના આશીર્વાદ' }, s: { en: 'Every auspicious beginning seeks His blessings', gu: 'દરેક શુભ શરૂઆત પ્રભુના આશીર્વાદથી' },
+      pos: [0, 4.6, 15.5], at: [0, 5.6, -9] },
+    { t: { en: 'Ganesh Sthapana and the Mangal Kalash', gu: 'ગણેશ સ્થાપના અને મંગળ કળશ' }, s: { en: 'Filled with prosperity and good wishes', gu: 'સુખ, સમૃદ્ધિ અને શુભેચ્છાઓથી ભરેલો' },
+      pos: [1.1, 1.75, 7.4], at: [0, 1.05, 4.6] },
+    { t: { en: 'The Chori', gu: 'લગ્નની ચોરી' }, s: { en: 'Where the bond of seven lifetimes is tied', gu: 'જ્યાં સાત જન્મનું બંધન બંધાશે' },
+      pos: [-7.6, 5.0, 8.2], at: [0, 1.6, 0] },
+    { t: { en: 'Mangal Phera', gu: 'મંગળ ફેરા' }, s: { en: 'Four rounds around the sacred fire', gu: 'અગ્નિદેવની સાક્ષીએ ચાર મંગળ ફેરા' },
+      pos: [0, 2.2, 4.4], at: [0, .75, 0], orbit: 1 },
+    { t: { en: 'Saptapadi', gu: 'સપ્તપદી' }, s: { en: 'Seven steps, seven promises', gu: 'સાત પગલાં, સાત વચન' },
+      pos: [7.9, 1.35, 2.2], at: [3.4, .25, 0] },
+    { t: { en: 'With your blessings', gu: 'આપના આશીર્વાદ સાથે' }, s: { en: 'Your presence will make it complete', gu: 'આપની હાજરીથી જ પ્રસંગ પૂર્ણ થશે' },
+      pos: [0, 9.5, 12.5], at: [0, .6, -.5] }
+  ];
+  const N = STOPS.length, sec = document.getElementById('rituals'), wrap = document.getElementById('riGL');
+  sec.style.setProperty('--rn', N);
+  const capEl = document.getElementById('riCap'), cN = document.getElementById('riN'), cT = document.getElementById('riT'), cS = document.getElementById('riS'), bar = document.getElementById('riBar');
+  let shown = -1;
+  function caption(i, force){ if (i === shown && !force) return; const first = shown < 0; shown = i;
+    const put = () => { cN.textContent = num(String(i + 1).padStart(2, '0')) + ' / ' + num(String(N).padStart(2, '0')); cT.textContent = L(STOPS[i].t); cS.textContent = L(STOPS[i].s); capEl.classList.remove('sw'); };
+    if (first || force) put(); else { capEl.classList.add('sw'); setTimeout(put, 180); } }
+  document.getElementById('langBtn').addEventListener('click', () => caption(Math.max(0, shown), true));
+  caption(0, true);
+  let G = null;     // the 3D scene, once three.js has arrived
+  (function wait(n){ if (window.THREE) { try { G = build(); } catch (e) { console.warn('chori 3D off', e); sec.classList.add('no3d'); } }
+    else if (n < 200) setTimeout(() => wait(n + 1), 100); else sec.classList.add('no3d'); })(0);
+
+  function build(){
+    const T3 = THREE, cv = document.createElement('canvas'); cv.className = 'ri-cv'; wrap.appendChild(cv);
+    const R = new T3.WebGLRenderer({ canvas: cv, antialias: !PHONE, alpha: true, powerPreference: 'high-performance' });
+    if (!R.getContext()) throw new Error('no webgl');
+    R.setPixelRatio(Math.min(devicePixelRatio || 1, PHONE ? 1.5 : 1.75)); R.outputEncoding = T3.sRGBEncoding;
+    R.setClearColor(0x000000, 0);
+    const scene = new T3.Scene(); scene.fog = new T3.Fog(0xf5e6dc, 22, 60);
+    const cam = new T3.PerspectiveCamera(46, 1, .1, 120);
+    scene.add(new T3.HemisphereLight(0xfff4e6, 0xe6b8a8, .95));
+    const sun = new T3.DirectionalLight(0xfff0dc, .85); sun.position.set(6, 12, 8); scene.add(sun);
+    const fireL = new T3.PointLight(0xff9a3c, 1.6, 9, 2); fireL.position.set(0, 1.1, 0); scene.add(fireL);
+    const cvTex = (w, h, draw) => { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const t = new T3.CanvasTexture(c); t.encoding = T3.sRGBEncoding; t.anisotropy = 4; return t; };
+    const std = (o) => new T3.MeshStandardMaterial(Object.assign({ roughness: .6, metalness: 0 }, o));
+    const GOLD = std({ color: 0xd9a84e, metalness: .85, roughness: .32 }), SAND = std({ color: 0xead3b0, roughness: .85 }), SAND2 = std({ color: 0xe2c49a, roughness: .9 });
+    const KUM = std({ color: 0x9e1b2b, roughness: .55 }), BRASS = std({ color: 0xc9923f, metalness: .9, roughness: .28 });
+
+    // ---- the platform: a round marble floor with a rangoli ----
+    const rang = cvTex(1024, 1024, (g, w) => { const c = w / 2; g.fillStyle = '#f7ecdf'; g.fillRect(0, 0, w, w);
+      const ring = (r, n, col, rr, off) => { g.fillStyle = col; for (let i = 0; i < n; i++) { const a = i / n * 6.283 + (off || 0); g.beginPath(); g.ellipse(c + Math.cos(a) * r, c + Math.sin(a) * r, rr, rr * .45, a, 0, 6.283); g.fill(); } };
+      const circ = (r, col, lw) => { g.strokeStyle = col; g.lineWidth = lw; g.beginPath(); g.arc(c, c, r, 0, 6.283); g.stroke(); };
+      circ(500, '#c9923f', 10); circ(470, '#b3122a', 6);
+      ring(440, 48, '#e8731e', 26); ring(440, 48, '#f4c430', 13, .065); ring(392, 36, '#b3122a', 22, .04); ring(392, 36, '#fff6e8', 8, .04);
+      circ(360, '#c9923f', 5); ring(330, 28, '#2f8a4c', 22); ring(330, 28, '#f4c430', 9, .11); circ(300, '#b3122a', 4);
+      for (let k = 0; k < 4; k++) { circ(250 - k * 22, k % 2 ? '#e8731e' : '#c9923f', 3); } });
+    const floor = new T3.Mesh(new T3.CylinderGeometry(6.2, 6.4, .32, 72), [std({ color: 0xe9d6bd }), std({ map: rang, roughness: .7 }), std({ color: 0xe9d6bd })]);
+    floor.position.y = -.16; scene.add(floor);
+    const rim = new T3.Mesh(new T3.TorusGeometry(6.3, .06, 8, 96), GOLD); rim.rotation.x = Math.PI / 2; scene.add(rim);
+    const ground = new T3.Mesh(new T3.CircleGeometry(60, 48), std({ color: 0xf2dfd2, roughness: 1 })); ground.rotation.x = -Math.PI / 2; ground.position.y = -.33; scene.add(ground);
+
+    // ---- painted pots (matli) for the chori pillars ----
+    const potTex = (base, band, dot) => cvTex(512, 256, (g, w, h) => { g.fillStyle = base; g.fillRect(0, 0, w, h);
+      g.fillStyle = band; g.fillRect(0, h * .42, w, h * .16); g.fillStyle = '#f4c430'; g.fillRect(0, h * .4, w, 6); g.fillRect(0, h * .58, w, 6);
+      g.fillStyle = dot; for (let i = 0; i < 24; i++) { g.beginPath(); g.arc(i * w / 24 + 10, h * .5, 7, 0, 6.283); g.fill(); }
+      g.fillStyle = '#fff6e8'; for (let i = 0; i < 16; i++) { const x = i * w / 16 + 16; g.beginPath(); g.moveTo(x, h * .2); g.lineTo(x + 9, h * .3); g.lineTo(x, h * .36); g.lineTo(x - 9, h * .3); g.fill(); g.beginPath(); g.arc(x, h * .75, 6, 0, 6.283); g.fill(); } });
+    const POTS = [std({ map: potTex('#b3122a', '#2f8a4c', '#fff6e8'), roughness: .5 }), std({ map: potTex('#2f7a46', '#b3122a', '#f4c430'), roughness: .5 }), std({ map: potTex('#d4561c', '#7a1420', '#fff6e8'), roughness: .5 })];
+    const potG = new T3.SphereGeometry(1, 28, 18);
+    const leafG = new T3.ConeGeometry(.09, .5, 5); leafG.translate(0, .25, 0); leafG.scale(1, 1, .3);
+    const LEAF = std({ color: 0x2f7a3a, roughness: .7 }), COCO = std({ color: 0x8a5a2b, roughness: .95 });
+    function kalashTop(parent, y, s){ const c = new T3.Mesh(new T3.SphereGeometry(.2 * s, 16, 12), COCO); c.scale.y = 1.25; c.position.y = y + .2 * s; parent.add(c);
+      for (let i = 0; i < 6; i++) { const l = new T3.Mesh(leafG, LEAF); l.scale.setScalar(s); l.position.y = y + .02; l.rotation.set(.95, i / 6 * 6.283, 0, 'YXZ'); parent.add(l); } }
+    const H = 3.4, P = 2.35;
+    const pillars = [[-P, -P], [P, -P], [P, P], [-P, P]];
+    for (const [x, z] of pillars) {
+      const g = new T3.Group(); g.position.set(x, 0, z); scene.add(g);
+      const post = new T3.Mesh(new T3.CylinderGeometry(.07, .07, H, 10), BRASS); post.position.y = H / 2; g.add(post);
+      let y = .02; const rs = [.46, .42, .38, .34, .3, .26, .22];
+      rs.forEach((r, i) => { const m = new T3.Mesh(potG, POTS[i % 3]); m.scale.set(r, r * .78, r); y += r * .78; m.position.y = y; m.rotation.y = i * .7; g.add(m);
+        const lip = new T3.Mesh(new T3.TorusGeometry(r * .42, .025, 6, 24), GOLD); lip.rotation.x = Math.PI / 2; lip.position.y = y + r * .74; g.add(lip); y += r * .74; });
+      kalashTop(g, y, .9);
+    }
+    // canopy frame
+    const beamG = new T3.BoxGeometry(P * 2 + .3, .14, .14);
+    for (let k = 0; k < 4; k++) { const b = new T3.Mesh(beamG, KUM); const a = k * Math.PI / 2; b.position.set(Math.sin(a) * P, H, Math.cos(a) * P); b.rotation.y = a + Math.PI / 2; scene.add(b);
+      const t = new T3.Mesh(new T3.BoxGeometry(P * 2 + .3, .04, .18), GOLD); t.position.copy(b.position); t.position.y += .09; t.rotation.y = b.rotation.y; scene.add(t); }
+    const roof = new T3.Mesh(new T3.ConeGeometry(P * 1.5, 1.1, 4, 1, true), std({ color: 0xc23a50, side: T3.DoubleSide, roughness: .7 }));
+    roof.position.y = H + .62; roof.rotation.y = Math.PI / 4; scene.add(roof);
+    const fin = new T3.Mesh(new T3.SphereGeometry(.16, 16, 12), GOLD); fin.position.y = H + 1.2; scene.add(fin);
+
+    // ---- marigold garlands: drapes between the pillars and hanging strings ----
+    const beads = [];
+    const sag = (a, b, n, d) => { for (let i = 0; i <= n; i++) { const f = i / n; beads.push(new T3.Vector3(a.x + (b.x - a.x) * f, a.y + (b.y - a.y) * f - Math.sin(f * Math.PI) * d, a.z + (b.z - a.z) * f)); } };
+    for (let k = 0; k < 4; k++) { const [x1, z1] = pillars[k], [x2, z2] = pillars[(k + 1) % 4];
+      sag(new T3.Vector3(x1, H - .05, z1), new T3.Vector3(x2, H - .05, z2), 46, .55); sag(new T3.Vector3(x1, H - .05, z1), new T3.Vector3(x2, H - .05, z2), 40, .25);
+      for (let s = 1; s < 6; s++) { const f = s / 6, x = x1 + (x2 - x1) * f, z = z1 + (z2 - z1) * f; for (let i = 0; i < 9; i++) beads.push(new T3.Vector3(x, H - .12 - i * .1, z)); } }
+    const mg = new T3.InstancedMesh(new T3.IcosahedronGeometry(.075, 1), std({ roughness: .85 }), beads.length);
+    const m4 = new T3.Matrix4(), cO = new T3.Color(0xe8731e), cY = new T3.Color(0xf4b41a), cR = new T3.Color(0xc0392b);
+    beads.forEach((p, i) => { m4.makeScale(1, .85, 1); m4.setPosition(p); mg.setMatrixAt(i, m4); mg.setColorAt(i, i % 7 === 0 ? cR : i % 2 ? cO : cY); });
+    scene.add(mg);
+
+    // ---- havan kund with a living fire ----
+    const kund = new T3.Group(); scene.add(kund);
+    [[1.1, .18], [.86, .18], [.62, .18]].forEach(([w, h], i) => { const m = new T3.Mesh(new T3.BoxGeometry(w, h, w), i % 2 ? BRASS : std({ color: 0xa8662c, metalness: .7, roughness: .4 })); m.position.y = h / 2 + i * h; kund.add(m); });
+    const flameTex = cvTex(128, 128, (g) => { const r = g.createRadialGradient(64, 64, 0, 64, 64, 64); r.addColorStop(0, 'rgba(255,246,190,1)'); r.addColorStop(.22, 'rgba(255,196,40,.95)'); r.addColorStop(.55, 'rgba(240,96,16,.55)'); r.addColorStop(1, 'rgba(200,50,10,0)'); g.fillStyle = r; g.fillRect(0, 0, 128, 128); });
+    const fireMat = new T3.SpriteMaterial({ map: flameTex, depthWrite: false, transparent: true });
+    const fire = []; for (let i = 0; i < (PHONE ? 34 : 56); i++) { const s = new T3.Sprite(fireMat); s.userData = { life: Math.random(), sp: .7 + Math.random() * .8, x: (Math.random() - .5) * .34, z: (Math.random() - .5) * .34 }; scene.add(s); fire.push(s); }
+
+    // ---- the mangal kalash at the front, on a red stool, with a swastik ----
+    const kal = new T3.Group(); kal.position.set(0, 0, 4.6); scene.add(kal);
+    const stool = new T3.Mesh(new T3.BoxGeometry(.9, .42, .9), KUM); stool.position.y = .21; kal.add(stool);
+    const cloth = new T3.Mesh(new T3.BoxGeometry(.96, .05, .96), GOLD); cloth.position.y = .44; kal.add(cloth);
+    const kTex = cvTex(512, 256, (g, w, h) => { g.fillStyle = '#c9923f'; g.fillRect(0, 0, w, h); g.fillStyle = '#b3122a'; g.fillRect(0, h * .2, w, h * .07); g.fillRect(0, h * .78, w, h * .05);
+      g.strokeStyle = '#b3122a'; g.lineWidth = 9; g.lineCap = 'round'; const sw = (cx, cy, r) => { g.beginPath(); g.moveTo(cx, cy - r); g.lineTo(cx, cy + r); g.moveTo(cx - r, cy); g.lineTo(cx + r, cy);
+        g.moveTo(cx, cy - r); g.lineTo(cx + r, cy - r); g.moveTo(cx + r, cy); g.lineTo(cx + r, cy + r); g.moveTo(cx, cy + r); g.lineTo(cx - r, cy + r); g.moveTo(cx - r, cy); g.lineTo(cx - r, cy - r); g.stroke(); };
+      sw(w * .25, h * .52, 34); sw(w * .75, h * .52, 34); g.fillStyle = '#b3122a'; [[.25 - .045, .52 - .08], [.25 + .045, .52 - .08], [.25 - .045, .52 + .08], [.25 + .045, .52 + .08]].forEach(([a, b]) => { g.beginPath(); g.arc(w * a, h * b, 5, 0, 6.283); g.fill(); }); });
+    const prof = [[0, 0], [.2, .02], [.33, .14], [.38, .32], [.33, .5], [.2, .62], [.15, .7], [.2, .76]].map(([x, y]) => new T3.Vector2(x, y));
+    const pot = new T3.Mesh(new T3.LatheGeometry(prof, 40), std({ map: kTex, metalness: .75, roughness: .3, side: T3.DoubleSide })); pot.position.y = .47; pot.scale.setScalar(1.25); kal.add(pot);
+    kalashTop(kal, .47 + .76 * 1.25, 1.1);
+
+    // ---- seven diyas: the saptapadi path, and more diyas around the rim ----
+    const diyaG = new T3.SphereGeometry(.13, 16, 8, 0, 6.283, Math.PI / 2, Math.PI / 2), CLAY = std({ color: 0xb4562a, roughness: .85, side: T3.DoubleSide });
+    const flames = [];
+    const diya = (x, z, s) => { const d = new T3.Mesh(diyaG, CLAY); d.position.set(x, .13 * s, z); d.scale.set(s, s * .6, s); scene.add(d);
+      const f = new T3.Sprite(fireMat); f.position.set(x, .2 * s, z); f.userData = { s, ph: Math.random() * 6 }; scene.add(f); flames.push(f); };
+    for (let i = 0; i < 7; i++) diya(3.05 + i * .42, Math.sin(i * .9) * .12, 1.5);
+    for (let i = 0; i < (PHONE ? 18 : 28); i++) { const a = i / (PHONE ? 18 : 28) * 6.283; diya(Math.cos(a) * 5.75, Math.sin(a) * 5.75, .9); }
+
+    // ---- the temple behind: a plinth, a hall and three carved shikhars with saffron flags ----
+    const tmp = new T3.Group(); tmp.position.set(0, 0, -11); tmp.scale.setScalar(1.15); scene.add(tmp);
+    const plinth = new T3.Mesh(new T3.BoxGeometry(12, 1.2, 6), SAND2); plinth.position.y = .6; tmp.add(plinth);
+    for (let i = 0; i < 4; i++) { const st = new T3.Mesh(new T3.BoxGeometry(3.2, .3, .6), SAND); st.position.set(0, .15 + i * .3, 3.3 - i * .3 + .3); tmp.add(st); }
+    const hall = new T3.Mesh(new T3.BoxGeometry(10, 3, 4.6), SAND); hall.position.y = 2.7; tmp.add(hall);
+    const archMat = std({ color: 0xc9a27a, roughness: .9 });
+    for (let i = -4; i <= 4; i++) { const pl = new T3.Mesh(new T3.CylinderGeometry(.14, .16, 2.6, 10), SAND2); pl.position.set(i * 1.1, 2.5, 2.42); tmp.add(pl);
+      if (i < 4) { const ar = new T3.Mesh(new T3.TorusGeometry(.48, .08, 6, 16, Math.PI), archMat); ar.position.set(i * 1.1 + .55, 3.35, 2.42); tmp.add(ar); } }
+    const band = new T3.Mesh(new T3.BoxGeometry(10.4, .35, 4.9), SAND2); band.position.y = 4.35; tmp.add(band);
+    const shProf = [[0, 0], [1.25, 0], [1.2, .6], [1.05, 1.6], [.85, 2.6], [.6, 3.4], [.34, 3.95], [.12, 4.2], [0, 4.25]].map(([x, y]) => new T3.Vector2(x, y));
+    const shG = new T3.LatheGeometry(shProf, 16), flagMat = std({ color: 0xf07a1a, side: T3.DoubleSide, roughness: .8 });
+    const flags = [];
+    [[-3.2, .72], [0, 1.08], [3.2, .72]].forEach(([x, s]) => { const sh = new T3.Mesh(shG, SAND); sh.position.set(x, 4.5, 0); sh.scale.setScalar(s); tmp.add(sh);
+      for (let k = 1; k < 4; k++) { const r = new T3.Mesh(new T3.TorusGeometry(shProf[k * 2][0] * s, .05, 6, 20), SAND2); r.rotation.x = Math.PI / 2; r.position.set(x, 4.5 + shProf[k * 2][1] * s, 0); tmp.add(r); }
+      const top = 4.5 + 4.25 * s; const k1 = new T3.Mesh(new T3.SphereGeometry(.2 * s, 14, 10), GOLD); k1.position.set(x, top + .12, 0); tmp.add(k1);
+      const k2 = new T3.Mesh(new T3.ConeGeometry(.09 * s, .5 * s, 10), GOLD); k2.position.set(x, top + .5 * s, 0); tmp.add(k2);
+      const pole = new T3.Mesh(new T3.CylinderGeometry(.02, .02, 1.6 * s, 6), BRASS); pole.position.set(x, top + .8 * s, 0); tmp.add(pole);
+      const fl = new T3.Mesh(new T3.PlaneGeometry(.9 * s, .5 * s, 8, 1), flagMat); fl.position.set(x + .45 * s, top + 1.35 * s, 0); tmp.add(fl); flags.push(fl); });
+    for (let i = -2; i <= 2; i++) if (i) { const dm = new T3.Mesh(new T3.SphereGeometry(.7, 18, 10, 0, 6.283, 0, Math.PI / 2), SAND); dm.position.set(i * 2, 4.5, 1.6); tmp.add(dm); }
+
+    // ---- falling marigold petals and gold dust ----
+    const PN = PHONE ? 70 : 140, petalG = new T3.PlaneGeometry(.12, .07);
+    const petals = new T3.InstancedMesh(petalG, new T3.MeshBasicMaterial({ side: T3.DoubleSide, transparent: true, opacity: .9 }), PN);
+    const pd = []; for (let i = 0; i < PN; i++) { pd.push({ x: (Math.random() - .5) * 14, y: Math.random() * 8, z: (Math.random() - .5) * 14, v: .25 + Math.random() * .35, r: Math.random() * 6, w: .6 + Math.random() * 1.4 }); petals.setColorAt(i, i % 3 ? cO : cY); }
+    scene.add(petals);
+    const dq = new T3.Quaternion(), de = new T3.Euler(), dv = new T3.Vector3(), ds = new T3.Vector3(1, 1, 1);
+
+    // ---- camera path ----
+    const V = a => new T3.Vector3(a[0], a[1], a[2]);
+    const KP = STOPS.map(s => V(s.pos)), KA = STOPS.map(s => V(s.at));
+    const cp = new T3.Vector3(), ca = new T3.Vector3();
+    let W = 0, Hh = 0;
+    function size(){ const w = wrap.clientWidth, h = wrap.clientHeight; if (w === W && h === Hh) return; W = w; Hh = h; R.setSize(w, h, false); cam.aspect = w / h; cam.fov = w < h ? 58 : 44; cam.updateProjectionMatrix(); }
+    size(); addEventListener('resize', size);
+    let last = performance.now(), t = 0, k = 0, kT = 0;
+    return {
+      setK(v){ kT = v; },
+      frame(now){
+        const dt = Math.min(.05, (now - last) / 1000); last = now; t += REDUCE ? 0 : dt; size();
+        k += (kT - k) * (REDUCE ? 1 : Math.min(1, dt * 4));
+        const i = Math.min(N - 2, Math.floor(k)), f = k - i, e = f * f * (3 - 2 * f);
+        cp.copy(KP[i]).lerp(KP[i + 1], e); ca.copy(KA[i]).lerp(KA[i + 1], e);
+        // at the phera stop the camera itself walks around the fire
+        const ph = Math.max(0, 1 - Math.abs(k - 3)), ang = (k - 3) * 1.6 + t * .12 * ph;
+        if (ph > 0) { const r = Math.hypot(cp.x, cp.z), a0 = Math.atan2(cp.x, cp.z); cp.x = Math.sin(a0 + ang * ph) * r; cp.z = Math.cos(a0 + ang * ph) * r; }
+        cp.x += Math.sin(t * .35) * .12; cp.y += Math.sin(t * .5) * .06;
+        cam.position.copy(cp); cam.lookAt(ca);
+        // fire
+        for (const s of fire) { const u = s.userData; u.life += dt * u.sp * 1.1; if (u.life > 1) { u.life = 0; u.x = (Math.random() - .5) * .34; u.z = (Math.random() - .5) * .34; }
+          const L = u.life; s.position.set(u.x * (1 - L), .56 + L * 1.25, u.z * (1 - L)); s.scale.setScalar((.55 - L * .4) * (1 + Math.sin(t * 20 + u.sp * 9) * .1)); }
+        fireL.intensity = 1.5 + Math.sin(t * 17) * .2 + Math.sin(t * 7.3) * .15;
+        for (const fl of flames) { const u = fl.userData; const s = u.s * (.32 + Math.sin(t * 13 + u.ph) * .04 + Math.sin(t * 5.1 + u.ph) * .03); fl.scale.set(s * .7, s, 1); }
+        for (const fl of flags) { const p = fl.geometry.attributes.position; for (let j = 0; j < p.count; j++) { const x = p.getX(j); p.setZ(j, Math.sin(t * 4 + x * 7) * .06 * (x + .45)); } p.needsUpdate = true; }
+        for (let j = 0; j < PN; j++) { const p = pd[j]; p.y -= p.v * dt; if (p.y < 0) { p.y = 8; p.x = (Math.random() - .5) * 14; p.z = (Math.random() - .5) * 14; }
+          dv.set(p.x + Math.sin(t * p.w + p.r) * .4, p.y, p.z); de.set(t * p.w + p.r, t * .7 + p.r, 0); dq.setFromEuler(de); m4.compose(dv, dq, ds); petals.setMatrixAt(j, m4); }
+        petals.instanceMatrix.needsUpdate = true;
+        R.render(scene, cam);
+      }
+    };
   }
-  let q = 0;
-  const run = () => { q = 0; envFrame(); ringFrame(); };
+  function riFrame(now){
+    const { p, on } = prog(sec); if (!on) return false;
+    const x = p * (N - 1), i = Math.min(N - 1, Math.floor(x)), fr = x - i;
+    const k = Math.min(N - 1, i + sm((fr - .35) / .5));       // hold on each stop, then glide to the next
+    caption(Math.round(k)); bar.style.transform = `scaleX(${p.toFixed(4)})`;
+    if (G) { G.setK(k); G.frame(now); }
+    return true;
+  }
+  let q = 0, riOn = false;
+  const run = () => { q = 0; envFrame(); kick(); };
+  function kick(){ if (riOn) return; const r = sec.getBoundingClientRect(); if (r.bottom < -50 || r.top > innerHeight + 50) return;
+    riOn = true; requestAnimationFrame(function L(now){ if (riFrame(now)) requestAnimationFrame(L); else riOn = false; }); }
   addEventListener('scroll', () => { if (!q) q = requestAnimationFrame(run); }, { passive: true });
-  addEventListener('resize', () => { layout(); run(); });
-  // a gentle idle float while either scene is on screen
+  addEventListener('resize', run);
+  // a gentle idle float while the envelope is on screen
   (function idle(){ if (!REDUCE && !document.hidden && !q) run(); setTimeout(() => requestAnimationFrame(idle), 60); })();
-  document.getElementById('langBtn').addEventListener('click', () => { labels(); caption(Math.max(0, shown), true); });
-  labels(); layout(); caption(0, true); run();
-  addEventListener('load', () => { layout(); run(); if (window.W3D) window.W3D.relayout(); });
+  run();
+  addEventListener('load', () => { run(); if (window.W3D) window.W3D.relayout(); });
 })();
 </script>
 </body>
