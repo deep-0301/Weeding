@@ -447,7 +447,7 @@ function renderJoin(sec){
     // keep this phone's own earlier entries aside, so they can be uploaded once from Setup
     try { if (!state.sample && state.expenses.length) localStorage.setItem(STASH_KEY, JSON.stringify({expenses:state.expenses, history:state.history||[]})); } catch(e) {}
     setTries({n:0, until:0});
-    familyCode = pin; try { localStorage.setItem(CODE_KEY, pin); } catch(e) {} startCloud(); location.hash = "setup"; route(); };
+    familyCode = pin; try { localStorage.setItem(CODE_KEY, pin); } catch(e) {} startCloud(); location.hash = "overview"; route(); scrollTo(0, 0); };
   $("#j_go").onclick = () => {
     const pin = $("#j_code").value.replace(/\D/g, "");
     if (pin.length !== 4) return err(T("Type the 4 digits of the family PIN."));
