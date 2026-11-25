@@ -529,6 +529,26 @@ html[lang=gu] .ri-s{font-size:clamp(15px,4vw,18px)}
   </div>
 </section>
 
+<!-- ============ DATE ============ -->
+<section class="bleed" id="date">
+  <div class="bg" data-par><picture>
+    <img src="real/photos/DSC00302-l.webp" srcset="real/photos/DSC00302-s.webp 1100w, real/photos/DSC00302-l.webp 2000w" sizes="100vw" alt="" loading="lazy">
+  </picture></div>
+  <div class="inner">
+    <span class="eyebrow rv" data-t="dateEy"></span>
+    <div class="scratch rv d1" id="scratch">
+      <div class="sc-face"><p class="big-date gold" data-f="bigDate"></p><p class="muh" data-f="muhurat"></p></div>
+      <canvas class="sc-foil" id="scFoil" aria-label="Scratch to reveal the date"></canvas>
+    </div>
+    <div class="cd rv d2 sc-hide" id="cd" aria-live="off">
+      <div><b id="cdD">0</b><span data-t="days"></span></div>
+      <div><b id="cdH">0</b><span data-t="hours"></span></div>
+      <div><b id="cdM">0</b><span data-t="mins"></span></div>
+      <div><b id="cdS">0</b><span data-t="secs"></span></div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ FROM THE MANDIR TO THE CHORI: a 3D ring of gold-framed photographs that turns as you scroll ============ -->
 <section id="rituals" aria-label="The wedding chori in 3D">
   <div class="ri-stick">
@@ -570,26 +590,6 @@ html[lang=gu] .ri-s{font-size:clamp(15px,4vw,18px)}
     </div>
     <div class="track" id="track"></div>
     <div class="gal-bar"><i id="galBar"></i></div>
-  </div>
-</section>
-
-<!-- ============ DATE ============ -->
-<section class="bleed" id="date">
-  <div class="bg" data-par><picture>
-    <img src="real/photos/DSC00302-l.webp" srcset="real/photos/DSC00302-s.webp 1100w, real/photos/DSC00302-l.webp 2000w" sizes="100vw" alt="" loading="lazy">
-  </picture></div>
-  <div class="inner">
-    <span class="eyebrow rv" data-t="dateEy"></span>
-    <div class="scratch rv d1" id="scratch">
-      <div class="sc-face"><p class="big-date gold" data-f="bigDate"></p><p class="muh" data-f="muhurat"></p></div>
-      <canvas class="sc-foil" id="scFoil" aria-label="Scratch to reveal the date"></canvas>
-    </div>
-    <div class="cd rv d2 sc-hide" id="cd" aria-live="off">
-      <div><b id="cdD">0</b><span data-t="days"></span></div>
-      <div><b id="cdH">0</b><span data-t="hours"></span></div>
-      <div><b id="cdM">0</b><span data-t="mins"></span></div>
-      <div><b id="cdS">0</b><span data-t="secs"></span></div>
-    </div>
   </div>
 </section>
 
